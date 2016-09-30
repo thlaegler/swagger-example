@@ -1,2 +1,2 @@
 # swagger-example
-An example for using swagger to generate RESTEasy API, Java client, Android client and iOS client with a lot of Documentation
+Example project, which uses Swagger (YAML), several Maven plugins and mvn site to generate documentation, Java REST API, Java REST client, Android client and iOS Client.
