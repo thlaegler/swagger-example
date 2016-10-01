@@ -1,0 +1,759 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>rest-api</artifactId>
+	<packaging>war</packaging>
+	<name>Swagger REST API Project</name>
+	<description>This Project contains the generated Swagger REST API</description>
+
+	<parent>
+		<groupId>com.laegler.rest</groupId>
+		<artifactId>rest-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<swagger-core-version>1.5.10</swagger-core-version>
+		<jetty-version>9.2.9.v20150224</jetty-version>
+		<resteasy-version>3.0.11.Final</resteasy-version>
+		<slf4j-version>1.6.3</slf4j-version>
+		<junit-version>4.8.1</junit-version>
+		<servlet-api-version>2.5</servlet-api-version>
+
+		<!-- Docker -->
+		<server.host>localhost</server.host>
+		<server.port>8080</server.port>
+		<server.port.admin>8081</server.port.admin>
+
+		<!-- Dependency Versions -->
+		<retrofit.version>2.1.0</retrofit.version>
+		<gson.version>2.7</gson.version>
+		<jackson.version>2.8.1</jackson.version>
+		<okhttp.version>2.7.5</okhttp.version>
+		<oltu.version>1.0.2</oltu.version>
+		<junit.version>4.12</junit.version>
+		<restassured.version>3.0.0</restassured.version>
+		<cucumber.version>1.2.4</cucumber.version>
+		<mockito.version>2.0.2-beta</mockito.version>
+		<powermock.version>1.6.5</powermock.version>
+
+		<!-- Maven Settings -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<compiler.source.version>1.8</compiler.source.version>
+		<compiler.target.version>1.8</compiler.target.version>
+	</properties>
+
+	<url>http://www.xn--lgler-gra.com</url>
+	<organization>
+		<name>itemis</name>
+		<url>http://www.itemis.de</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<distribution>repo</distribution>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+		</license>
+	</licenses>
+	<mailingLists>
+		<mailingList>
+			<name>Example Project Mailing</name>
+			<post>example@xn--lgler-gra.com</post>
+		</mailingList>
+	</mailingLists>
+	<inceptionYear>2016</inceptionYear>
+	<developers>
+		<developer>
+			<id>p950120</id>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.xn--lgler-gra.com</organizationUrl>
+			<name>Thomas Laegler</name>
+			<email>thomas.laegler@googlemail.com</email>
+			<roles>
+				<role>Architect</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Germany/Hamburg</timezone>
+			<properties>
+				<picUrl>http://www.xn--lgler-gra.com/gravatar</picUrl>
+			</properties>
+		</developer>
+	</developers>
+	<issueManagement>
+		<url>https://jira.de</url>
+		<system>Jira Issues</system>
+	</issueManagement>
+	<scm>
+		<url>https://bitbucket.org/tlaegler/webservices</url>
+		<connection>scm:git:git://bitbucket.org/tlaegler/webservices.git</connection>
+		<developerConnection>scm:git:git@bitbucket.org:tlaegler/webservices.git</developerConnection>
+	</scm>
+	<ciManagement>
+		<url>https://bitbucket.org/tlaegler/webservices/jenkins</url>
+		<system>Jenkins</system>
+	</ciManagement>
+	<distributionManagement>
+		<site>
+			<id>website</id>
+			<url>scp://tk-online.net/nexus</url>
+		</site>
+	</distributionManagement>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<warName>${project.build.finalName}</warName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.19.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>
+									src/gen/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-plugin-api</artifactId>
+				<!-- <version>3.3.9</version> -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<configuration>
+					<!-- <templateFile>${basedir}/maven-site.vm</templateFile> -->
+					<outputDirectory>src/main/webapp/site</outputDirectory>
+					<port>9000</port>
+					<tempWebappDirectory>src/main/webapp/site/temp</tempWebappDirectory>
+					<locales>en,de</locales>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>lt.velykis.maven.skins</groupId>
+						<artifactId>reflow-velocity-tools</artifactId>
+						<version>1.1.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.velocity</groupId>
+						<artifactId>velocity</artifactId>
+						<version>1.7</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<version>2.0.17</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate-html</goal>
+							<goal>generate-webhelp</goal>
+							<!-- <goal>generate-rtf</goal> -->
+							<goal>generate-pdf</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<targetDirectory>src/main/webapp/docbook</targetDirectory>
+					<includes>assets/docbkx/book.xml</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pdf-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<id>pdf</id>
+						<phase>site</phase>
+						<goals>
+							<goal>pdf</goal>
+						</goals>
+						<configuration>
+							<!-- <locales>en,de</locales> -->
+							<!-- <implementation>itext</implementation> -->
+							<aggregate>true</aggregate>
+							<outputDirectory>src/main/webapp/site/pdf</outputDirectory>
+							<includeReports>true</includeReports>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<aggregate>true</aggregate>
+					<source>1.7</source>
+					<encoding>UTF-8</encoding>
+					<maxmemory>1g</maxmemory>
+					<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Swagger UI -->
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>swagger-ui</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-swagger-ui</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/src/main/webapp/apidocs/swagger-ui</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-yaml</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/src/main/webapp/apidocs</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/../rest-generate/yaml/api.yaml</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+				<version>2.6</version> <configuration> <warName>${project.build.finalName}</warName> 
+				<webappDirectory>${basedir}/target/${project.build.finalName}</webappDirectory> 
+				<webResources> <webResource> <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory> 
+				<targetPath>swagger-ui</targetPath> </webResource> </webResources> </configuration> 
+				</plugin> -->
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<outputDirectory>src/main/webapp/newsite</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<linkJavadoc>true</linkJavadoc>
+					<javadocDir>src/main/webapp/site2/javadoc/html</javadocDir>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependencies</report>
+							<report>cim</report>
+							<report>summary</report>
+							<report>dependency-info</report>
+							<report>dependency-convergence</report>
+							<report>dependency-management</report>
+							<report>plugin-management</report>
+							<report>plugins</report>
+							<report>index</report>
+							<report>help</report>
+							<report>modules</report>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>issue-tracking</report>
+							<report>license</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<reportSets>
+					<reportSet>
+						<id>html</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+						<configuration>
+							<destDir>src/main/webapp/javadoc/html</destDir>
+							<additionalparam>-Xdoclint:none</additionalparam>
+							<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
+						</configuration>
+					</reportSet>
+					<!-- <reportSet> <id>pdf</id> <reports> <report>javadoc</report> </reports> 
+						<configuration> <name>PDF</name> <description>This is my Documentation on 
+						PDF.</description> <destDir>javadoc/pdf</destDir> <doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet> 
+						<docletPath>assets/docbkx/pdfdoclet-1.0.3-all.jar</docletPath> <useStandardDocletOptions>false</useStandardDocletOptions> 
+						<additionalparam>-pdf javadoc.pdf</additionalparam> <excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
+						</configuration> </reportSet> -->
+					<!-- <reportSet> <id>doccheck</id> <configuration> <doclet>com.sun.tools.doclets.doccheck.DocCheck</doclet> 
+						<docletPath>/path/to/doccheck.jar</docletPath> <docletArtifact> <groupId>com.sun.tools.doclets</groupId> 
+						<artifactId>doccheck</artifactId> <version>1.2b2</version> </docletArtifact> 
+						<additionalparam> -d ${basedir}/generated/site/doccheck </additionalparam> 
+						<destDir>doccheck</destDir> <name>DocCheck</name> <description>DocCheck documentation.</description> 
+						<configuration> <destDir>${basedir}/docs/generated/javadoc/doccheck</destDir> 
+						</configuration> </configuration> <reports> <report>javadoc</report> </reports> 
+						</reportSet> -->
+					<!-- <reportSet> <id>custom-javadoc</id> <configuration> <doctitle>My 
+						API for ${project.name} ${project.version}</doctitle> <windowtitle>My API 
+						for ${project.name} ${project.version}</windowtitle> <testDoctitle>My Test 
+						API for ${project.name} ${project.version}</testDoctitle> <testWindowtitle>My 
+						Test API for ${project.name} ${project.version}</testWindowtitle> <reportOutputDirectory>${basedir}/docs/generated/report</reportOutputDirectory> 
+						<docletArtifact> <groupId>org.umlgraph</groupId> <artifactId>doclet</artifactId> 
+						<version>5.1</version> </docletArtifact> <useStandardDocletOptions>true</useStandardDocletOptions> 
+						<destDir>javadoc/pdfuml</destDir> <outputDirectory>javadoc/pdfuml</outputDirectory> 
+						<excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
+						</configuration> <reports> <report>javadoc</report> </reports> </reportSet> -->
+					<!-- <reportSet> <configuration> <destDir>javadoc/test</destDir> <additionalparam>-Xdoclint:none</additionalparam> 
+						<excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
+						</configuration> <reports> <report>javadoc</report> <report>test-javadoc</report> 
+						</reports> </reportSet> -->
+					<!-- <reportSet> <id>aggregate</id> <configuration> <destDir>javadoc/aggregate</destDir> 
+						<additionalparam>-Xdoclint:none</additionalparam> <excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
+						</configuration> <inherited>false</inherited> <reports> <report>aggregate</report> 
+						</reports> </reportSet> -->
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<xmlPath>${project.basedir}/src/site/changes.xml</xmlPath>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-changelog-plugin</artifactId> 
+				<version>2.3</version> <configuration> <type>tag</type> <tags> <tag implementation="java.lang.String">alpha-2</tag> 
+				<tag implementation="java.lang.String">alpha-3</tag> </tags> <type>date</type> 
+				<dates> <date implementation="java.lang.String">2005-08-01</date> <date implementation="java.lang.String">2005-09-01</date> 
+				</dates> <dateFormat>yyyy-MM-dd</dateFormat> </configuration> <reportSets> 
+				<reportSet> <id>dual-report</id> <configuration> <type>range</type> <range>30</range> 
+				</configuration> <reports> <report>changelog</report> <report>file-activity</report> 
+				</reports> </reportSet> </reportSets> </plugin> -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<outputDirectory>src/main/webapp/site2</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<profiles>
+		<profile>
+			<id>checkstyle</id>
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>2.17</version>
+						<configuration>
+							<logViolationsToConsole>true</logViolationsToConsole>
+							<configLocation>assets/checkstyle/checkstyle.xml</configLocation>
+							<propertiesLocation>assets/checkstyle/checkstyle.properties</propertiesLocation>
+							<propertyExpansion>projectname=${project.artifactId}</propertyExpansion>
+						</configuration>
+					</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+		<profile>
+			<id>docker</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.15.14</version>
+						<!-- <groupId>org.jolokia</groupId> <artifactId>docker-maven-plugin</artifactId> -->
+						<extensions>true</extensions>
+						<executions>
+							<execution>
+								<id>start</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>build</goal>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>build-docker-image</id>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<images>
+								<image>
+									<alias>${project.groupId}.${project.artifactId}</alias>
+									<name>example/rest-api</name>
+									<build>
+										<from>jboss/wildfly</from>
+										<maintainer>thlaegler</maintainer>
+										<assembly>
+											<descriptor>${project.basedir}/assets/assembly.xml</descriptor>
+											<!-- src/main/docker/assembly.xml -->
+											<!-- <descriptor>assembly.xml</descriptor> -->
+											<basedir>/opt/wildfly9/Wildfly-10.0.0.Final/standalone/deployments</basedir>
+											<user>jboss:jboss:jboss</user>
+										</assembly>
+										<ports>
+											<port>8080</port>
+										</ports>
+										<cmd>
+											<shell>java -jar \ /maven/${project.build.finalName}.jar
+												server
+												\ /maven/docker-config.yml</shell>
+										</cmd>
+										<!-- <command>java -Djava.security.egd=file:/dev/./urandom -jar 
+											/maven/docker-sample.jar</command> -->
+									</build>
+									<run>
+										<namingStrategy>alias</namingStrategy>
+										<ports>
+											<port>${server.port}:8080</port>
+											<port>${server.port.admin}:8081</port>
+										</ports>
+										<volumes>
+											<bind>
+												<volume>${user.home}/logs:/logs</volume>
+											</bind>
+										</volumes>
+										<wait>
+											<log>Server startup complete</log>
+											<url>http://${server.host}:${server.port}/</url>
+											<time>20000</time>
+										</wait>
+										<log>
+											<prefix>${project.artifactId}</prefix>
+											<prefix>MQ</prefix>
+											<date>DEFAULT</date>
+											<color>YELLOW</color>
+										</log>
+									</run>
+								</image>
+								<!-- <image> <alias>mongodb</alias> <name>mongo:2.6.11</name> <run> 
+									<namingStrategy>alias</namingStrategy> <cmd>-smallfiles</cmd> <wait> <log>waiting 
+									for connections on port</log> <time>10000</time> </wait> <log> <prefix>MongoDB</prefix> 
+									<color>yellow</color> </log> </run> </image> -->
+								<!-- <image> <alias>db</alias> <name>postgres:9</name> <run> <wait> 
+									<log>database system is ready to accept connections</log> </wait> </run> 
+									</image> -->
+							</images>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.19.1</version>
+						<configuration>
+							<phase>integration-test</phase>
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+							<groups>${project.groupId}.IntegrationTest</groups>
+							<systemPropertyVariables>
+								<service.url>http://${server.host}:${server.port}/</service.url>
+							</systemPropertyVariables>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-core</artifactId>
+			<version>${swagger-core-version}</version>
+			<!-- Workaround: http://stackoverflow.com/questions/27694804/beanparam-in-swagger-with-resteasy-3-0-and-wildfly-8-0 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-multipart</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>${swagger-core-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger-core-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-jersey2-jaxrs -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+			<version>${swagger-core-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-multipart</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-servlet -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-servlet</artifactId>
+			<version>${swagger-core-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.faces/jsf-api -->
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet-api-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+			<version>${resteasy-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-validator-provider-11</artifactId>
+			<version>${resteasy-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+			<version>${resteasy-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${resteasy-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8.8</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>snakeyaml</artifactId>
+					<groupId>org.yaml</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bsh</artifactId>
+					<groupId>org.beanshell</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,44 @@
+<book xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      version="5.0">
+  <info>
+    <author>
+      <personname><firstname>Thomas</firstname><surname>Laegler</surname></personname>
+    </author>
+    <copyright><year>2012</year><holder>Thomas Laegler</holder></copyright>
+  </info>
+  <title>Mein DocBook-Dokument</title>
+  <article>
+    <title>Mein erstes Kapitel</title>
+    <section>
+      <title>Mein erster Abschnitt</title>
+      <para>Mein erster Absatz vom ersten Abschnitt.</para>
+      <para>Mein zweiter Absatz vom ersten Abschnitt.</para>
+    </section>
+    <section>
+      <title>Mein zweiter Abschnitt</title>
+      <para>Mein erster Absatz vom zweiten Abschnitt.</para>
+      <para>Mein zweiter Absatz vom zweiten Abschnitt, mit Formatierungen, z.B.:
+            <quote>quote</quote>, <emphasis>emphasis</emphasis>, <replaceable>replaceable</replaceable>,
+            <literal>literal</literal>, <userinput>userinput</userinput>.</para>
+    </section>
+  </article>
+  <article>
+    <title>Mein zweites Kapitel</title>
+    <section>
+      <title>Mein neuer Abschnitt im zweiten Kapitel</title>
+      <para>Mein erster Absatz vom neuen Abschnitt im zweiten Kapitel.</para>
+      <para>Mein zweiter Absatz vom neuen Abschnitt im zweiten Kapitel mit einer Tabelle und mit HTML-Links:</para>
+      <table>
+        <title>Doku-Tabelle</title>
+        <tgroup cols="2">
+          <thead><row><entry>Thema</entry><entry>Doku-Link</entry></row></thead>
+          <tbody>
+            <row><entry>DocBook</entry><entry><link xlink:href="http://www.docbook.org/tdg5/en/html/docbook.html">http://www.docbook.org/tdg5/en/html/docbook.html</link></entry></row>
+            <row><entry>Docbkx </entry><entry><link xlink:href="http://docs.codehaus.org/display/MAVENUSER/Docbkx+Maven+Plugin">http://docs.codehaus.org/display/MAVENUSER/Docbkx+Maven+Plugin</link></entry></row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </article>
+</book>

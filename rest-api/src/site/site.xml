@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Swagger Example REST API">
+	<publishDate position="left" format="yyyy-MM-dd" />
+	<version position="left" />
+	<poweredBy>
+		<logo name="test" href="test" img="" position="left" alt=""
+			border="" width="" height="" target="" title="" />
+	</poweredBy>
+
+	<skin>
+		<groupId>lt.velykis.maven.skins</groupId>
+		<artifactId>reflow-maven-skin</artifactId>
+		<version>1.1.1</version>
+	</skin>
+	<custom>
+		<reflowSkin>
+			<theme>bootswatch-cerulean</theme>
+			<highlightJs>true</highlightJs>
+			<brand>
+				<name>
+					<![CDATA[
+			    	<span class="color-highlight">itemis</span>
+			    	]]>
+				</name>
+				<href>http://www.itemis.de</href>
+			</brand>
+			<breadcrumbs>true</breadcrumbs>
+			<slogan>Super interesting project doing good things.</slogan>
+			<titleTemplate>%2$s | %1$s</titleTemplate>
+			<toc>sidebar</toc>
+			<topNav>Download|reports</topNav>
+			<bottomNav>
+				<column>Main|Download</column>
+				<column>Documentation</column>
+				<column>reports|modules</column>
+			</bottomNav>
+			<bottomDescription>Experimental development. No warranty!</bottomDescription>
+			<slogan position="bannerRight|bannerLeft">The best website in the world</slogan>
+			<pages>
+				<index project="project-id">
+					<shortTitle>Welcome</shortTitle>
+					<titleTemplate>Reflow Maven Skin</titleTemplate>
+					<breadcrumbs>true</breadcrumbs>
+					<toc>sidebar</toc>
+					<sections>
+						<carousel />
+						<body />
+						<sidebar />
+						<thumbs>2</thumbs>
+						<columns>3</columns>
+					</sections>
+				</index>
+				<readme>
+					<breadcrumbs>true</breadcrumbs>
+					<toc>sidebar|top</toc>
+				</readme>
+				<developer-info>
+					<toc>sidebar|top</toc>
+				</developer-info>
+			</pages>
+		</reflowSkin>
+	</custom>
+
+	<bannerRight>
+		<name>Swagger Example REST API</name>
+		<src>https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png</src>
+		<href>http://www.itemis.de/</href>
+	</bannerRight>
+
+	<body>
+		<head>
+			<link rel="author" href="http://www.itemis.de" />
+		</head>
+
+		<links>
+			<item name="itemis" href="http://www.itemis.de/" />
+		</links>
+
+		<menu name="Swagger Example REST API">
+			<item name="Home" href="index.html" />
+			<item name="Project Info" href="project-info.html" />
+			<item name="Project Summary" href="project-summary.html" />
+			<item name="Project Reports" href="project-reports.html" />
+			<item name="License" href="license.html" />
+			<item name="Mail Lists" href="mail-lists.html" />
+			<item name="Team" href="team-list.html" />
+
+			<item name="Sharepoint" href="sharepoint.html" />
+			<item name="Github" href="source-repository.html" />
+			<item name="JIRA" href="issue-tracking.html" />
+			<item name="Jenkins" href="integration.html" />
+
+			<item name="REST API Documentation (dynamic HTML)" href="../api/dynamic-html/docs/index.html" />
+			<item name="REST API Documentation (HTML)" href="../api/html/index.html" />
+			<item name="JavaDoc (HTML)" href="javadoc/html/index.html" />
+			<item name="JavaDoc (PDF)" href="javadoc/pdf/javadoc.pdf" />
+			<item name="Source Documentation (HTML)" href="xref/index.html" />
+			<item name="Source Test Documentation (HTML)" href="xref-test/index.html" />
+			<item name="DocBook (PDF)" href="../docbook/book.html" />
+			<item name="DocBook (HTML)" href="../docbook/index.html" />
+			<item name="DocBook (PDF)" href="../docbook/book.html" />
+			<item name="User Guide (PDF)" href="pdf/maven-pdf-plugin.pdf" />
+
+			<item name="Changelog" href="changelog.html" />
+			<item name="Changelog Files" href="file-activity.html" />
+			<item name="Test Report" href="surefire-report.html" />
+
+			<item name="Dependency Info" href="dependency-info.html" />
+			<item name="Dependency Management" href="dependency-management.html" />
+			<item name="Dependency Convergence" href="dependency-convergence.html" />
+			<item name="Plugin-Management" href="plugin-management.html" />
+			<item name="Plugins" href="plugins.html" />
+
+			<item name="Release Notes" href="release-notes.html" />
+			<item name="General Information" href="about.html" />
+			<item name="For Maven 1.x Users" href="maven1.html" />
+			<item name="Road Map" href="roadmap.html" />
+		</menu>
+
+	</body>
+</project>

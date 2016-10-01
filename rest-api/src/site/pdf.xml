@@ -1,0 +1,31 @@
+<document xmlns="http://maven.apache.org/DOCUMENT/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DOCUMENT/1.0.1 http://maven.apache.org/xsd/document-1.0.1.xsd"
+  outputName="maven-pdf-plugin">
+
+  <meta>
+    <title>Swagger Example REST API</title>
+    <author>Thomas Laegler</author>
+  </meta>
+
+  <toc name="Table of Contents">
+  	<item name="Readme" ref="markup/readme.md"/>
+    <item name="Introduction" ref="index.apt"/>
+    <item name="Dependency Info" ref="dependency-info.html"/>
+    <item name="Usage" ref="usage.apt.vm"/>
+    <item name="Filtering Document Descriptor" ref="examples/filtering.apt"/>
+    <item name="Configuring Reports" ref="/examples/configuring-reports.xml.vm"/>
+    <item name="Limitations" ref="limitations.apt"/>
+    <item name="FAQ" ref="faq.fml"/>
+  </toc>
+
+  <cover>
+    <coverTitle>Swagger Example REST API</coverTitle>
+    <coverSubTitle>${project.name} - ${project.version}</coverSubTitle>
+    <coverType>User Guide</coverType>
+    <projectName>${project.name}</projectName>
+    <projectLogo>http://maven.apache.org/images/maventxt_logo_200.gif</projectLogo>
+    <companyName>itemis</companyName>
+    <companyLogo>https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png</companyLogo>
+  </cover>
+</document>

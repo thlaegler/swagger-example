@@ -1,0 +1,49 @@
+package {{package}}.impl;
+
+import {{package}}.*;
+import {{modelPackage}}.*;
+import java.util.ArrayList;
+{{#operations}}{{#operation}}{{#isMultipart}}import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+{{/isMultipart}}{{/operation}}{{/operations}}
+
+{{#imports}}import {{import}};
+{{/imports}}
+
+import java.util.List;
+import {{package}}.NotFoundException;
+
+import java.io.InputStream;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+
+{{>generatedAnnotation}}
+{{#operations}}
+public class {{classname}}ServiceImpl extends {{classname}}Service {
+  {{#operation}}
+      @Override
+      public Response {{nickname}}({{#isMultipart}}MultipartFormDataInput input,{{/isMultipart}}{{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{^isMultipart}}{{>serviceFormParams}},{{/isMultipart}}{{#isMultipart}}{{^isFormParam}},{{/isFormParam}}{{/isMultipart}}{{/allParams}}SecurityContext securityContext)
+      throws NotFoundException {
+      
+      // TODO: This is REST API mock-method returning an example response.
+      // You have to customize the result in this method like:
+      // Something result = builder.id(1).name("my name").build();
+      {{^isListContainer}}
+      {{#responses.0.schema.genericRef}}
+      {{responses.0.schema.genericRef.simpleRef}} result = {{responses.0.schema.genericRef.simpleRef}}.getExample();
+      {{/responses.0.schema.genericRef}}
+      {{^responses.0.schema.genericRef}}
+      ApiResponseMessage result = new ApiResponseMessage(ApiResponseMessage.OK, "response example");
+      {{/responses.0.schema.genericRef}}
+      {{/isListContainer}}
+      {{#isListContainer}}
+      ArrayList<{{responses.0.baseType}}> result = new ArrayList<{{responses.0.baseType}}>();
+      result.add({{responses.0.baseType}}.getExample());
+      result.add({{responses.0.baseType}}.getExample());
+      {{/isListContainer}}
+      
+      return Response.ok().entity(result).build();
+  }
+  {{/operation}}
+}
+{{/operations}}
