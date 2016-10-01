@@ -1,4 +1,4 @@
-# swagger-android-client
+# rest-android-client
 
 ## Requirements
 
@@ -27,7 +27,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
     <groupId>com.laegler.rest</groupId>
-    <artifactId>swagger-android-client</artifactId>
+    <artifactId>rest-android-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <scope>compile</scope>
 </dependency>
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.laegler.rest:swagger-android-client:0.0.1-SNAPSHOT"
+compile "com.laegler.rest:rest-android-client:0.0.1-SNAPSHOT"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/swagger-android-client-0.0.1-SNAPSHOT.jar
+* target/rest-android-client-0.0.1-SNAPSHOT.jar
 * target/lib/*.jar
 
 ## Getting Started

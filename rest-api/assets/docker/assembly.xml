@@ -8,7 +8,7 @@
 			<outputDirectory>/</outputDirectory>
 		</file> -->
 		<file>
-			<source>assets/docker-config.yml</source>
+			<source>assets/docker/docker-config.yml</source>
 			<outputDirectory>/</outputDirectory>
 		</file>
 	</files>
