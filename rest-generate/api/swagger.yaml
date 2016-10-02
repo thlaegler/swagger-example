@@ -138,9 +138,6 @@ paths:
       consumes:
       - application/json
       - application/xml
-      produces:
-      - application/json
-      - application/xml
       parameters:
       - in: body
         name: body
@@ -177,9 +174,6 @@ paths:
       operationId: findAll
       tags:
       - Something
-      consumes:
-      - application/json
-      - application/xml
       produces:
       - application/json
       - application/xml
@@ -214,12 +208,16 @@ paths:
       - application/json
       - application/xml
       parameters:
-      - in: path
-        name: id
-        description: ID of pet that needs to be fetched
+      - name: id
+        in: path
+        description: |
+          ID of Something that needs to be fetched.
         required: true
         type: integer
         format: int64
+        minLength: 1
+        maxLength: 8
+        pattern: '^[1-9]{1}[0-9]{0,7}'
       responses:
         200:
           description: |

@@ -191,6 +191,13 @@
 						</configuration>
 					</execution>
 				</executions>
+				<!-- <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
+					<artifactId>doxia-core</artifactId> <version>1.7</version> </dependency> 
+					<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-markdown</artifactId> 
+					<version>1.7</version> </dependency> <dependency> <groupId>org.apache.maven.doxia</groupId> 
+					<artifactId>doxia-doc-renderer</artifactId> <version>1.7</version> </dependency> 
+					<dependency> <groupId>org.apache.maven.doxia</groupId> <artifactId>doxia-module-rtf</artifactId> 
+					<version>1.7</version> </dependency> </dependencies> -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -222,7 +229,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Generate YAML/JSON from Java API -->
+			<!-- Generate Swagger JSON from Java API or YAML -->
 			<!-- https://github.com/kongchen/swagger-maven-plugin -->
 			<plugin>
 				<groupId>com.github.kongchen</groupId>
@@ -267,6 +274,13 @@
 					<stopWait>10</stopWait>
 				</configuration>
 			</plugin>
+			<!-- https://mvnrepository.com/artifact/org.jenkins-ci.main/maven-plugin -->
+			<plugin>
+				<groupId>org.jenkins-ci.main</groupId>
+				<artifactId>maven-plugin</artifactId>
+				<version>2.13</version>
+			</plugin>
+
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
 				<version>2.6</version> <configuration> <warName>${project.build.finalName}</warName> 
 				<webappDirectory>${basedir}/target/${project.build.finalName}</webappDirectory> 
@@ -285,15 +299,6 @@
 				<version>2.19.1</version>
 				<configuration>
 					<outputDirectory>${project.basedir}/src/main/webapp/newsite</outputDirectory>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<destDir>gaga</destDir>
-					<linkJavadoc>true</linkJavadoc>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -347,29 +352,31 @@
 					</reportSet>
 					<!-- JavaDoc PDF -->
 					<reportSet>
-						<id>pdf2</id>
+						<id>pdf</id>
 						<reports>
 							<report>javadoc</report>
-							<report>test-javadoc</report>
 						</reports>
 						<configuration>
 							<name>JavaDoc PDF</name>
 							<description>PDF document of JavaDoc
 								(com.tarsec.javadoc.pdfdoclet).</description>
-							<destDir>pdf2</destDir>
+							<destDir>pdf</destDir>
 							<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet>
-							<docletPath>${project.basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath>
-							<useStandardDocletOptions>true</useStandardDocletOptions>
-							<show>private</show>
-							<author>Thomas Laegler</author>
-							<bottom>Copyright © ${inceptionYear}–${currentYear} itemis. All
-								rights reserved.</bottom>
-							<additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam>
-							<!-- <docletArtifact> <groupId>pdfdoclet</groupId> <artifactId>doclet</artifactId> 
-								<version>1.0.3</version> </docletArtifact> -->
+							<docletPath>${basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath>
+							<useStandardDocletOptions>false</useStandardDocletOptions>
+							<additionalparam>-pdf javadoc.pdf</additionalparam>
+							<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
 							<failOnError>false</failOnError>
 						</configuration>
 					</reportSet>
+					<!-- <reportSet> <id>pdf2</id> <reports> <report>javadoc</report> <report>test-javadoc</report> 
+						</reports> <configuration> <name>JavaDoc PDF</name> <description>PDF document 
+						of JavaDoc (com.tarsec.javadoc.pdfdoclet).</description> <destDir>pdf2</destDir> 
+						<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet> <docletPath>${project.basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath> 
+						<useStandardDocletOptions>false</useStandardDocletOptions> <show>private</show> 
+						<author>Thomas Laegler</author> <bottom>Copyright © ${inceptionYear}–${currentYear} 
+						itemis. All rights reserved.</bottom> <additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam> 
+						<failOnError>false</failOnError> </configuration> </reportSet> -->
 					<!-- JavaDoc DocCheck -->
 					<!-- <reportSet> <id>doccheck</id> <reports> <report>javadoc</report> 
 						<report>test-javadoc</report> </reports> <configuration> <name>${project.name}</name> 
@@ -387,28 +394,41 @@
 						</reportSet> -->
 					<!-- JavaDoc yUML -->
 					<!-- Doesn't work with JDK 1.8: https://power2build.wordpress.com/2015/02/24/uml-doclet-in-eclipse/ -->
-					<!-- <reportSet> <id>uml1</id> <reports> <report>javadoc</report> <report>test-javadoc</report> 
-						</reports> <configuration> <name>${project.name}</name> <description>${project.description}</description> 
-						<doclet>ydoc.doclets.YStandard</doclet> <docletPath>${project.basedir}/assets/doclet/uml/lib/ydoc.jar:${project.basedir}/assets/doclet/uml/resources</docletPath> 
-						<destDir>uml1</destDir> <show>private</show> <additionalparam>-umlautogen 
-						${javadoc.opts}</additionalparam> <failOnError>false</failOnError> </configuration> 
-						</reportSet> -->
-					<!-- JavaDoc UML2 -->
 					<reportSet>
-						<id>uml2</id>
+						<id>yuml</id>
 						<reports>
 							<report>javadoc</report>
 							<report>test-javadoc</report>
 						</reports>
 						<configuration>
+							<name>${project.name}</name>
+							<description>${project.description}</description>
+							<doclet>ydoc.doclets.YStandard</doclet>
+							<docletPath>${project.basedir}/assets/doclet/uml/lib/ydoc.jar:${project.basedir}/assets/doclet/uml/lib/styleed.jar:${project.basedir}/assets/doclet/uml/resources</docletPath>
+							<show>private</show>
+							<additionalparam>-umlautogen ${javadoc.opts}</additionalparam>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- JavaDoc UML2 -->
+					<reportSet>
+						<id>uml</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<!-- <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet> <docletArtifact> 
+								<groupId>org.umlgraph</groupId> <artifactId>umlgraph</artifactId> <version>5.6</version> 
+								</docletArtifact> <additionalparam>-views -all</additionalparam> <useStandardDocletOptions>true</useStandardDocletOptions> -->
 							<name>JavaDoc UML (umlgraph)</name>
 							<description>UML diagrams in HTML JavaDoc (org.umlgraph.doclet).</description>
 							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-							<destDir>uml2</destDir>
+							<destDir>uml</destDir>
 							<docletArtifact>
 								<groupId>org.umlgraph</groupId>
 								<artifactId>doclet</artifactId>
-								<version>5.4</version>
+								<version>5.6</version>
 							</docletArtifact>
 							<show>private</show>
 							<additionalparam>
@@ -466,6 +486,18 @@
 						</configuration> <inherited>false</inherited> <reports> <report>aggregate</report> 
 						</reports> </reportSet> -->
 				</reportSets>
+			</plugin>
+			<!-- Dependency Graph. GraphViz must be installed -->
+			<!-- <plugin> <groupId>org.kuali.maven.plugins</groupId> <artifactId>graph-maven-plugin</artifactId> 
+				<version>1.2.3</version> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<docTitle>JavaDoc Source HTML</docTitle>
+					<linkJavadoc>true</linkJavadoc>
+				</configuration>
 			</plugin>
 			<!-- Generate Changelog from Jira, Github or changes.xml -->
 			<plugin>

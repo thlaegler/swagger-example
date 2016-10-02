@@ -40,7 +40,7 @@ public class JavaResteasyMockServerCodegen extends JavaResteasyServerCodegen {
   @Override
   public String getName() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("jaxrs-resteasy-mock");
+    _builder.append("jaxrs-resteasy");
     return _builder.toString();
   }
   

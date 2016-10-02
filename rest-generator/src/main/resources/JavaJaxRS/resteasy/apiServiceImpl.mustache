@@ -3,6 +3,7 @@ package {{package}}.impl;
 import {{package}}.*;
 import {{modelPackage}}.*;
 import java.util.ArrayList;
+import javax.ws.rs.core.GenericEntity;
 {{#operations}}{{#operation}}{{#isMultipart}}import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 {{/isMultipart}}{{/operation}}{{/operations}}
 
@@ -31,18 +32,22 @@ public class {{classname}}ServiceImpl extends {{classname}}Service {
       {{^isListContainer}}
       {{#responses.0.schema.genericRef}}
       {{responses.0.schema.genericRef.simpleRef}} result = {{responses.0.schema.genericRef.simpleRef}}.getExample();
+      return Response.ok().entity(result).build();
       {{/responses.0.schema.genericRef}}
       {{^responses.0.schema.genericRef}}
-      ApiResponseMessage result = new ApiResponseMessage(ApiResponseMessage.OK, "response example");
+      ApiResponseMessage result = new ApiResponseMessage(ApiResponseMessage.OK, "dummy response");
+      return Response.ok().entity(result).build();
       {{/responses.0.schema.genericRef}}
       {{/isListContainer}}
       {{#isListContainer}}
-      ArrayList<{{responses.0.baseType}}> result = new ArrayList<{{responses.0.baseType}}>();
-      result.add({{responses.0.baseType}}.getExample());
-      result.add({{responses.0.baseType}}.getExample());
+      List<{{responses.0.baseType}}> results = new ArrayList<{{responses.0.baseType}}>();
+      results.add({{responses.0.baseType}}.getExample());
+      results.add({{responses.0.baseType}}.getExample());
+      results.add({{responses.0.baseType}}.getExample());
+      return Response.ok().entity(new GenericEntity<List<{{responses.0.baseType}}>>(results){}).build();
       {{/isListContainer}}
       
-      return Response.ok().entity(result).build();
+      
   }
   {{/operation}}
 }

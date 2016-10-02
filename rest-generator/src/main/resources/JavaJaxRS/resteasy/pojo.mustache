@@ -121,29 +121,30 @@ public class {{classname}} {{#parent}}extends {{{parent}}}{{/parent}} {{#seriali
   }
   
   public static {{classname}} getExample() {
-    return new {{classname}}(true);
-  }
-  
-  private {{classname}}(boolean isExample) {
+    {{classname}} example = new {{classname}}();
     {{#vars}}
       {{#isListContainer}}
-      this.{{name}} = new {{containerType}}<{{datatypeWithEnum}}>();
+      example.{{name}} = new {{containerType}}<{{datatypeWithEnum}}>();
       {{#items}}
-        this.{{name}}.add({{datatypeWithEnum}}.getExample());
+        example.{{name}}.add({{datatypeWithEnum}}.getExample());
       {{/items}}
       {{/isListContainer}}
       {{^isListContainer}}
       {{#isString}}
-      this.{{name}} = "{{example}}";
+      example.{{name}} = "{{example}}";
       {{/isString}}
       {{#isLong}}
-      this.{{name}} = {{example}}L;
+      example.{{name}} = {{example}}L;
       {{/isLong}}
       {{#isInteger}}
-      this.{{name}} = {{example}};
+      example.{{name}} = {{example}};
       {{/isInteger}}
       {{/isListContainer}}
+      {{^isPrimitiveType}}
+        example.{{name}} = {{datatypeWithEnum}}.getExample();
+      {{/isPrimitiveType}}
     {{/vars}}
+    return example;
   }
   
   public {{classname}}() {

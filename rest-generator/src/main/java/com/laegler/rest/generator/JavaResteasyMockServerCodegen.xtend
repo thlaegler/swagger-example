@@ -37,9 +37,11 @@ class JavaResteasyMockServerCodegen extends JavaResteasyServerCodegen {
 
 		dateLibrary = 'legacy' // TODO: change to joda
 		embeddedTemplateDir = templateDir = '''JavaJaxRS«File.separator»resteasy'''
+		//embeddedTemplateDir = templateDir = '''JavaJaxRS«File.separator»resteasyMock'''
 	}
 
-	override def String getName() '''jaxrs-resteasy-mock'''
+	override def String getName() '''jaxrs-resteasy'''
+	//override def String getName() '''jaxrs-resteasy-mock'''
 
 	override def String getHelp() '''Generates a Java JAXRS-Resteasy Mock Server application.'''
 

@@ -7,28 +7,43 @@
     </author>
     <copyright><year>2012</year><holder>Thomas Laegler</holder></copyright>
   </info>
-  <title>Mein DocBook-Dokument</title>
+  <title>Example REST API Guide</title>
   <article>
-    <title>Mein erstes Kapitel</title>
+    <title>Getting Started</title>
     <section>
-      <title>Mein erster Abschnitt</title>
-      <para>Mein erster Absatz vom ersten Abschnitt.</para>
-      <para>Mein zweiter Absatz vom ersten Abschnitt.</para>
+      <title>erster Abschnitt</title>
+      <para>erster Absatz vom ersten Abschnitt.</para>
+      <para>zweiter Absatz vom ersten Abschnitt.</para>
     </section>
     <section>
-      <title>Mein zweiter Abschnitt</title>
-      <para>Mein erster Absatz vom zweiten Abschnitt.</para>
-      <para>Mein zweiter Absatz vom zweiten Abschnitt, mit Formatierungen, z.B.:
+      <title>User Guide</title>
+      <para>erster Absatz vom zweiten Abschnitt.</para>
+      <para>zweiter Absatz vom zweiten Abschnitt, mit Formatierungen, z.B.:
+            <quote>quote</quote>, <emphasis>emphasis</emphasis>, <replaceable>replaceable</replaceable>,
+            <literal>literal</literal>, <userinput>userinput</userinput>.</para>
+    </section>
+  </article>
+    <article>
+    <title>User Guide</title>
+    <section>
+      <title>erster Abschnitt</title>
+      <para>erster Absatz vom ersten Abschnitt.</para>
+      <para>zweiter Absatz vom ersten Abschnitt.</para>
+    </section>
+    <section>
+      <title>User Guide</title>
+      <para>erster Absatz vom zweiten Abschnitt.</para>
+      <para>zweiter Absatz vom zweiten Abschnitt, mit Formatierungen, z.B.:
             <quote>quote</quote>, <emphasis>emphasis</emphasis>, <replaceable>replaceable</replaceable>,
             <literal>literal</literal>, <userinput>userinput</userinput>.</para>
     </section>
   </article>
   <article>
-    <title>Mein zweites Kapitel</title>
+    <title>Developer Guide</title>
     <section>
-      <title>Mein neuer Abschnitt im zweiten Kapitel</title>
-      <para>Mein erster Absatz vom neuen Abschnitt im zweiten Kapitel.</para>
-      <para>Mein zweiter Absatz vom neuen Abschnitt im zweiten Kapitel mit einer Tabelle und mit HTML-Links:</para>
+      <title>neuer Abschnitt im zweiten Kapitel</title>
+      <para>erster Absatz vom neuen Abschnitt im zweiten Kapitel.</para>
+      <para>zweiter Absatz vom neuen Abschnitt im zweiten Kapitel mit einer Tabelle und mit HTML-Links:</para>
       <table>
         <title>Doku-Tabelle</title>
         <tgroup cols="2">
