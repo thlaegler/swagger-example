@@ -12,7 +12,8 @@ info:
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-host: v22015123236530736.hotsrv.de
+#host: v22015123236530736.hotsrv.de
+host: localhost:8080
 basePath: /example
 schemes:
 - http
@@ -49,7 +50,6 @@ paths:
       operationId: add
       tags:
       - Something
-      - Example
       consumes:
       - application/json
       - application/xml
@@ -91,7 +91,6 @@ paths:
       operationId: update
       tags:
       - Something
-      - Example
       consumes:
       - application/json
       - application/xml
@@ -136,7 +135,6 @@ paths:
       operationId: remove
       tags:
       - Something
-      - Example
       consumes:
       - application/json
       - application/xml
@@ -179,7 +177,6 @@ paths:
       operationId: findAll
       tags:
       - Something
-      - Example
       consumes:
       - application/json
       - application/xml
@@ -210,7 +207,6 @@ paths:
       operationId: findById
       tags:
       - Something
-      - Example
       consumes:
       - application/json
       - application/xml

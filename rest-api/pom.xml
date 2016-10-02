@@ -18,41 +18,14 @@
 		<server.host>localhost</server.host>
 		<server.port>8080</server.port>
 		<server.port.admin>8081</server.port.admin>
+
+		<site.web.path>${project.basedir}/src/main/webapp</site.web.path>
 	</properties>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
+
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<warName>${project.build.finalName}</warName>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -66,12 +39,35 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>
-									src/gen/java</source>
+								<source>${project.basedir}/src/gen/java</source>
 							</sources>
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <version>3.0.0</version> 
+				<configuration> <filesets> <fileset> <directory>${site.web.path}</directory> 
+				<followSymlinks>false</followSymlinks> <useDefaultExcludes>true</useDefaultExcludes> 
+				</fileset> </filesets> </configuration> <executions> <execution> <id>auto-clean</id> 
+				<phase>initialize</phase> <goals> <goal>clean</goal> </goals> </execution> 
+				</executions> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${compiler.source.version}</source>
+					<target>${compiler.target.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<warName>${project.build.finalName}</warName>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven</groupId>
@@ -92,15 +88,33 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>doccheck</groupId>
+				<artifactId>maven-doccheck-plugin</artifactId>
+				<version>1.4-0.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.19.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.4</version>
 				<configuration>
 					<!-- <templateFile>${basedir}/maven-site.vm</templateFile> -->
-					<outputDirectory>src/main/webapp/site</outputDirectory>
+					<outputDirectory>${site.web.path}</outputDirectory>
 					<port>9000</port>
-					<tempWebappDirectory>src/main/webapp/site/temp</tempWebappDirectory>
-					<locales>en,de</locales>
+					<tempWebappDirectory>${site.web.path}/temp</tempWebappDirectory>
+					<!-- <locales>en,de</locales> -->
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -121,18 +135,40 @@
 				<version>2.0.17</version>
 				<executions>
 					<execution>
+						<id>docbkx</id>
+						<phase>site</phase>
 						<goals>
 							<goal>generate-html</goal>
+							<goal>generate-xhtml</goal>
+							<goal>generate-xhtml5</goal>
 							<goal>generate-webhelp</goal>
 							<!-- <goal>generate-rtf</goal> -->
 							<goal>generate-pdf</goal>
+							<goal>generate-eclipse</goal>
+							<goal>generate-manpages</goal>
 						</goals>
-						<phase>package</phase>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.xslthl</groupId>
+						<artifactId>xslthl</artifactId>
+						<version>2.0.1</version>
+						<scope>runtime</scope>
+					</dependency>
+					<dependency>
+						<groupId>net.sf.offo</groupId>
+						<artifactId>fop-hyph</artifactId>
+						<version>1.2</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
 				<configuration>
-					<targetDirectory>src/main/webapp/docbook</targetDirectory>
-					<includes>assets/docbkx/book.xml</includes>
+					<targetDirectory>${site.web.path}/docbook</targetDirectory>
+					<includes>*.xml</includes>
+					<highlightSource>1</highlightSource>
+					<hyphenate>true</hyphenate>
+					<hyphenateVerbatim>true</hyphenateVerbatim>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -150,7 +186,7 @@
 							<!-- <locales>en,de</locales> -->
 							<!-- <implementation>itext</implementation> -->
 							<aggregate>true</aggregate>
-							<outputDirectory>src/main/webapp/site/pdf</outputDirectory>
+							<outputDirectory>${site.web.path}/pdf</outputDirectory>
 							<includeReports>true</includeReports>
 						</configuration>
 					</execution>
@@ -162,78 +198,74 @@
 				<version>2.10.4</version>
 				<configuration>
 					<aggregate>true</aggregate>
-					<source>1.7</source>
+					<source>${compiler.source.version}</source>
 					<encoding>UTF-8</encoding>
 					<maxmemory>1g</maxmemory>
+					<show>private</show>
+					<additionalparam>${javadoc.opts}</additionalparam>
 					<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
+					<!-- <taglets> <taglet> <tagletClass>net.sourceforge.taglets.Taglets</tagletClass> 
+						<tagletArtifact> <groupId>net.sourceforge.taglets</groupId> <artifactId>taglets</artifactId> 
+						<version>2.0.3</version> </tagletArtifact> </taglet> </taglets> -->
+					<failOnError>false</failOnError>
 				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
-						<phase>verify</phase>
+						<phase>generate-sources</phase>
 						<goals>
+							<goal>javadoc</goal>
 							<goal>jar</goal>
+							<goal>test-javadoc</goal>
+							<goal>test-jar</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Swagger UI -->
+			<!-- Generate YAML/JSON from Java API -->
+			<!-- https://github.com/kongchen/swagger-maven-plugin -->
 			<plugin>
-				<groupId>com.googlecode.maven-download-plugin</groupId>
-				<artifactId>download-maven-plugin</artifactId>
-				<version>1.2.1</version>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<info>
+								<title>${project.name}</title>
+								<version>${project.version}</version>
+							</info>
+							<locations>${project.groupId}</locations>
+							<basePath>http://localhost:8080/example</basePath>
+							<outputPath>${site.web.path}/apidocs</outputPath>
+							<swaggerDirectory>${site.web.path}/apidocs</swaggerDirectory>
+						</apiSource>
+					</apiSources>
+				</configuration>
 				<executions>
 					<execution>
-						<id>swagger-ui</id>
-						<phase>prepare-package</phase>
+						<id>markdown</id>
+						<phase>generate-sources</phase>
 						<goals>
-							<goal>wget</goal>
+							<goal>generate</goal>
 						</goals>
-						<configuration>
-							<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
-							<unpack>true</unpack>
-							<outputDirectory>${project.build.directory}</outputDirectory>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-swagger-ui</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/src/main/webapp/apidocs/swagger-ui</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-yaml</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/src/main/webapp/apidocs</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${project.basedir}/../rest-generate/yaml</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.4.0.M1</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+					<webApp>
+						<contextPath>/example</contextPath>
+					</webApp>
+					<stopPort>9966</stopPort>
+					<stopKey>example</stopKey>
+					<stopWait>10</stopWait>
+				</configuration>
 			</plugin>
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
 				<version>2.6</version> <configuration> <warName>${project.build.finalName}</warName> 
@@ -243,6 +275,8 @@
 				</plugin> -->
 		</plugins>
 	</build>
+
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -250,7 +284,7 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
-					<outputDirectory>src/main/webapp/newsite</outputDirectory>
+					<outputDirectory>${project.basedir}/src/main/webapp/newsite</outputDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -258,8 +292,8 @@
 				<artifactId>maven-jxr-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
+					<destDir>gaga</destDir>
 					<linkJavadoc>true</linkJavadoc>
-					<javadocDir>src/main/webapp/site2/javadoc/html</javadocDir>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -269,22 +303,23 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-							<report>dependencies</report>
-							<report>cim</report>
+							<report>index</report>
 							<report>summary</report>
+							<report>license</report>
+							<report>modules</report>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>cim</report>
+							<report>issue-tracking</report>
+							<report>scm</report>
+							<report>dependencies</report>
 							<report>dependency-info</report>
 							<report>dependency-convergence</report>
 							<report>dependency-management</report>
 							<report>plugin-management</report>
 							<report>plugins</report>
-							<report>index</report>
 							<report>help</report>
-							<report>modules</report>
-							<report>project-team</report>
-							<report>mailing-list</report>
-							<report>issue-tracking</report>
-							<report>license</report>
-							<report>scm</report>
+							<!-- <report>maven-doccheck-plugin</report> -->
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -298,24 +333,121 @@
 						<id>html</id>
 						<reports>
 							<report>javadoc</report>
+							<report>test-javadoc</report>
 						</reports>
 						<configuration>
-							<destDir>src/main/webapp/javadoc/html</destDir>
-							<additionalparam>-Xdoclint:none</additionalparam>
-							<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
+							<name>JavaDoc HTML</name>
+							<description>HTML documents of JavaDoc.</description>
+							<destDir>html</destDir>
+							<show>private</show>
+							<additionalparam>${javadoc.opts}</additionalparam>
+							<!-- <excludePackageNames>target.generated-sources.annotations</excludePackageNames> -->
+							<failOnError>false</failOnError>
 						</configuration>
 					</reportSet>
-					<!-- <reportSet> <id>pdf</id> <reports> <report>javadoc</report> </reports> 
-						<configuration> <name>PDF</name> <description>This is my Documentation on 
-						PDF.</description> <destDir>javadoc/pdf</destDir> <doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet> 
-						<docletPath>assets/docbkx/pdfdoclet-1.0.3-all.jar</docletPath> <useStandardDocletOptions>false</useStandardDocletOptions> 
-						<additionalparam>-pdf javadoc.pdf</additionalparam> <excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
-						</configuration> </reportSet> -->
+					<!-- JavaDoc PDF -->
+					<reportSet>
+						<id>pdf2</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc PDF</name>
+							<description>PDF document of JavaDoc
+								(com.tarsec.javadoc.pdfdoclet).</description>
+							<destDir>pdf2</destDir>
+							<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet>
+							<docletPath>${project.basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath>
+							<useStandardDocletOptions>true</useStandardDocletOptions>
+							<show>private</show>
+							<author>Thomas Laegler</author>
+							<bottom>Copyright © ${inceptionYear}–${currentYear} itemis. All
+								rights reserved.</bottom>
+							<additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam>
+							<!-- <docletArtifact> <groupId>pdfdoclet</groupId> <artifactId>doclet</artifactId> 
+								<version>1.0.3</version> </docletArtifact> -->
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- JavaDoc DocCheck -->
+					<!-- <reportSet> <id>doccheck</id> <reports> <report>javadoc</report> 
+						<report>test-javadoc</report> </reports> <configuration> <name>${project.name}</name> 
+						<description>${project.description}</description> <doclet>com.sun.tools.doclets.doccheck.DocCheck</doclet> 
+						<docletArtifact> <groupId>com.sun.tools.doclets</groupId> <artifactId>doccheck</artifactId> 
+						<version>1.2b2</version> </docletArtifact> <additionalparam>-d ${project.basedir}/src/main/webapp/doccheck 
+						${javadoc.opts}</additionalparam> <destDir>doccheck</destDir><failOnError>false</failOnError></configuration> 
+						</reportSet> -->
+					<!-- <reportSet> <id>doccheck2</id> <reports> <report>javadoc</report> 
+						<report>test-javadoc</report> </reports> <configuration> <name>${project.name}</name> 
+						<description>${project.description}</description> <doclet>com.sun.tools.doclets.doccheck.DocCheck</doclet> 
+						<docletArtifact> <groupId>mx.com.inftel.oss</groupId> <artifactId>java7-markdown-doclets</artifactId> 
+						<version>1.6-b147-133</version> </docletArtifact> <additionalparam>-d ${project.basedir}/src/main/webapp/doccheck2 
+						${javadoc.opts}</additionalparam> <destDir>${project.basedir}/src/main/webapp/doccheck2</destDir><failOnError>false</failOnError></configuration> 
+						</reportSet> -->
+					<!-- JavaDoc yUML -->
+					<!-- Doesn't work with JDK 1.8: https://power2build.wordpress.com/2015/02/24/uml-doclet-in-eclipse/ -->
+					<!-- <reportSet> <id>uml1</id> <reports> <report>javadoc</report> <report>test-javadoc</report> 
+						</reports> <configuration> <name>${project.name}</name> <description>${project.description}</description> 
+						<doclet>ydoc.doclets.YStandard</doclet> <docletPath>${project.basedir}/assets/doclet/uml/lib/ydoc.jar:${project.basedir}/assets/doclet/uml/resources</docletPath> 
+						<destDir>uml1</destDir> <show>private</show> <additionalparam>-umlautogen 
+						${javadoc.opts}</additionalparam> <failOnError>false</failOnError> </configuration> 
+						</reportSet> -->
+					<!-- JavaDoc UML2 -->
+					<reportSet>
+						<id>uml2</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc UML (umlgraph)</name>
+							<description>UML diagrams in HTML JavaDoc (org.umlgraph.doclet).</description>
+							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+							<destDir>uml2</destDir>
+							<docletArtifact>
+								<groupId>org.umlgraph</groupId>
+								<artifactId>doclet</artifactId>
+								<version>5.4</version>
+							</docletArtifact>
+							<show>private</show>
+							<additionalparam>
+								-inferrel -inferdep -quiet -hide java.*
+								-collpackages java.util.* -qualify
+								-postfixpackage
+								-nodefontsize 9
+								-nodefontpackagesize 7 ${javadoc.opts}
+							</additionalparam>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- JavaDoc UML3 -->
+					<reportSet>
+						<id>uml3</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc UML (spinellis)</name>
+							<description>UML diagrams in HTML JavaDoc
+								(gr.spinellis.UmlGraph).</description>
+							<destDir>uml3</destDir>
+							<doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet>
+							<docletArtifact>
+								<groupId>gr.spinellis</groupId>
+								<artifactId>umlgraph</artifactId>
+								<version>4.6</version>
+							</docletArtifact>
+							<show>private</show>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
 					<!-- <reportSet> <id>doccheck</id> <configuration> <doclet>com.sun.tools.doclets.doccheck.DocCheck</doclet> 
 						<docletPath>/path/to/doccheck.jar</docletPath> <docletArtifact> <groupId>com.sun.tools.doclets</groupId> 
 						<artifactId>doccheck</artifactId> <version>1.2b2</version> </docletArtifact> 
-						<additionalparam> -d ${basedir}/generated/site/doccheck </additionalparam> 
-						<destDir>doccheck</destDir> <name>DocCheck</name> <description>DocCheck documentation.</description> 
+						<additionalparam> -d ${site.web.path}/doccheck </additionalparam> <destDir>doccheck</destDir> 
+						<name>DocCheck</name> <description>DocCheck documentation.</description> 
 						<configuration> <destDir>${basedir}/docs/generated/javadoc/doccheck</destDir> 
 						</configuration> </configuration> <reports> <report>javadoc</report> </reports> 
 						</reportSet> -->
@@ -329,22 +461,27 @@
 						<destDir>javadoc/pdfuml</destDir> <outputDirectory>javadoc/pdfuml</outputDirectory> 
 						<excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
 						</configuration> <reports> <report>javadoc</report> </reports> </reportSet> -->
-					<!-- <reportSet> <configuration> <destDir>javadoc/test</destDir> <additionalparam>-Xdoclint:none</additionalparam> 
-						<excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
-						</configuration> <reports> <report>javadoc</report> <report>test-javadoc</report> 
-						</reports> </reportSet> -->
 					<!-- <reportSet> <id>aggregate</id> <configuration> <destDir>javadoc/aggregate</destDir> 
 						<additionalparam>-Xdoclint:none</additionalparam> <excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
 						</configuration> <inherited>false</inherited> <reports> <report>aggregate</report> 
 						</reports> </reportSet> -->
 				</reportSets>
 			</plugin>
+			<!-- Generate Changelog from Jira, Github or changes.xml -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
 				<version>2.12</version>
 				<configuration>
 					<xmlPath>${project.basedir}/src/site/changes.xml</xmlPath>
+					<columnNames>Type,Key,Summary,Assignee,Status,Fix Version</columnNames>
+					<useJql>true</useJql>
+					<githubAPIScheme>https</githubAPIScheme>
+					<githubAPIPort>443</githubAPIPort>
+					<onlyMilestoneIssues>false</onlyMilestoneIssues>
+					<includeOpenIssues>false</includeOpenIssues>
+					<onlyCurrentVersion>true</onlyCurrentVersion>
+					<fixVersionIds>13722,12515</fixVersionIds>
 				</configuration>
 				<reportSets>
 					<reportSet>
@@ -368,7 +505,7 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<outputDirectory>src/main/webapp/site2</outputDirectory>
+					<outputDirectory>${project.basedir}/site2</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -385,8 +522,8 @@
 						<version>2.17</version>
 						<configuration>
 							<logViolationsToConsole>true</logViolationsToConsole>
-							<configLocation>assets/checkstyle/checkstyle.xml</configLocation>
-							<propertiesLocation>assets/checkstyle/checkstyle.properties</propertiesLocation>
+							<configLocation>${project.basedir}/assets/checkstyle/checkstyle.xml</configLocation>
+							<propertiesLocation>${project.basedir}/assets/checkstyle/checkstyle.properties</propertiesLocation>
 							<propertyExpansion>projectname=${project.artifactId}</propertyExpansion>
 						</configuration>
 					</plugin>
@@ -765,11 +902,78 @@
 			<version>2.7</version>
 		</dependency>
 
+		<!-- TEST -->
+		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
+			<!-- <version>${junit.version}</version> -->
+			<scope>compile</scope>
+			<!-- <scope>test</scope> -->
+		</dependency>
+
+		<!-- Mockito und PowerMock -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<!-- <version>${mockito.version}</version> -->
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<!-- <version>${powermock.version}</version> -->
+			<scope>test</scope>
+			<exclusions>
+				<!-- exclude hamcrest-core 1.1 because of conflicting dependencies. Using 
+					1.3 from REST-Aassured -->
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- REST-Assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<!-- <version>${restassured.version}</version> -->
+			<!-- <scope>test</scope> -->
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Cucumber und Gherkin -->
+		<!-- <dependency> <groupId>info.cukes</groupId> <artifactId>cucumber-jvm</artifactId> 
+			<version>${cucumber.version}</version> <type>pom</type> <scope>test</scope> 
+			<scope>provided</scope> </dependency> -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-core</artifactId>
+			<!-- <version>${cucumber.version}</version> -->
+			<!-- <scope>test</scope> -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<!-- <version>${cucumber.version}</version> -->
+			<!-- <scope>test</scope> -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<!-- <version>${cucumber.version}</version> -->
+			<!-- <scope>test</scope> -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>gherkin</artifactId>
+			<!-- <version>2.12.2</version> -->
+			<!-- <scope>test</scope> -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>

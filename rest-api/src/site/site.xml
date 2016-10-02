@@ -25,23 +25,17 @@
 				<href>http://www.itemis.de</href>
 			</brand>
 			<breadcrumbs>true</breadcrumbs>
-			<slogan>Super interesting project doing good things.</slogan>
+			<slogan>Be lazy and let it generate :)</slogan>
 			<titleTemplate>%2$s | %1$s</titleTemplate>
 			<toc>sidebar</toc>
-			<topNav>MainMenu|Project|User Guide|Parent|Modules|Reports</topNav>
-			<bottomNav>
-				<column>Main|Download</column>
-				<column>Documentation</column>
-				<column>reports|modules</column>
-			</bottomNav>
+			<topNav>API|Project|Guide|Staging</topNav>
 			<bottomNav>
 				<column>License</column>
-				<column>GitHub</column>
-				<column>Migrating from Apache Commons Math</column>
+				<column>Git Repo</column>
 			</bottomNav>
 			<bottomDescription>Experimental development. No warranty!</bottomDescription>
 			<slogan position="bannerRight|bannerLeft">The best website in the world</slogan>
-			<pages>
+			<!-- <pages>
 				<index project="project-id">
 					<shortTitle>Welcome</shortTitle>
 					<titleTemplate>Reflow Maven Skin</titleTemplate>
@@ -62,7 +56,7 @@
 				<developer-info>
 					<toc>sidebar|top</toc>
 				</developer-info>
-			</pages>
+			</pages> -->
 		</reflowSkin>
 	</custom>
 
@@ -78,10 +72,10 @@
 		</head>
 
 		<links>
-			<item name="itemis" href="http://www.itemis.de/" />
+			<item name="Home" href="index.html" />
 		</links>
 
-		<menu name="MainMenu">
+		<!-- <menu name="MainMenu">
 			<item name="Home" href="index.html" />
 			<item name="Project Info" href="project-info.html" />
 			<item name="Project Summary" href="project-summary.html" />
@@ -120,33 +114,54 @@
 			<item name="General Information" href="about.html" />
 			<item name="For Maven 1.x Users" href="maven1.html" />
 			<item name="Road Map" href="roadmap.html" />
+		</menu> -->
+		<menu name="API">
+			<item name="API Doc Index" href="apidocs/index.html" />
+			<item name="Swagger YAML" href="apidocs/swagger.yaml" />
+			<item name="Swagger JSON" href="apidocs/swagger.json" />
+			<item name="Swagger UI" href="apidocs/swagger-ui/index.html?url=/../swagger.yaml" />
+			<item name="HTML5" href="apidocs/html5/index.html" />
+			<item name="HTML2" href="apidocs/html2/index.html" />
+			<item name="HTML" href="apidocs/html/index.html" />
+			<item name="Dynamic HTML" href="apidocs/dynamic-html/docs/index.html" />
+			<item name="PDF" href="apidocs/pdf/index.pdf" />
+			<item name="ASCIIDOC" href="apidocs/asciidoc/index.adoc" />
+			<item name="Confluence Wiki Markup" href="apidocs/cwiki/confluence-markup.txt" />
 		</menu>
 		
-		<menu name="Project">
-			<item name="Overview" href="index.html" />
-			<item name="Building" href="building.html" />
-			<item name="Downloads" href="downloads.html" />
-			<item name="Mailing lists" href="mail-lists.html" />
-			<item name="Latest API docs (development)" href="apidocs/index.html" />
-			<item name="Developers Guide" href="developers.html" />
-			<item name="User Guide" href="user-guide.html" />
+		<menu name="Project" ref="reports" />
+		
+		<menu name="Guide">
+			<item name="Index" href="docbook/index.html" />
+			<item name="HTML" href="docbook/book.html" />
+			<item name="PDF" href="docbook/book.pdf" />
 		</menu>
 
-		<menu name="Modules" ref="modules" />
-
-		<menu name="Reports" ref="reports" />
+		<!-- <menu name="Modules" ref="modules" /> -->
+		
+		<menu name="Staging">
+			<item name="APP-DEV" href="index.html" />
+			<item name="WT01" href="index.html" />
+			<item name="WT02" href="index.html" />
+			<item name="WT03" href="index.html" />
+			<item name="WT04" href="index.html" />
+			<item name="WEIN" href="index.html" />
+			<item name="WTPRO" href="index.html" />
+			<item name="WWW" href="index.html" />
+		</menu>
 
 		<menu name="License">
+			<item name="Mailing lists" href="mail-lists.html" />
 			<item name="License" href="license.html" />
 		</menu>
 
-		<menu name="GitHub">
-			<item name="GitHub repository" href="https://github.com" />
+		<menu name="Git Repo">
+			<item name="Git repository" href="https://github.com" />
 		</menu>
 
-		<menu name="Test">
+		<!-- <menu name="Test">
 			<item name="Test" href="test.html" />
-		</menu>
+		</menu> -->
 
 	</body>
 </project>

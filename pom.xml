@@ -26,7 +26,7 @@
 		<servlet-api-version>2.5</servlet-api-version>
 
 		<!-- Dependency Versions -->
-		<swagger.version>1.5.10</swagger.version>
+		<swagger.version>${swagger-core-version}</swagger.version>
 		<retrofit.version>2.1.0</retrofit.version>
 		<gson.version>2.7</gson.version>
 		<jackson.version>2.8.1</jackson.version>
@@ -48,6 +48,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<compiler.source.version>1.8</compiler.source.version>
 		<compiler.target.version>1.8</compiler.target.version>
+
+		<javadoc.opts></javadoc.opts>
 	</properties>
 
 	<url>http://www.xn--lgler-gra.com</url>
@@ -107,6 +109,88 @@
 		</site>
 	</distributionManagement>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- TEST -->
+			<!-- JUnit -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>compile</scope>
+				<!-- <scope>test</scope> -->
+			</dependency>
+
+			<!-- Mockito und PowerMock -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+				<!-- <scope>test</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>${powermock.version}</version>
+				<!-- <scope>test</scope> -->
+				<exclusions>
+					<!-- exclude hamcrest-core 1.1 because of conflicting dependencies. 
+						Using 1.3 from REST-Aassured -->
+					<exclusion>
+						<groupId>org.hamcrest</groupId>
+						<artifactId>hamcrest-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- REST-Assured -->
+			<dependency>
+				<groupId>io.rest-assured</groupId>
+				<artifactId>rest-assured</artifactId>
+				<version>${restassured.version}</version>
+				<!-- <scope>test</scope> -->
+			</dependency>
+
+			<!-- Cucumber und Gherkin -->
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-jvm</artifactId>
+				<version>${cucumber.version}</version>
+				<type>pom</type>
+				<!-- <scope>test</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-core</artifactId>
+				<version>${cucumber.version}</version>
+				<!-- <scope>test</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-java</artifactId>
+				<version>${cucumber.version}</version>
+				<!-- <scope>test</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-junit</artifactId>
+				<version>${cucumber.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-weld</artifactId>
+				<version>${cucumber.version}</version>
+				<!-- <scope>test</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>gherkin</artifactId>
+				<version>2.12.2</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
 		<dependency>
@@ -118,7 +202,7 @@
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-core</artifactId>
-			<version>1.5.10</version>
+			<version>${swagger.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
 		<dependency>
@@ -161,6 +245,18 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>doclint-java8-disable</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+			</properties>
+		</profile>
+	</profiles>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>jcenter-snapshots</id>
@@ -177,4 +273,11 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<repositories>
+		<repository>
+			<id>geotoolkit</id>
+			<name>geotoolkit</name>
+			<url>http://maven.geotoolkit.org/</url>
+		</repository>
+	</repositories>
 </project>

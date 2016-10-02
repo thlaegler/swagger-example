@@ -1,0 +1,16 @@
+<document>
+	<properties>
+		<title />
+		<author email="123" />
+	</properties>
+	<body>
+		<release version="123" date="123" description="123">
+			<action dev="123" due-to="123" due-to-email="123" issue="123"
+				type="123" system="123" date="123">
+				<action />
+				<fixes issue="123" />
+				<dueto name="123" email="123" />
+			</action>
+		</release>
+	</body>
+</document>

@@ -20,7 +20,7 @@
 		<android.client.project>rest-android-client</android.client.project>
 
 		<apidocs.path>${project.basedir}/../${api.project}/src/main/webapp/apidocs</apidocs.path>
-		<yaml.path>${project.basedir}/yaml</yaml.path>
+		<yaml.path>${project.basedir}/api</yaml.path>
 		<asciidoc.path>${project.basedir}/asciidoc</asciidoc.path>
 	</properties>
 
@@ -65,44 +65,20 @@
 		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-generator</artifactId> 
 			<version>2.2.1</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-codegen -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-codegen</artifactId>
-			<version>2.2.1</version>
-		</dependency>
+		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-codegen</artifactId> 
+			<version>2.2.1</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-parser -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-parser</artifactId>
-			<version>1.0.22</version>
-		</dependency>
+		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-parser</artifactId> 
+			<version>1.0.22</version> </dependency> -->
 
-
-		<dependency>
-			<groupId>com.squareup.retrofit2</groupId>
-			<artifactId>converter-gson</artifactId>
-			<version>${retrofit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.retrofit2</groupId>
-			<artifactId>retrofit</artifactId>
-			<version>${retrofit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.retrofit2</groupId>
-			<artifactId>converter-scalars</artifactId>
-			<version>${retrofit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.okhttp</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>${okhttp.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.okhttp</groupId>
-			<artifactId>logging-interceptor</artifactId>
-			<version>${okhttp.version}</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.squareup.retrofit2</groupId> <artifactId>converter-gson</artifactId> 
+			<version>${retrofit.version}</version> </dependency> <dependency> <groupId>com.squareup.retrofit2</groupId> 
+			<artifactId>retrofit</artifactId> <version>${retrofit.version}</version> 
+			</dependency> <dependency> <groupId>com.squareup.retrofit2</groupId> <artifactId>converter-scalars</artifactId> 
+			<version>${retrofit.version}</version> </dependency> <dependency> <groupId>com.squareup.okhttp</groupId> 
+			<artifactId>okhttp</artifactId> <version>${okhttp.version}</version> </dependency> 
+			<dependency> <groupId>com.squareup.okhttp</groupId> <artifactId>logging-interceptor</artifactId> 
+			<version>${okhttp.version}</version> </dependency> -->
 	</dependencies>
 
 	<build>
@@ -110,7 +86,7 @@
 			<!-- Swagger Plugin -->
 			<!-- <plugin> <groupId>org.zalando.maven.plugins</groupId> <artifactId>swagger-codegen-maven-plugin</artifactId> 
 				<version>${zalando.swagger.plugin.version}</version> <configuration> <language>jaxrsinterfaces</language> 
-				<apiFile>${project.basedir}/src/main/resources/api.yaml</apiFile> <skipApigeneration>true</skipApigeneration> 
+				<apiFile>${project.basedir}/src/main/resources/swagger.yaml</apiFile> <skipApigeneration>true</skipApigeneration> 
 				<skipModelgeneration>true</skipModelgeneration> <yamlToJson>true</yamlToJson> 
 				<yamlToJsonOutputDirectory>${project.basedir}/src/main/resources/</yamlToJsonOutputDirectory> 
 				<enableBuilderSupport>true</enableBuilderSupport> <enable303>true</enable303> 
@@ -143,7 +119,7 @@
 							<!-- <language>jaxrs-resteasy-mock</language> -->
 
 							<language>jaxrs-resteasy</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${project.basedir}/../${api.project}</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<groupId>${project.groupId}</groupId>
@@ -165,7 +141,7 @@
 						</goals>
 						<configuration>
 							<language>java</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${project.basedir}/../${client.project}</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<groupId>${project.groupId}</groupId>
@@ -187,7 +163,7 @@
 						</goals>
 						<configuration>
 							<language>android</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${project.basedir}/../${android.client.project}</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<groupId>${project.groupId}</groupId>
@@ -208,7 +184,7 @@
 						</goals>
 						<configuration>
 							<language>csharp</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${project.basedir}/../${ios.client.project}</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<groupId>${project.groupId}</groupId>
@@ -227,7 +203,7 @@
 						</goals>
 						<configuration>
 							<language>html</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${apidocs.path}/html</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<verbose>true</verbose>
@@ -243,7 +219,7 @@
 						</goals>
 						<configuration>
 							<language>dynamic-html</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${apidocs.path}/dynamic-html</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<verbose>true</verbose>
@@ -251,11 +227,21 @@
 						</configuration>
 					</execution>
 					<!-- Generate modern HTML documentation -->
-					<!-- <execution> <id>html2</id> <phase>generate-sources</phase> <goals> 
-						<goal>generate</goal> </goals> <configuration> <language>html2</language> 
-						<inputSpec>${yaml.path}/api.yaml</inputSpec> <output>${apidocs.path}/html2</output> 
-						<addCompileSourceRoot>false</addCompileSourceRoot> <verbose>true</verbose> 
-						<configHelp>true</configHelp> </configuration> </execution> -->
+					<execution>
+						<id>html2</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<language>html2</language>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+							<output>${apidocs.path}/html2</output>
+							<addCompileSourceRoot>false</addCompileSourceRoot>
+							<verbose>true</verbose>
+							<!-- <configHelp>true</configHelp> -->
+						</configuration>
+					</execution>
 					<!-- Generate Confluence WikiText documentation -->
 					<execution>
 						<id>cwiki</id>
@@ -265,7 +251,7 @@
 						</goals>
 						<configuration>
 							<language>cwiki</language>
-							<inputSpec>${yaml.path}/api.yaml</inputSpec>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
 							<output>${apidocs.path}/cwiki</output>
 							<addCompileSourceRoot>false</addCompileSourceRoot>
 							<verbose>true</verbose>
@@ -291,7 +277,7 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<swaggerInput>${yaml.path}/api.yaml</swaggerInput>
+					<swaggerInput>${yaml.path}/swagger.yaml</swaggerInput>
 					<outputDir>${apidocs.path}/asciidoc</outputDir>
 					<config>
 						<swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
@@ -373,36 +359,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Generate YAML from Java API -->
-			<!-- https://github.com/kongchen/swagger-maven-plugin -->
-			<plugin>
-				<groupId>com.github.kongchen</groupId>
-				<artifactId>swagger-maven-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<apiSources>
-						<apiSource>
-							<info>
-								<title>Swagger REST Example API</title>
-								<version>${project.version}</version>
-							</info>
-							<locations>${project.groupId}</locations>
-							<basePath>http://www.example.com</basePath>
-							<outputPath>${apidocs.path}/kongchen</outputPath>
-							<swaggerDirectory>${yaml.path}/gen</swaggerDirectory>
-						</apiSource>
-					</apiSources>
-				</configuration>
-				<executions>
-					<execution>
-						<id>markdown</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<!-- <plugin> <groupId>org.asciidoctor</groupId> <artifactId>asciidoctor-maven-plugin</artifactId> 
 				<version>1.5.3</version> <executions> <execution> <id>output-html</id> <phase>generate-resources</phase> 
 				<goals> <goal>process-asciidoc</goal> </goals> <configuration> <output>${apidocs.path}/ascii</output> 
@@ -416,7 +372,178 @@
 					<target>${compiler.target.version}</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<aggregate>true</aggregate>
+					<source>${compiler.source.version}</source>
+					<encoding>UTF-8</encoding>
+					<maxmemory>1g</maxmemory>
+					<show>private</show>
+					<additionalparam>${javadoc.opts}</additionalparam>
+					<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
+					<!-- <taglets> <taglet> <tagletClass>net.sourceforge.taglets.Taglets</tagletClass> 
+						<tagletArtifact> <groupId>net.sourceforge.taglets</groupId> <artifactId>taglets</artifactId> 
+						<version>2.0.3</version> </tagletArtifact> </taglet> </taglets> -->
+					<failOnError>false</failOnError>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>javadoc</goal>
+							<goal>jar</goal>
+							<goal>test-javadoc</goal>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Swagger UI -->
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>swagger-ui</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-swagger-ui</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${apidocs.path}/swagger-ui</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-yaml</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${apidocs.path}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${yaml.path}</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-asciidoc</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							${apidocs.path}
+							<outputDirectory>${apidocs.path}/asciidoc</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${asciidoc.path}</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>index</report>
+							<report>summary</report>
+							<report>license</report>
+							<report>modules</report>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>cim</report>
+							<report>issue-tracking</report>
+							<report>scm</report>
+							<report>dependencies</report>
+							<report>dependency-info</report>
+							<report>dependency-convergence</report>
+							<report>dependency-management</report>
+							<report>plugin-management</report>
+							<report>plugins</report>
+							<report>help</report>
+							<!-- <report>maven-doccheck-plugin</report> -->
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- Generate Changelog from Jira, Github or changes.xml -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<xmlPath>${project.basedir}/src/site/changes.xml</xmlPath>
+					<columnNames>Type,Key,Summary,Assignee,Status,Fix Version</columnNames>
+					<useJql>true</useJql>
+					<githubAPIScheme>https</githubAPIScheme>
+					<githubAPIPort>443</githubAPIPort>
+					<onlyMilestoneIssues>false</onlyMilestoneIssues>
+					<includeOpenIssues>false</includeOpenIssues>
+					<onlyCurrentVersion>true</onlyCurrentVersion>
+					<fixVersionIds>13722,12515</fixVersionIds>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<outputDirectory>${project.basedir}/site2</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 </project>
