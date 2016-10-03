@@ -1,6 +1,6 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
 	version="5.0">
-	<title>Example REST API Guide</title>
+	<title>TK-App REST API Guide</title>
 	<info>
 		<author>
 			<personname>
@@ -10,7 +10,7 @@
 		</author>
 		<copyright>
 			<year>2016</year>
-			<holder>Thomas Laegler</holder>
+			<holder>Die Techniker</holder>
 		</copyright>
 	</info>
 	<article>

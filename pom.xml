@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.itemis.rest</groupId>
+	<groupId>de.tk.tkapp.rest</groupId>
 	<artifactId>rest-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Swagger REST Parent Project</name>
+	<name>TK-App REST API Parent</name>
 	<description>Example project, which uses Swagger, Xtend, some Maven plugins and 'mvn generate-sources site' to generate REST Projects (Java REST API, Java REST client, Android REST client and iOS client) and documentation (REST API Doc, JavaDoc, Maven Site, DocBook, PDF etc.) from YAML.</description>
 
 	<modules>
@@ -52,10 +52,10 @@
 		<javadoc.opts></javadoc.opts>
 	</properties>
 
-	<url>http://www.xn--lgler-gra.com</url>
+	<url>http://www.tk.de</url>
 	<organization>
-		<name>itemis</name>
-		<url>http://www.itemis.com</url>
+		<name>Die Techniker</name>
+		<url>http://www.tk.de</url>
 	</organization>
 	<licenses>
 		<license>
@@ -67,15 +67,60 @@
 	<mailingLists>
 		<mailingList>
 			<name>Example Project Mailing</name>
-			<post>example@itemis.com</post>
+			<post>example@tk.de</post>
 		</mailingList>
 	</mailingLists>
 	<inceptionYear>2016</inceptionYear>
 	<developers>
 		<developer>
-			<id>P950120</id>
+			<id>Pxxxxxx</id>
+			<organization>Die Techniker</organization>
+			<organizationUrl>http://www.tk.de</organizationUrl>
+			<name>Jan Koops</name>
+			<email>pxxxxxxx@tk.de</email>
+			<roles>
+				<role>Architect</role>
+			</roles>
+			<timezone>Germany/Hamburg</timezone>
+		</developer>
+		<developer>
+			<id>Pxxxxxx</id>
+			<organization>Die Techniker</organization>
+			<organizationUrl>http://www.tk.de</organizationUrl>
+			<name>Marcus Sasse</name>
+			<email>pxxxxxxx@tk.de</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>Germany/Hamburg</timezone>
+		</developer>
+		<developer>
+			<id>Pxxxxxx</id>
+			<organization>Die Techniker</organization>
+			<organizationUrl>http://www.tk.de</organizationUrl>
+			<name>Martin Schumacher</name>
+			<email>pxxxxxxx@tk.de</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>Germany/Hamburg</timezone>
+		</developer>
+		<developer>
+			<id>Pxxxxxx</id>
+			<organization>Die Techniker</organization>
+			<organizationUrl>http://www.tk.de</organizationUrl>
+			<name>Philip MacDonald</name>
+			<email>pxxxxxxx@tk.de</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>Germany/Hamburg</timezone>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
 			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
+			<organizationUrl>http://www.itemis.de</organizationUrl>
 			<name>Thomas Laegler</name>
 			<email>thomas.laegler@googlemail.com</email>
 			<roles>
@@ -83,11 +128,8 @@
 				<role>Developer</role>
 			</roles>
 			<timezone>Germany/Hamburg</timezone>
-			<properties>
-				<picUrl>http://www.itemis.com</picUrl>
-			</properties>
-		</developer>
-	</developers>
+		</contributor>
+	</contributors>
 	<issueManagement>
 		<url>https://github.com/thlaegler/swagger-example/issues</url>
 		<system>GitHub Issues</system>
@@ -111,11 +153,11 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
+			<!-- <dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>rest-generator</artifactId>
 				<version>${project.version}</version>
-			</dependency>
+			</dependency> -->
 
 			<!-- TEST -->
 			<!-- JUnit -->

@@ -1,27 +1,27 @@
 swagger: '2.0'
 info:
-  title: Example Rest API
+  title: Tk-App Rest API
   description: |
     This is the Example Rest API specification.
   version: 0.0.1-SNAPSHOT
-  termsOfService: http://www.itemis.com
+  termsOfService: http://www.tk.de
   contact:
     name: Thomas Laegler
-    url: http://www.itemis.com
+    url: http://www.tk.de
     email: thomas.laegler@googlemail.com
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 #host: v22015123236530736.hotsrv.de
 host: localhost:8080
-basePath: /example
+basePath: /tkapp
 schemes:
 - http
 securityDefinitions:
   oauth:
     type: oauth2
     flow: implicit
-    authorizationUrl: https://v22015123236530736.hotsrv.de/example/rest/auth
+    authorizationUrl: https://app-dev.tk-online.net/tkapp/rest/token
     scopes:
       basic: |
         to read any and all data related to a user (e.g. following/followed-by
@@ -52,11 +52,11 @@ paths:
       - Something
       consumes:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       parameters:
       - in: body
@@ -98,11 +98,11 @@ paths:
       - Something
       consumes:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       parameters:
       - in: body
@@ -147,7 +147,7 @@ paths:
       - Something
       consumes:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       parameters:
       - in: body
@@ -190,7 +190,7 @@ paths:
       - Something
       produces:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       responses:
         200:
@@ -218,11 +218,11 @@ paths:
       - Something
       consumes:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.v1+json
+      - application/vnd.de.tk.tkapp.v1+json
       - application/xml
       parameters:
       - name: id

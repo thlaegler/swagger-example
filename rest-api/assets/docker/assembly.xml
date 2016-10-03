@@ -15,7 +15,7 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>com.itemis.rest:rest-api</include>
+                <include>de.tk.tkapp.rest:rest-api</include>
             </includes>
             <outputFileNameMapping>rest-api.war</outputFileNameMapping>
         </dependencySet>

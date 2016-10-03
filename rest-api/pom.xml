@@ -4,11 +4,11 @@
 
 	<artifactId>rest-api</artifactId>
 	<packaging>war</packaging>
-	<name>Swagger REST API Project</name>
+	<name>TK-App REST API</name>
 	<description>This Project contains the generated Swagger REST API</description>
 
 	<parent>
-		<groupId>com.itemis.rest</groupId>
+		<groupId>de.tk.tkapp.rest</groupId>
 		<artifactId>rest-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -75,7 +75,8 @@
 
 							<language>jaxrs-resteasy</language>
 							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
-							<output>${project.basedir}/../${api.project}</output>
+							<!-- <output>${project.basedir}/../${api.project}</output> -->
+							<output>${project.basedir}</output>
 							<addCompileSourceRoot>true</addCompileSourceRoot>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>${api.project}</artifactId>
@@ -761,7 +762,7 @@
 						<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet> <docletPath>${project.basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath> 
 						<useStandardDocletOptions>false</useStandardDocletOptions> <show>private</show> 
 						<author>Thomas Laegler</author> <bottom>Copyright © ${inceptionYear}–${currentYear} 
-						itemis. All rights reserved.</bottom> <additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam> 
+						Die Techniker. All rights reserved.</bottom> <additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam> 
 						<failOnError>false</failOnError> </configuration> </reportSet> -->
 					<!-- JavaDoc DocCheck -->
 					<!-- <reportSet> <id>doccheck</id> <reports> <report>javadoc</report> 
@@ -1239,7 +1240,7 @@
 							</configuration>
 							<deployables>
 								<deployable>
-									<groupId>com.itemis.rest</groupId>
+									<groupId>de.tk.tkapp.rest</groupId>
 									<artifactId>rest-api</artifactId>
 									<type>war</type>
 									<properties>
@@ -1285,11 +1286,11 @@
 	</profiles>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>rest-generator</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
 		<dependency>

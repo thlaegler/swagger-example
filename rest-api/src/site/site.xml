@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Swagger Example REST API">
+<project name="TK-App REST API">
 	<publishDate position="left" format="dd.MM.yyyy" />
 	<version position="left" />
 	<poweredBy>
-		<logo name="itemis" href="https://www.itemis.com"
-			img="https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png"
-			position="left" alt="itemis" border="0" width="50" height="50" target="_blank"
-			title="itemis" />
+		<logo name="Die Techniker" href="https://www.tk.de"
+			img="https://www.tk.de/hs-fs/hubfs/Die Techniker_Logos/Die Techniker-Marke-200.png"
+			position="left" alt="Die Techniker" border="0" width="50" height="50" target="_blank"
+			title="Die Techniker" />
 	</poweredBy>
 
 	<skin>
@@ -21,10 +21,10 @@
 			<brand>
 				<name>
 					<![CDATA[
-			    	<span class="color-highlight">itemis</span>
+			    	<span class="color-highlight">Die Techniker</span>
 			    	]]>
 				</name>
-				<href>http://www.itemis.com</href>
+				<href>http://www.tk.de</href>
 			</brand>
 			<breadcrumbs>true</breadcrumbs>
 			<titleTemplate>%2$s | %1$s</titleTemplate>
@@ -46,15 +46,15 @@
 	</custom>
 
 	<bannerRight>
-		<name>Swagger Example REST API</name>
-		<src>https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png
+		<name>TK-App REST API</name>
+		<src>https://www.tk.de/centaurus/servlet/contentblob/464854/Bild/175592
 		</src>
-		<href>http://www.itemis.com/</href>
+		<href>http://www.tk.de/</href>
 	</bannerRight>
 
 	<body>
 		<head>
-			<link rel="author" href="http://www.itemis.com" />
+			<link rel="author" href="http://www.tk.de" />
 		</head>
 
 		<!-- <links>
@@ -112,14 +112,18 @@
 		<!-- <menu name="Modules" ref="modules" /> -->
 
 		<menu name="Staging">
-			<item name="APP-DEV" href="http://app-dev.example.com" />
-			<item name="WT01" href="http://wt01.example.com" />
-			<item name="WT02" href="http://wt02.example.com" />
-			<item name="WT03" href="http://wt03.example.com" />
-			<item name="WT04" href="http://wt04.example.com" />
-			<item name="WEIN" href="http://wein.example.com" />
-			<item name="WPRO" href="http://wpro.example.com" />
-			<item name="WWW" href="http://www.example.com" />
+			<item name="APP-DEV" href="http://app-dev.tk-online.net" />
+			<item name="WT01" href="http://wt01.tk-online.net" />
+			<item name="WT01-vorschau" href="http://wt01-vorschau.tk-online.net" />
+			<item name="WT02" href="http://wt02.tk-online.net" />
+			<item name="WT02-vorschau" href="http://wt02-vorschau.tk-online.net" />
+			<item name="WT03" href="http://wt03.tk-online.net" />
+			<item name="WT03-vorschau" href="http://wt03-vorschau.tk-online.net" />
+			<item name="WT04" href="http://wt04.tk-online.net" />
+			<item name="WT04-vorschau" href="http://wt04-vorschau.tk-online.net" />
+			<item name="WEIN" href="http://wein.tk-online.net" />
+			<item name="WPRO" href="http://wpro.tk-online.net" />
+			<item name="WWW" href="http://www.tk.de" />
 		</menu>
 
 		<menu name="Links">

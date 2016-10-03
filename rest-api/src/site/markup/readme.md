@@ -3,7 +3,7 @@ mvn site
 javadoc
 
 
-com.itemis..rest: Assortment of technologies including Arquillian
+de.tk.tkapp..rest: Assortment of technologies including Arquillian
 ========================
 Author: Pete Muir
 Level: Intermediate
@@ -19,7 +19,7 @@ This is your project! It is a sample, deployable Maven 3 project to help you get
 
 This project is setup to allow you to create a compliant Java EE 7 application using JSF 2.2, CDI 1.1, EJB 3.3, JPA 2.1 and Bean Validation 1.1. It includes a persistence unit and some sample persistence and transaction code to introduce you to database access in enterprise Java.
 
-There is a tutorial for this quickstart in the [Getting Started Developing Applications Guide](https://github.com/wildfly/quickstart/guide/com.itemis..rest/).
+There is a tutorial for this quickstart in the [Getting Started Developing Applications Guide](https://github.com/wildfly/quickstart/guide/de.tk.tkapp..rest/).
 
 System requirements
 -------------------
@@ -56,13 +56,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package wildfly:deploy
 
-4. This will deploy `target/com.itemis..rest.war` to the running instance of the server.
+4. This will deploy `target/de.tk.tkapp..rest.war` to the running instance of the server.
  
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/com.itemis..rest/>.
+The application will be running at the following URL: <http://localhost:8080/de.tk.tkapp..rest/>.
 
 
 Undeploy the Archive

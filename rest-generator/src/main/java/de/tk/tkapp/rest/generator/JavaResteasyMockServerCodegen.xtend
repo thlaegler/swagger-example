@@ -1,4 +1,4 @@
-package com.itemis.rest.generator
+package de.tk.tkapp.rest.generator
 
 import io.swagger.codegen.CodegenModel
 import io.swagger.codegen.CodegenOperation
@@ -22,7 +22,7 @@ class JavaResteasyMockServerCodegen extends JavaResteasyServerCodegen {
 	new() {
 		super()
 
-		artifactId = 'swagger-jaxrs-resteasy-mock-server'
+		artifactId = 'swagger-jaxrs-resteasy-server'
 
 		outputFolder = 'generated-code/javaJaxRSMock'
 		apiTemplateFiles.put('apiService.mustache', '.java')

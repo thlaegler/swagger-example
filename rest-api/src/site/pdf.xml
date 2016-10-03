@@ -4,7 +4,7 @@
   outputName="site">
 
   <meta>
-    <title>Swagger Example REST API</title>
+    <title>TK-App REST API</title>
     <author>Thomas Laegler</author>
   </meta>
 
@@ -20,12 +20,12 @@
   </toc>
 
   <cover>
-    <coverTitle>Swagger Example REST API</coverTitle>
+    <coverTitle>TK-App REST API</coverTitle>
     <coverSubTitle>${project.name} - ${project.version}</coverSubTitle>
     <coverType>User Guide</coverType>
     <projectName>${project.name}</projectName>
     <projectLogo>http://maven.apache.org/images/maventxt_logo_200.gif</projectLogo>
-    <companyName>itemis</companyName>
-    <companyLogo>https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png</companyLogo>
+    <companyName>Die Techniker</companyName>
+    <companyLogo>https://www.tk.de/hs-fs/hubfs/Die Techniker_Logos/Die Techniker-Marke-200.png</companyLogo>
   </cover>
 </document>
