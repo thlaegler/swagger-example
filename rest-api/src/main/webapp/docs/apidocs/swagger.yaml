@@ -1,0 +1,325 @@
+swagger: '2.0'
+info:
+  title: Tk-App Rest API
+  description: |
+    This is the Example Rest API specification.
+  version: 0.0.1-SNAPSHOT
+  termsOfService: http://www.tk.de
+  contact:
+    name: Thomas Laegler
+    url: http://www.tk.de
+    email: thomas.laegler@googlemail.com
+  license:
+    name: Apache License 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+#host: v22015123236530736.hotsrv.de
+host: localhost:8080
+basePath: /tkapp
+schemes:
+- http
+securityDefinitions:
+  oauth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://app-dev.tk-online.net/tkapp/rest/token
+    scopes:
+      basic: |
+        to read any and all data related to a user (e.g. following/followed-by
+         lists, photos, etc.) (granted by default)
+      comments: to create or delete comments on a user’s behalf
+      relationships: to follow and unfollow users on a user’s behalf
+      likes: to like and unlike items on a user’s behalf
+  key:
+    type: apiKey
+    in: query
+    name: access_token
+security:
+- oauth:
+  - basic
+  - comments
+  - relationships
+  - likes
+- key: [
+    ]
+paths:
+  /somethings:
+    post:
+      summary: Add a new Something
+      description: |
+        Add a new Something.
+      operationId: add
+      tags:
+      - Something
+      consumes:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Something object that needs to be added to database.
+        required: true
+        schema:
+          $ref: '#/definitions/Something'
+      responses:
+        200:
+          description: |
+            New Something successfully added.
+          schema:
+            $ref: '#/definitions/Something'
+        201:
+          description: |
+            New Something successfully added.
+        405:
+          description: |
+            Validation exception.
+        400:
+          description: |
+            Invalid Something supplied.
+        default:
+          description: |
+            An unexpected error occured.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+      - oauth:
+        - basic
+    put:
+      summary: Update an existing Something
+      description: |
+        Update an existing Something.
+      operationId: update
+      tags:
+      - Something
+      consumes:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Something object that needs to be added to database.
+        required: true
+        schema:
+          $ref: '#/definitions/Something'
+      responses:
+        200:
+          description: |
+            Something successfully updated.
+          schema:
+            $ref: '#/definitions/Something'
+        205:
+          description: |
+            Something successfully updated. Client should reset/recall content.
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Something not found.
+        400:
+          description: |
+            Invalid Something supplied.
+        default:
+          description: |
+            An unexpected error occured.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+      - oauth:
+        - basic
+    delete:
+      summary: Remove an existing Something
+      description: |
+        Remove an existing Something from database.
+      operationId: remove
+      tags:
+      - Something
+      consumes:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Something object that needs to be removed from database.
+        required: true
+        schema:
+          $ref: '#/definitions/Something'
+      responses:
+        200:
+          description: |
+            Something successfully removed.
+        204:
+          description: |
+            Something successfully removed.
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Something not found.
+        400:
+          description: |
+            Invalid Something supplied.
+        default:
+          description: |
+            An unexpected error occured.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+      - oauth:
+        - basic
+    get:
+      summary: Get all existing Somethings
+      description: |
+        Get all existing Somethings.
+      operationId: findAll
+      tags:
+      - Something
+      produces:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      responses:
+        200:
+          description: |
+            Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Something'
+        default:
+          description: |
+            An unexpected error occured.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+      - oauth:
+        - basic
+  /somethings/{id}:
+    get:
+      summary: Find an existing Something
+      description: |
+        Find an existing Something from database by ID.
+      operationId: findById
+      tags:
+      - Something
+      consumes:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.de.tk.tkapp.v1+json
+      - application/xml
+      parameters:
+      - name: id
+        in: path
+        description: |
+          ID of Something that needs to be fetched.
+        required: true
+        type: integer
+        format: int64
+        minLength: 1
+        maxLength: 8
+        pattern: '^[1-9]{1}[0-9]{0,7}'
+      responses:
+        200:
+          description: |
+            Successful response
+          schema:
+            $ref: '#/definitions/Something'
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Something not found with given ID.
+        400:
+          description: |
+            Invalid ID of Something supplied.
+        default:
+          description: |
+            An unexpected error occured.
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+      - oauth:
+        - basic
+definitions:
+  Something:
+    type: object
+    description: |
+      A Something object.
+    required:
+    - id
+    - name
+    properties:
+      id:
+        description: |
+          Id of Something.
+        type: integer
+        format: int64
+        example: 1
+      name:
+        description: |
+          Name of Something.
+        type: string
+        example: aSomething
+      otherObject:
+        $ref: '#/definitions/OtherObject'
+  OtherObject:
+    type: object
+    description: |
+      A Reference to another object.
+    required:
+    - id
+    - name
+    properties:
+      id:
+        description: |
+          Id of OtherObject.
+        type: integer
+        format: int64
+        example: 1
+      name:
+        description: |
+          Name of OtherObject.
+        type: string
+        example: aOtherObject
+  Error:
+    type: object
+    description: |
+      Generic Error object.
+    required:
+    - code
+    - title
+    - message
+    properties:
+      code:
+        description: |
+          Error Code of this Error.
+        type: integer
+        format: int64
+        example: 123
+      title:
+        description: |
+          Title of the Error Message.
+        type: string
+        example: Invalid Request
+      message:
+        description: Message Body of this Error.
+        type: string
+        example: Your Request was somehow invalid.

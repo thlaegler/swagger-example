@@ -1,0 +1,11 @@
+@startuml
+
+    abstract class SomethingsApiService {
+        {abstract} +add(Something, SecurityContext): Response
+        {abstract} +findAll(SecurityContext): Response
+        {abstract} +findById(Long, SecurityContext): Response
+        {abstract} +remove(Something, SecurityContext): Response
+        {abstract} +update(Something, SecurityContext): Response
+    }
+
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+
+    class ApiException {
+        +ApiException(int, String)
+    }
+
+@enduml

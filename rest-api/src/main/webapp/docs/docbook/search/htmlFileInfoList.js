@@ -1,0 +1,24 @@
+var doStem = true;
+//List of indexed files.
+fl = new Array();
+fl["0"]= "ar01s02.html";
+fl["1"]= "ar01s01.html";
+fl["2"]= "ar02.html";
+fl["3"]= "ar03.html";
+fl["4"]= "ar03s01.html";
+fl["5"]= "index.html";
+fl["6"]= "book.html";
+fl["7"]= "ar02s01.html";
+fl["8"]= "ar02s02.html";
+fl["9"]= "ar01.html";
+fil = new Array();
+fil["0"]= "ar01s02.html@@@User Guide@@@null";
+fil["1"]= "ar01s01.html@@@erster Abschnitt@@@null";
+fil["2"]= "ar02.html@@@User Guide@@@null";
+fil["3"]= "ar03.html@@@Developer Guide@@@null";
+fil["4"]= "ar03s01.html@@@neuer Abschnitt im zweiten Kapitel@@@null";
+fil["5"]= "index.html@@@TK-App REST API Guide@@@null";
+fil["6"]= "book.html@@@null@@@null";
+fil["7"]= "ar02s01.html@@@erster Abschnitt@@@null";
+fil["8"]= "ar02s02.html@@@User Guide@@@null";
+fil["9"]= "ar01.html@@@Getting Started@@@null";

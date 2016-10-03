@@ -1,0 +1,24 @@
+@startuml
+
+    namespace de.tk.tkapp.rest.api.handler.impl {
+
+        class SomethingsApiServiceImpl {
+            +add(Something, SecurityContext): Response
+            +findAll(SecurityContext): Response
+            +findById(Long, SecurityContext): Response
+            +remove(Something, SecurityContext): Response
+            +update(Something, SecurityContext): Response
+        }
+
+        abstract class de.tk.tkapp.rest.api.handler.SomethingsApiService {
+            {abstract} +add(Something, SecurityContext): Response
+            {abstract} +findAll(SecurityContext): Response
+            {abstract} +findById(Long, SecurityContext): Response
+            {abstract} +remove(Something, SecurityContext): Response
+            {abstract} +update(Something, SecurityContext): Response
+        }
+        de.tk.tkapp.rest.api.handler.SomethingsApiService <|-- SomethingsApiServiceImpl
+
+    }
+
+@enduml

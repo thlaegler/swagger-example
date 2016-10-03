@@ -1,0 +1,9 @@
+@startuml
+
+    class ApiOriginFilter {
+        +doFilter(ServletRequest, ServletResponse, FilterChain): void
+        +destroy(): void
+        +init(FilterConfig): void
+    }
+
+@enduml

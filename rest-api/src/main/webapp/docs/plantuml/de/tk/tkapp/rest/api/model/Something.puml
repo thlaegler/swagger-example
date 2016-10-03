@@ -1,0 +1,16 @@
+@startuml
+
+    class Something {
+        +id(Long): Something
+        +getId(): Long
+        +setId(Long): void
+        +name(String): Something
+        +getName(): String
+        +setName(String): void
+        +otherObject(OtherObject): Something
+        +getOtherObject(): OtherObject
+        +setOtherObject(OtherObject): void
+        {static} +getExample(): Something
+    }
+
+@enduml

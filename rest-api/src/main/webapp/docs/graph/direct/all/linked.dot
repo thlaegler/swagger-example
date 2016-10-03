@@ -1,0 +1,428 @@
+digraph dependencies {
+
+  graph [ label=<<table border="0" cellpadding="0" cellspacing="0"><tr><td>Dependency Graph for TK-App REST API</td></tr><tr><td><font color="black" face="Courier" point-size="10"> </font></td></tr><tr><td align="LEFT"><font color="black" face="Courier" point-size="10">transitive = false</font></td></tr><tr><td><font color="black" face="Courier" point-size="10"> </font></td></tr></table>> labeljust="l" labelloc="t" fontsize="18" fontname="Helvetica" ranksep="1" rankdir="TB" nodesep=".05" ];
+  node [ fontsize="10" fontname="Helvetica" shape="rectangle" ];
+  edge [ fontsize="10" fontname="Helvetica" ];
+
+  "0" [
+    fontsize="10"
+    label="de.tk.tkapp.rest\nrest-api\nwar\n0.0.1-SNAPSHOT"
+    color="black"
+    fontcolor="black"
+    fillcolor="#dddddd"
+    style="solid,filled"
+  ];
+  "1" [
+    fontsize="10"
+    label="io.swagger\nswagger-core\n1.5.10"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "14" [
+    fontsize="10"
+    label="io.swagger\nswagger-models\n1.5.10"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "18" [
+    fontsize="10"
+    label="io.swagger\nswagger-annotations\n1.5.10"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "19" [
+    fontsize="10"
+    label="io.swagger\nswagger-jersey2-jaxrs\n1.5.10"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "34" [
+    fontsize="10"
+    label="io.swagger\nswagger-servlet\n1.5.10"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "41" [
+    fontsize="10"
+    label="gr.spinellis\nUmlGraph\n4.6"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "42" [
+    fontsize="10"
+    label="nl.talsmasoftware\numldoclet\n1.0.3"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "44" [
+    fontsize="10"
+    label="javax.faces\njsf-api\n2.1"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "45" [
+    fontsize="10"
+    label="org.slf4j\nslf4j-log4j12\n1.6.3"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "48" [
+    fontsize="10"
+    label="javax.servlet\nservlet-api\n2.5"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "49" [
+    fontsize="10"
+    label="org.jboss.resteasy\nresteasy-jaxrs\n3.0.11.Final"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "59" [
+    fontsize="10"
+    label="org.jboss.resteasy\njaxrs-api\n3.0.11.Final"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "60" [
+    fontsize="10"
+    label="org.jboss.resteasy\nresteasy-validator-provider-11\n3.0.11.Final"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "66" [
+    fontsize="10"
+    label="org.jboss.resteasy\nresteasy-multipart-provider\n3.0.11.Final"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "81" [
+    fontsize="10"
+    label="org.jboss.resteasy\nresteasy-jackson2-provider\n3.0.11.Final"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "94" [
+    fontsize="10"
+    label="javax.annotation\njavax.annotation-api\n1.2"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "95" [
+    fontsize="10"
+    label="com.fasterxml.jackson.datatype\njackson-datatype-joda\n2.4.1"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "100" [
+    fontsize="10"
+    label="joda-time\njoda-time\n2.7"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "101" [
+    fontsize="10"
+    label="junit\njunit\n4.12"
+    color="black"
+    fontcolor="black"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "103" [
+    fontsize="10"
+    label="org.mockito\nmockito-all\n2.0.2-beta"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "104" [
+    fontsize="10"
+    label="org.powermock\npowermock-api-mockito\n1.6.5"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "114" [
+    fontsize="10"
+    label="io.rest-assured\nrest-assured\n3.0.0"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "138" [
+    fontsize="10"
+    label="info.cukes\ncucumber-core\n1.2.4"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "142" [
+    fontsize="10"
+    label="info.cukes\ncucumber-java\n1.2.4"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "144" [
+    fontsize="10"
+    label="info.cukes\ncucumber-junit\n1.2.4"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "147" [
+    fontsize="10"
+    label="info.cukes\ngherkin\n2.12.2"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "148" [
+    fontsize="10"
+    label="org.testng\ntestng\n6.8.8"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+
+  "0" -> "19" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "34" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "41" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "42" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "44" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "45" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "48" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "60" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "66" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "81" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "0" -> "94" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "103" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "0" -> "104" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "0" -> "114" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "142" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "144" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "0" -> "148" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "1" -> "14" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "1" -> "95" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "14" -> "18" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "34" -> "1" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "49" -> "59" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "66" -> "49" [
+    label="provided"
+    style="solid"
+    color="#F7B13D"
+    fontcolor="#F7B13D"
+    weight="1.0"
+  ];
+  "95" -> "100" [
+    label=""
+    style="solid"
+    color="black"
+    fontcolor="black"
+    weight="1.0"
+  ];
+  "138" -> "147" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "142" -> "138" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "144" -> "138" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "144" -> "101" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+}

@@ -179,41 +179,17 @@
 			</plugin>
 			<!-- API Doc: Markdown -->
 			<!-- requires JDK 1.8 -->
-			<!-- <plugin>
-				<groupId>io.github.swagger2markup</groupId>
-				<artifactId>swagger2markup-maven-plugin</artifactId>
-				<version>${swagger2markup.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>io.github.swagger2markup</groupId>
-						<artifactId>swagger2markup-import-files-ext</artifactId>
-						<version>${swagger2markup.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>io.github.swagger2markup</groupId>
-						<artifactId>swagger2markup-spring-restdocs-ext</artifactId>
-						<version>${swagger2markup.version}</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<swaggerInput>${yaml.path}/swagger.yaml</swaggerInput>
-					<outputDir>${apidocs.path}/markdown</outputDir>
-					<markupLanguage>markdown</markupLanguage>
-					<separateDefinitions>true</separateDefinitions>
-					<config>
-						<swagger2markup.markupLanguage>MARKDOWN</swagger2markup.markupLanguage>
-					</config>
-				</configuration>
-				<executions>
-					<execution>
-						<id>markdown</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>convertSwagger2markup</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
+			<!-- <plugin> <groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-maven-plugin</artifactId> 
+				<version>${swagger2markup.version}</version> <dependencies> <dependency> 
+				<groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-import-files-ext</artifactId> 
+				<version>${swagger2markup.version}</version> </dependency> <dependency> <groupId>io.github.swagger2markup</groupId> 
+				<artifactId>swagger2markup-spring-restdocs-ext</artifactId> <version>${swagger2markup.version}</version> 
+				</dependency> </dependencies> <configuration> <swaggerInput>${yaml.path}/swagger.yaml</swaggerInput> 
+				<outputDir>${apidocs.path}/markdown</outputDir> <markupLanguage>markdown</markupLanguage> 
+				<separateDefinitions>true</separateDefinitions> <config> <swagger2markup.markupLanguage>MARKDOWN</swagger2markup.markupLanguage> 
+				</config> </configuration> <executions> <execution> <id>markdown</id> <phase>generate-sources</phase> 
+				<goals> <goal>convertSwagger2markup</goal> </goals> </execution> </executions> 
+				</plugin> -->
 			<!-- API Doc: adoc -->
 			<plugin>
 				<groupId>io.github.swagger2markup</groupId>
@@ -434,19 +410,9 @@
 					<!-- <outputDirectory>${site.web.path}</outputDirectory> -->
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-source-plugin</artifactId> 
+				<version>3.0.1</version> <executions> <execution> <id>attach-sources</id> 
+				<goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>doccheck</groupId>
 				<artifactId>maven-doccheck-plugin</artifactId>
@@ -762,8 +728,9 @@
 						<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet> <docletPath>${project.basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath> 
 						<useStandardDocletOptions>false</useStandardDocletOptions> <show>private</show> 
 						<author>Thomas Laegler</author> <bottom>Copyright © ${inceptionYear}–${currentYear} 
-						Die Techniker. All rights reserved.</bottom> <additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam> 
-						<failOnError>false</failOnError> </configuration> </reportSet> -->
+						Die Techniker. All rights reserved.</bottom> <additionalparam>-pdf javadoc.pdf 
+						${javadoc.opts}</additionalparam> <failOnError>false</failOnError> </configuration> 
+						</reportSet> -->
 					<!-- JavaDoc DocCheck -->
 					<!-- <reportSet> <id>doccheck</id> <reports> <report>javadoc</report> 
 						<report>test-javadoc</report> </reports> <configuration> <name>${project.name}</name> 
@@ -1286,11 +1253,8 @@
 	</profiles>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>rest-generator</artifactId>
-			<version>${project.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>${project.groupId}</groupId> <artifactId>rest-generator</artifactId> 
+			<version>${project.version}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
 		<dependency>

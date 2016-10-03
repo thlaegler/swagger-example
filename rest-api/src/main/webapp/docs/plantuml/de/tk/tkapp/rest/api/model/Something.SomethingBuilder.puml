@@ -1,0 +1,10 @@
+@startuml
+
+    class Something.SomethingBuilder {
+        +id(Long): Something.SomethingBuilder
+        +name(String): Something.SomethingBuilder
+        +otherObject(OtherObject): Something.SomethingBuilder
+        +build(): Something
+    }
+
+@enduml

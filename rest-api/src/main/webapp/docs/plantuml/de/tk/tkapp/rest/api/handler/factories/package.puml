@@ -1,0 +1,11 @@
+@startuml
+
+    namespace de.tk.tkapp.rest.api.handler.factories {
+
+        class SomethingsApiServiceFactory {
+            {static} +getSomethingsApi(): SomethingsApiService
+        }
+
+    }
+
+@enduml

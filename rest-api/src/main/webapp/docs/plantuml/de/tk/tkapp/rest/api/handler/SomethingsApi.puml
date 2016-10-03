@@ -1,0 +1,11 @@
+@startuml
+
+    class SomethingsApi {
+        +add(Something, SecurityContext): Response
+        +findAll(SecurityContext): Response
+        +findById(Long, SecurityContext): Response
+        +remove(Something, SecurityContext): Response
+        +update(Something, SecurityContext): Response
+    }
+
+@enduml

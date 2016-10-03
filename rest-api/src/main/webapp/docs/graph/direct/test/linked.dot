@@ -1,0 +1,61 @@
+digraph dependencies {
+
+  graph [ label=<<table border="0" cellpadding="0" cellspacing="0"><tr><td>Dependency Graph for TK-App REST API</td></tr><tr><td><font color="black" face="Courier" point-size="10"> </font></td></tr><tr><td align="LEFT"><font color="black" face="Courier" point-size="10">      show = test</font></td></tr><tr><td align="LEFT"><font color="black" face="Courier" point-size="10">transitive = false</font></td></tr><tr><td><font color="black" face="Courier" point-size="10"> </font></td></tr></table>> labeljust="l" labelloc="t" fontsize="18" fontname="Helvetica" ranksep="1" rankdir="TB" nodesep=".05" ];
+  node [ fontsize="10" fontname="Helvetica" shape="rectangle" ];
+  edge [ fontsize="10" fontname="Helvetica" ];
+
+  "0" [
+    fontsize="10"
+    label="de.tk.tkapp.rest\nrest-api\nwar\n0.0.1-SNAPSHOT"
+    color="black"
+    fontcolor="black"
+    fillcolor="#dddddd"
+    style="solid,filled"
+  ];
+  "103" [
+    fontsize="10"
+    label="org.mockito\nmockito-all\n2.0.2-beta"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "104" [
+    fontsize="10"
+    label="org.powermock\npowermock-api-mockito\n1.6.5"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+  "148" [
+    fontsize="10"
+    label="org.testng\ntestng\n6.8.8"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    fillcolor="white"
+    style="solid,filled"
+  ];
+
+  "0" -> "103" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "0" -> "104" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+  "0" -> "148" [
+    label="test"
+    style="solid"
+    color="#0A64C8"
+    fontcolor="#0A64C8"
+    weight="1.0"
+  ];
+}

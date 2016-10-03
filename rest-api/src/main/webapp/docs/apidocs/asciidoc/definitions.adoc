@@ -1,0 +1,61 @@
+
+[[_definitions]]
+== Definitions
+
+[[_error]]
+=== Error
+Generic Error object.
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|*code* +
+_required_|Error Code of this Error. +
+*Example* : `123`|integer(int64)
+|*message* +
+_required_|Message Body of this Error. +
+*Example* : `"Your Request was somehow invalid."`|string
+|*title* +
+_required_|Title of the Error Message. +
+*Example* : `"Invalid Request"`|string
+|===
+
+
+[[_otherobject]]
+=== OtherObject
+A Reference to another object.
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|*id* +
+_required_|Id of OtherObject. +
+*Example* : `1`|integer(int64)
+|*name* +
+_required_|Name of OtherObject. +
+*Example* : `"aOtherObject"`|string
+|===
+
+
+[[_something]]
+=== Something
+A Something object.
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|*id* +
+_required_|Id of Something. +
+*Example* : `1`|integer(int64)
+|*name* +
+_required_|Name of Something. +
+*Example* : `"aSomething"`|string
+|*otherObject* +
+_optional_||<<_otherobject,OtherObject>>
+|===
+
+
+

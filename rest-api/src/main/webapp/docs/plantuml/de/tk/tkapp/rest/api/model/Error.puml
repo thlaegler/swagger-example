@@ -1,0 +1,16 @@
+@startuml
+
+    class Error {
+        +code(Long): Error
+        +getCode(): Long
+        +setCode(Long): void
+        +title(String): Error
+        +getTitle(): String
+        +setTitle(String): void
+        +message(String): Error
+        +getMessage(): String
+        +setMessage(String): void
+        {static} +getExample(): Error
+    }
+
+@enduml

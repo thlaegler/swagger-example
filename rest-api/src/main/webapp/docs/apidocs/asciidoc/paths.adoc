@@ -1,0 +1,290 @@
+
+[[_paths]]
+== Paths
+
+[[_add]]
+=== Add a new Something
+....
+POST /somethings
+....
+
+
+==== Description
+Add a new Something.
+
+
+==== Parameters
+
+[options="header", cols=".^1,.^3,.^10,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|*Body*|*body* +
+_required_|Something object that needs to be added to database.|<<_something,Something>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^1,.^15,.^4"]
+|===
+|HTTP Code|Description|Schema
+|*200*|New Something successfully added.|<<_something,Something>>
+|*201*|New Something successfully added.|No Content
+|*400*|Invalid Something supplied.|No Content
+|*405*|Validation exception.|No Content
+|*default*|An unexpected error occured.|<<_error,Error>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Produces
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Tags
+
+* Something
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|*oauth2*|*<<_oauth,oauth>>*|basic
+|===
+
+
+[[_findall]]
+=== Get all existing Somethings
+....
+GET /somethings
+....
+
+
+==== Description
+Get all existing Somethings.
+
+
+==== Responses
+
+[options="header", cols=".^1,.^15,.^4"]
+|===
+|HTTP Code|Description|Schema
+|*200*|Successful response|< <<_something,Something>> > array
+|*default*|An unexpected error occured.|<<_error,Error>>
+|===
+
+
+==== Produces
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Tags
+
+* Something
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|*oauth2*|*<<_oauth,oauth>>*|basic
+|===
+
+
+[[_update]]
+=== Update an existing Something
+....
+PUT /somethings
+....
+
+
+==== Description
+Update an existing Something.
+
+
+==== Parameters
+
+[options="header", cols=".^1,.^3,.^10,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|*Body*|*body* +
+_required_|Something object that needs to be added to database.|<<_something,Something>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^1,.^15,.^4"]
+|===
+|HTTP Code|Description|Schema
+|*200*|Something successfully updated.|<<_something,Something>>
+|*205*|Something successfully updated. Client should reset/recall content.|No Content
+|*400*|Invalid Something supplied.|No Content
+|*404*|Something not found.|No Content
+|*405*|Validation exception.|No Content
+|*default*|An unexpected error occured.|<<_error,Error>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Produces
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Tags
+
+* Something
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|*oauth2*|*<<_oauth,oauth>>*|basic
+|===
+
+
+[[_remove]]
+=== Remove an existing Something
+....
+DELETE /somethings
+....
+
+
+==== Description
+Remove an existing Something from database.
+
+
+==== Parameters
+
+[options="header", cols=".^1,.^3,.^10,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|*Body*|*body* +
+_required_|Something object that needs to be removed from database.|<<_something,Something>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^1,.^15,.^4"]
+|===
+|HTTP Code|Description|Schema
+|*200*|Something successfully removed.|No Content
+|*204*|Something successfully removed.|No Content
+|*400*|Invalid Something supplied.|No Content
+|*404*|Something not found.|No Content
+|*405*|Validation exception.|No Content
+|*default*|An unexpected error occured.|<<_error,Error>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Tags
+
+* Something
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|*oauth2*|*<<_oauth,oauth>>*|basic
+|===
+
+
+[[_findbyid]]
+=== Find an existing Something
+....
+GET /somethings/{id}
+....
+
+
+==== Description
+Find an existing Something from database by ID.
+
+
+==== Parameters
+
+[options="header", cols=".^1,.^3,.^10,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|*Path*|*id* +
+_required_|ID of Something that needs to be fetched.|integer(int64)|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^1,.^15,.^4"]
+|===
+|HTTP Code|Description|Schema
+|*200*|Successful response|<<_something,Something>>
+|*400*|Invalid ID of Something supplied.|No Content
+|*404*|Something not found with given ID.|No Content
+|*405*|Validation exception.|No Content
+|*default*|An unexpected error occured.|<<_error,Error>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Produces
+
+* `application/json`
+* `application/vnd.de.tk.tkapp.v1+json`
+* `application/xml`
+
+
+==== Tags
+
+* Something
+
+
+==== Security
+
+[options="header", cols=".^3,.^4,.^13"]
+|===
+|Type|Name|Scopes
+|*oauth2*|*<<_oauth,oauth>>*|basic
+|===
+
+
+

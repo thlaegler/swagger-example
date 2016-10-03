@@ -1,0 +1,18 @@
+@startuml
+
+    namespace de.tk.tkapp.rest.api.invoker {
+
+        class StringUtil {
+            {static} +containsIgnoreCase(String[], String): boolean
+            {static} +join(String[], String): String
+        }
+
+        class RestApplication {
+        }
+
+        class javax.ws.rs.core.Application
+        javax.ws.rs.core.Application <|-- RestApplication
+
+    }
+
+@enduml

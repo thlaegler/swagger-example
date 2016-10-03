@@ -1,0 +1,69 @@
+@startuml
+
+    namespace de.tk.tkapp.rest.api.model {
+
+        class Something {
+            +id(Long): Something
+            +getId(): Long
+            +setId(Long): void
+            +name(String): Something
+            +getName(): String
+            +setName(String): void
+            +otherObject(OtherObject): Something
+            +getOtherObject(): OtherObject
+            +setOtherObject(OtherObject): void
+            {static} +getExample(): Something
+        }
+
+        class de.tk.tkapp.rest.api.model.Something.SomethingBuilder {
+            +id(Long): Something.SomethingBuilder
+            +name(String): Something.SomethingBuilder
+            +otherObject(OtherObject): Something.SomethingBuilder
+            +build(): Something
+        }
+
+        class Error {
+            +code(Long): Error
+            +getCode(): Long
+            +setCode(Long): void
+            +title(String): Error
+            +getTitle(): String
+            +setTitle(String): void
+            +message(String): Error
+            +getMessage(): String
+            +setMessage(String): void
+            {static} +getExample(): Error
+        }
+
+        class de.tk.tkapp.rest.api.model.Error.ErrorBuilder {
+            +code(Long): Error.ErrorBuilder
+            +title(String): Error.ErrorBuilder
+            +message(String): Error.ErrorBuilder
+            +build(): Error
+        }
+
+        class OtherObject {
+            +id(Long): OtherObject
+            +getId(): Long
+            +setId(Long): void
+            +name(String): OtherObject
+            +getName(): String
+            +setName(String): void
+            {static} +getExample(): OtherObject
+        }
+
+        class de.tk.tkapp.rest.api.model.OtherObject.OtherObjectBuilder {
+            +id(Long): OtherObject.OtherObjectBuilder
+            +name(String): OtherObject.OtherObjectBuilder
+            +build(): OtherObject
+        }
+
+        Something +-- de.tk.tkapp.rest.api.model.Something.SomethingBuilder
+
+        Error +-- de.tk.tkapp.rest.api.model.Error.ErrorBuilder
+
+        OtherObject +-- de.tk.tkapp.rest.api.model.OtherObject.OtherObjectBuilder
+
+    }
+
+@enduml

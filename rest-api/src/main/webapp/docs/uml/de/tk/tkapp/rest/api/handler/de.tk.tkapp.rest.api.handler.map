@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SomethingsApiService.html" title="de.tk.tkapp.rest.api.handler.SomethingsApiService" alt="" coords="15,113,158,138"/>
+<area shape="rect" id="node1" href="./SomethingsApiService.html" title="&lt;TABLE&gt;" alt="" coords="5,101,169,149"/>
+<area shape="rect" id="node2_1" href="./ApiResponseMessage.html" title="de.tk.tkapp.rest.api.handler.ApiResponseMessage" alt="" coords="183,17,326,42"/>
+<area shape="rect" id="node2" href="./ApiResponseMessage.html" title="&lt;TABLE&gt;" alt="" coords="173,5,337,53"/>
+<area shape="rect" id="node3_2" href="./ApiOriginFilter.html" title="de.tk.tkapp.rest.api.handler.ApiOriginFilter" alt="" coords="371,17,469,42"/>
+<area shape="rect" id="node3" href="./ApiOriginFilter.html" title="&lt;TABLE&gt;" alt="" coords="361,5,479,53"/>
+<area shape="rect" id="node4_3" href="./NotFoundException.html" title="de.tk.tkapp.rest.api.handler.NotFoundException" alt="" coords="495,113,622,138"/>
+<area shape="rect" id="node4" href="./NotFoundException.html" title="&lt;TABLE&gt;" alt="" coords="485,101,633,149"/>
+<area shape="rect" id="node5_4" href="./SomethingsApi.html" title="de.tk.tkapp.rest.api.handler.SomethingsApi" alt="" coords="36,17,137,42"/>
+<area shape="rect" id="node5" href="./SomethingsApi.html" title="&lt;TABLE&gt;" alt="" coords="25,5,148,53"/>
+<area shape="rect" id="node6_5" href="./ApiException.html" title="de.tk.tkapp.rest.api.handler.ApiException" alt="" coords="513,17,604,42"/>
+<area shape="rect" id="node6" href="./ApiException.html" title="&lt;TABLE&gt;" alt="" coords="503,5,615,53"/>
+</map>

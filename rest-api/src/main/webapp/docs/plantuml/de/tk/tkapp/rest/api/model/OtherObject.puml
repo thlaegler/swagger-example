@@ -1,0 +1,13 @@
+@startuml
+
+    class OtherObject {
+        +id(Long): OtherObject
+        +getId(): Long
+        +setId(Long): void
+        +name(String): OtherObject
+        +getName(): String
+        +setName(String): void
+        {static} +getExample(): OtherObject
+    }
+
+@enduml

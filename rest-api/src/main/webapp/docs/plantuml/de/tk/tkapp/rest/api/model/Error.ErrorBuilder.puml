@@ -1,0 +1,10 @@
+@startuml
+
+    class Error.ErrorBuilder {
+        +code(Long): Error.ErrorBuilder
+        +title(String): Error.ErrorBuilder
+        +message(String): Error.ErrorBuilder
+        +build(): Error
+    }
+
+@enduml
