@@ -1,9 +1,0 @@
-@startuml
-
-    class OtherObject.OtherObjectBuilder {
-        +id(Long): OtherObject.OtherObjectBuilder
-        +name(String): OtherObject.OtherObjectBuilder
-        +build(): OtherObject
-    }
-
-@enduml

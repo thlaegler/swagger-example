@@ -38,334 +38,7 @@
 
 		<plugins>
 
-			<!-- Swagger Plugin -->
-			<!-- <plugin> <groupId>org.zalando.maven.plugins</groupId> <artifactId>swagger-codegen-maven-plugin</artifactId> 
-				<version>${zalando.swagger.plugin.version}</version> <configuration> <language>jaxrsinterfaces</language> 
-				<apiFile>${project.basedir}/src/main/resources/swagger.yaml</apiFile> <skipApigeneration>true</skipApigeneration> 
-				<skipModelgeneration>true</skipModelgeneration> <yamlToJson>true</yamlToJson> 
-				<yamlToJsonOutputDirectory>${project.basedir}/src/main/resources/</yamlToJsonOutputDirectory> 
-				<enableBuilderSupport>true</enableBuilderSupport> <enable303>true</enable303> 
-				<apiPackage>${project.groupId}.api2.handler</apiPackage> <modelPackage>${project.groupId}.api2.model</modelPackage> 
-				<invokerPackage>${project.groupId}.api2.invoker</invokerPackage> </configuration> 
-				<executions> <execution> <id>yaml2json</id> <goals> <goal>codegen</goal> 
-				</goals> </execution> </executions> </plugin> -->
-			<plugin>
-				<groupId>io.swagger</groupId>
-				<artifactId>swagger-codegen-maven-plugin</artifactId>
-				<version>${io.swagger.plugin.version}</version>
-				<dependencies>
-					<!-- Custom API Mock Generator -->
-					<dependency>
-						<groupId>${project.groupId}</groupId>
-						<artifactId>rest-generator</artifactId>
-						<version>${project.version}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<!-- Generate RESTeasy API -->
-					<execution>
-						<id>api</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<!-- Custom API Mock Generator -->
-							<!-- <language>jaxrs-resteasy-mock</language> -->
 
-							<language>jaxrs-resteasy</language>
-							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
-							<!-- <output>${project.basedir}/../${api.project}</output> -->
-							<output>${project.basedir}</output>
-							<addCompileSourceRoot>true</addCompileSourceRoot>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${api.project}</artifactId>
-							<artifactVersion>${project.version}</artifactVersion>
-							<apiPackage>${project.groupId}.api.handler</apiPackage>
-							<modelPackage>${project.groupId}.api.model</modelPackage>
-							<invokerPackage>${project.groupId}.api.invoker</invokerPackage>
-							<!-- <verbose>true</verbose> -->
-							<!-- <configHelp>true</configHelp> -->
-						</configuration>
-					</execution>
-					<!-- Generate Java REST client -->
-					<!-- <execution> <id>client</id> <phase>generate-sources</phase> <goals> 
-						<goal>generate</goal> </goals> <configuration> <language>java</language> 
-						<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${client.project}</output> 
-						<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
-						<artifactId>${client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
-						<apiPackage>${project.groupId}.api.handler</apiPackage> <modelPackage>${project.groupId}.api.model</modelPackage> 
-						<invokerPackage>${project.groupId}.api.invoker</invokerPackage> <verbose>true</verbose> 
-						</configuration> </execution> -->
-					<!-- Generate Android REST client -->
-					<!-- <execution> <id>android</id> <phase>generate-sources</phase> <goals> 
-						<goal>generate</goal> </goals> <configuration> <language>android</language> 
-						<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${android.client.project}</output> 
-						<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
-						<artifactId>${android.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
-						<verbose>true</verbose> <library>retrofit2</library> </configuration> </execution> -->
-					<!-- Generate iOS REST client -->
-					<!-- <execution> <id>ios</id> <phase>generate-sources</phase> <goals> 
-						<goal>generate</goal> </goals> <configuration> <language>csharp</language> 
-						<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${ios.client.project}</output> 
-						<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
-						<artifactId>${ios.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
-						<verbose>true</verbose> </configuration> </execution> -->
-					<!-- Generate simple HTML documentation -->
-					<execution>
-						<id>html</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<language>html</language>
-							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
-							<output>${apidocs.path}/html</output>
-							<addCompileSourceRoot>false</addCompileSourceRoot>
-							<!-- <verbose>true</verbose> -->
-							<!-- <configHelp>true</configHelp> -->
-						</configuration>
-					</execution>
-					<!-- Generate dynamic HTML documentation -->
-					<execution>
-						<id>dynamic-html</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<language>dynamic-html</language>
-							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
-							<output>${apidocs.path}/dynamic-html</output>
-							<addCompileSourceRoot>false</addCompileSourceRoot>
-							<!-- <verbose>true</verbose> -->
-							<!-- <configHelp>true</configHelp> -->
-						</configuration>
-					</execution>
-					<!-- Generate modern HTML documentation -->
-					<execution>
-						<id>html2</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<language>html2</language>
-							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
-							<output>${apidocs.path}/html2</output>
-							<addCompileSourceRoot>false</addCompileSourceRoot>
-							<!-- <verbose>true</verbose> -->
-							<!-- <configHelp>true</configHelp> -->
-						</configuration>
-					</execution>
-					<!-- Generate Confluence WikiText documentation -->
-					<execution>
-						<id>cwiki</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<language>cwiki</language>
-							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
-							<output>${apidocs.path}/cwiki</output>
-							<addCompileSourceRoot>false</addCompileSourceRoot>
-							<!-- <verbose>true</verbose> -->
-							<!-- <configHelp>true</configHelp> -->
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- API Doc: Markdown -->
-			<!-- requires JDK 1.8 -->
-			<!-- <plugin> <groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-maven-plugin</artifactId> 
-				<version>${swagger2markup.version}</version> <dependencies> <dependency> 
-				<groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-import-files-ext</artifactId> 
-				<version>${swagger2markup.version}</version> </dependency> <dependency> <groupId>io.github.swagger2markup</groupId> 
-				<artifactId>swagger2markup-spring-restdocs-ext</artifactId> <version>${swagger2markup.version}</version> 
-				</dependency> </dependencies> <configuration> <swaggerInput>${yaml.path}/swagger.yaml</swaggerInput> 
-				<outputDir>${apidocs.path}/markdown</outputDir> <markupLanguage>markdown</markupLanguage> 
-				<separateDefinitions>true</separateDefinitions> <config> <swagger2markup.markupLanguage>MARKDOWN</swagger2markup.markupLanguage> 
-				</config> </configuration> <executions> <execution> <id>markdown</id> <phase>generate-sources</phase> 
-				<goals> <goal>convertSwagger2markup</goal> </goals> </execution> </executions> 
-				</plugin> -->
-			<!-- API Doc: adoc -->
-			<plugin>
-				<groupId>io.github.swagger2markup</groupId>
-				<artifactId>swagger2markup-maven-plugin</artifactId>
-				<version>${swagger2markup.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>io.github.swagger2markup</groupId>
-						<artifactId>swagger2markup-import-files-ext</artifactId>
-						<version>${swagger2markup.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>io.github.swagger2markup</groupId>
-						<artifactId>swagger2markup-spring-restdocs-ext</artifactId>
-						<version>${swagger2markup.version}</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<swaggerInput>${yaml.path}/swagger.yaml</swaggerInput>
-					<outputDir>${apidocs.path}/asciidoc</outputDir>
-					<config>
-						<swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
-						<!-- <swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy> -->
-						<swagger2markup.extensions.dynamicOverview.contentPath>${asciidoc.path}/extensions/overview</swagger2markup.extensions.dynamicOverview.contentPath>
-						<swagger2markup.extensions.dynamicDefinitions.contentPath>${asciidoc.path}/extensions/definitions</swagger2markup.extensions.dynamicDefinitions.contentPath>
-						<swagger2markup.extensions.dynamicPaths.contentPath>${asciidoc.path}/extensions/paths</swagger2markup.extensions.dynamicPaths.contentPath>
-						<swagger2markup.extensions.dynamicSecurity.contentPath>${asciidoc.path}/extensions/security/</swagger2markup.extensions.dynamicSecurity.contentPath>
-						<swagger2markup.extensions.springRestDocs.snippetBaseUri>${asciidoc.path}</swagger2markup.extensions.springRestDocs.snippetBaseUri>
-						<swagger2markup.extensions.springRestDocs.defaultSnippets>false</swagger2markup.extensions.springRestDocs.defaultSnippets>
-					</config>
-				</configuration>
-				<executions>
-					<execution>
-						<id>asciidoc</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>convertSwagger2markup</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Run the generated asciidoc through Asciidoctor to generate other 
-				documentation types, such as PDFs or HTML5 -->
-			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.3</version>
-				<!-- Include Asciidoctor PDF for pdf generation -->
-				<dependencies>
-					<dependency>
-						<groupId>org.asciidoctor</groupId>
-						<artifactId>asciidoctorj-pdf</artifactId>
-						<version>1.5.0-alpha.10.1</version>
-					</dependency>
-				</dependencies>
-				<!-- Configure generic document generation settings -->
-				<configuration>
-					<sourceDirectory>${asciidoc.path}</sourceDirectory>
-					<sourceDocumentName>index.adoc</sourceDocumentName>
-					<attributes>
-						<doctype>book</doctype>
-						<toc>left</toc>
-						<toclevels>3</toclevels>
-						<numbered></numbered>
-						<hardbreaks></hardbreaks>
-						<sectlinks></sectlinks>
-						<sectanchors></sectanchors>
-						<generated>${apidocs.path}/asciidoc</generated>
-					</attributes>
-				</configuration>
-				<!-- Since each execution can only handle one backend, run separate executions 
-					for each desired output type -->
-				<executions>
-					<execution>
-						<id>html5</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>html5</backend>
-							<outputDirectory>${apidocs.path}/html5</outputDirectory>
-						</configuration>
-					</execution>
-					<execution>
-						<id>pdf</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>pdf</backend>
-							<outputDirectory>${apidocs.path}/pdf</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- <plugin> <groupId>org.asciidoctor</groupId> <artifactId>asciidoctor-maven-plugin</artifactId> 
-				<version>1.5.3</version> <executions> <execution> <id>output-html</id> <phase>generate-resources</phase> 
-				<goals> <goal>process-asciidoc</goal> </goals> <configuration> <output>${apidocs.path}/ascii</output> 
-				</configuration> </execution> </executions> </plugin> -->
-			<!-- Swagger UI -->
-			<plugin>
-				<groupId>com.googlecode.maven-download-plugin</groupId>
-				<artifactId>download-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
-					<execution>
-						<id>swagger-ui</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>wget</goal>
-						</goals>
-						<configuration>
-							<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
-							<unpack>true</unpack>
-							<outputDirectory>${project.build.directory}</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-swagger-ui</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${apidocs.path}/swagger-ui</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-yaml</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${apidocs.path}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${yaml.path}</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-asciidoc</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${apidocs.path}/asciidoc</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${asciidoc.path}</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -994,6 +667,341 @@
 	</reporting>
 
 	<profiles>
+		<profile>
+			<id>swagger</id>
+			<build>
+				<plugins>
+					<!-- Swagger Plugin -->
+					<!-- <plugin> <groupId>org.zalando.maven.plugins</groupId> <artifactId>swagger-codegen-maven-plugin</artifactId> 
+						<version>${zalando.swagger.plugin.version}</version> <configuration> <language>jaxrsinterfaces</language> 
+						<apiFile>${project.basedir}/src/main/resources/swagger.yaml</apiFile> <skipApigeneration>true</skipApigeneration> 
+						<skipModelgeneration>true</skipModelgeneration> <yamlToJson>true</yamlToJson> 
+						<yamlToJsonOutputDirectory>${project.basedir}/src/main/resources/</yamlToJsonOutputDirectory> 
+						<enableBuilderSupport>true</enableBuilderSupport> <enable303>true</enable303> 
+						<apiPackage>${project.groupId}.api2.handler</apiPackage> <modelPackage>${project.groupId}.api2.model</modelPackage> 
+						<invokerPackage>${project.groupId}.api2.invoker</invokerPackage> </configuration> 
+						<executions> <execution> <id>yaml2json</id> <goals> <goal>codegen</goal> 
+						</goals> </execution> </executions> </plugin> -->
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>${io.swagger.plugin.version}</version>
+						<dependencies>
+							<!-- Custom API Mock Generator -->
+							<dependency>
+								<groupId>${project.groupId}</groupId>
+								<artifactId>rest-generator</artifactId>
+								<version>${project.version}</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<!-- Generate RESTeasy API -->
+							<execution>
+								<id>api</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<!-- Custom API Mock Generator -->
+									<!-- <language>jaxrs-resteasy-mock</language> -->
+
+									<language>jaxrs-resteasy</language>
+									<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+									<!-- <output>${project.basedir}/../${api.project}</output> -->
+									<output>${project.basedir}</output>
+									<addCompileSourceRoot>true</addCompileSourceRoot>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${api.project}</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<apiPackage>${project.groupId}.api.handler</apiPackage>
+									<modelPackage>${project.groupId}.api.model</modelPackage>
+									<invokerPackage>${project.groupId}.api.invoker</invokerPackage>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
+							<!-- Generate Java REST client -->
+							<!-- <execution> <id>client</id> <phase>generate-sources</phase> <goals> 
+								<goal>generate</goal> </goals> <configuration> <language>java</language> 
+								<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${client.project}</output> 
+								<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
+								<artifactId>${client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
+								<apiPackage>${project.groupId}.api.handler</apiPackage> <modelPackage>${project.groupId}.api.model</modelPackage> 
+								<invokerPackage>${project.groupId}.api.invoker</invokerPackage> <verbose>true</verbose> 
+								</configuration> </execution> -->
+							<!-- Generate Android REST client -->
+							<!-- <execution> <id>android</id> <phase>generate-sources</phase> 
+								<goals> <goal>generate</goal> </goals> <configuration> <language>android</language> 
+								<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${android.client.project}</output> 
+								<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
+								<artifactId>${android.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
+								<verbose>true</verbose> <library>retrofit2</library> </configuration> </execution> -->
+							<!-- Generate iOS REST client -->
+							<!-- <execution> <id>ios</id> <phase>generate-sources</phase> <goals> 
+								<goal>generate</goal> </goals> <configuration> <language>csharp</language> 
+								<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${ios.client.project}</output> 
+								<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
+								<artifactId>${ios.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
+								<verbose>true</verbose> </configuration> </execution> -->
+							<!-- Generate simple HTML documentation -->
+							<execution>
+								<id>html</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>html</language>
+									<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+									<output>${apidocs.path}/html</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
+							<!-- Generate dynamic HTML documentation -->
+							<execution>
+								<id>dynamic-html</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>dynamic-html</language>
+									<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+									<output>${apidocs.path}/dynamic-html</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
+							<!-- Generate modern HTML documentation -->
+							<execution>
+								<id>html2</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>html2</language>
+									<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+									<output>${apidocs.path}/html2</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
+							<!-- Generate Confluence WikiText documentation -->
+							<execution>
+								<id>cwiki</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>cwiki</language>
+									<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+									<output>${apidocs.path}/cwiki</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- API Doc: Markdown -->
+					<!-- requires JDK 1.8 -->
+					<!-- <plugin> <groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-maven-plugin</artifactId> 
+						<version>${swagger2markup.version}</version> <dependencies> <dependency> 
+						<groupId>io.github.swagger2markup</groupId> <artifactId>swagger2markup-import-files-ext</artifactId> 
+						<version>${swagger2markup.version}</version> </dependency> <dependency> <groupId>io.github.swagger2markup</groupId> 
+						<artifactId>swagger2markup-spring-restdocs-ext</artifactId> <version>${swagger2markup.version}</version> 
+						</dependency> </dependencies> <configuration> <swaggerInput>${yaml.path}/swagger.yaml</swaggerInput> 
+						<outputDir>${apidocs.path}/markdown</outputDir> <markupLanguage>markdown</markupLanguage> 
+						<separateDefinitions>true</separateDefinitions> <config> <swagger2markup.markupLanguage>MARKDOWN</swagger2markup.markupLanguage> 
+						</config> </configuration> <executions> <execution> <id>markdown</id> <phase>generate-sources</phase> 
+						<goals> <goal>convertSwagger2markup</goal> </goals> </execution> </executions> 
+						</plugin> -->
+					<!-- API Doc: adoc -->
+					<plugin>
+						<groupId>io.github.swagger2markup</groupId>
+						<artifactId>swagger2markup-maven-plugin</artifactId>
+						<version>${swagger2markup.version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>io.github.swagger2markup</groupId>
+								<artifactId>swagger2markup-import-files-ext</artifactId>
+								<version>${swagger2markup.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>io.github.swagger2markup</groupId>
+								<artifactId>swagger2markup-spring-restdocs-ext</artifactId>
+								<version>${swagger2markup.version}</version>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<swaggerInput>${yaml.path}/swagger.yaml</swaggerInput>
+							<outputDir>${apidocs.path}/asciidoc</outputDir>
+							<config>
+								<swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
+								<!-- <swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy> -->
+								<swagger2markup.extensions.dynamicOverview.contentPath>${asciidoc.path}/extensions/overview</swagger2markup.extensions.dynamicOverview.contentPath>
+								<swagger2markup.extensions.dynamicDefinitions.contentPath>${asciidoc.path}/extensions/definitions</swagger2markup.extensions.dynamicDefinitions.contentPath>
+								<swagger2markup.extensions.dynamicPaths.contentPath>${asciidoc.path}/extensions/paths</swagger2markup.extensions.dynamicPaths.contentPath>
+								<swagger2markup.extensions.dynamicSecurity.contentPath>${asciidoc.path}/extensions/security/</swagger2markup.extensions.dynamicSecurity.contentPath>
+								<swagger2markup.extensions.springRestDocs.snippetBaseUri>${asciidoc.path}</swagger2markup.extensions.springRestDocs.snippetBaseUri>
+								<swagger2markup.extensions.springRestDocs.defaultSnippets>false</swagger2markup.extensions.springRestDocs.defaultSnippets>
+							</config>
+						</configuration>
+						<executions>
+							<execution>
+								<id>asciidoc</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>convertSwagger2markup</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Run the generated asciidoc through Asciidoctor to generate other 
+						documentation types, such as PDFs or HTML5 -->
+					<plugin>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctor-maven-plugin</artifactId>
+						<version>1.5.3</version>
+						<!-- Include Asciidoctor PDF for pdf generation -->
+						<dependencies>
+							<dependency>
+								<groupId>org.asciidoctor</groupId>
+								<artifactId>asciidoctorj-pdf</artifactId>
+								<version>1.5.0-alpha.10.1</version>
+							</dependency>
+						</dependencies>
+						<!-- Configure generic document generation settings -->
+						<configuration>
+							<sourceDirectory>${asciidoc.path}</sourceDirectory>
+							<sourceDocumentName>index.adoc</sourceDocumentName>
+							<attributes>
+								<doctype>book</doctype>
+								<toc>left</toc>
+								<toclevels>3</toclevels>
+								<numbered></numbered>
+								<hardbreaks></hardbreaks>
+								<sectlinks></sectlinks>
+								<sectanchors></sectanchors>
+								<generated>${apidocs.path}/asciidoc</generated>
+							</attributes>
+						</configuration>
+						<!-- Since each execution can only handle one backend, run separate 
+							executions for each desired output type -->
+						<executions>
+							<execution>
+								<id>html5</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>process-asciidoc</goal>
+								</goals>
+								<configuration>
+									<backend>html5</backend>
+									<outputDirectory>${apidocs.path}/html5</outputDirectory>
+								</configuration>
+							</execution>
+							<execution>
+								<id>pdf</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>process-asciidoc</goal>
+								</goals>
+								<configuration>
+									<backend>pdf</backend>
+									<outputDirectory>${apidocs.path}/pdf</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- <plugin> <groupId>org.asciidoctor</groupId> <artifactId>asciidoctor-maven-plugin</artifactId> 
+						<version>1.5.3</version> <executions> <execution> <id>output-html</id> <phase>generate-resources</phase> 
+						<goals> <goal>process-asciidoc</goal> </goals> <configuration> <output>${apidocs.path}/ascii</output> 
+						</configuration> </execution> </executions> </plugin> -->
+					<!-- Swagger UI -->
+					<plugin>
+						<groupId>com.googlecode.maven-download-plugin</groupId>
+						<artifactId>download-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<id>swagger-ui</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>wget</goal>
+								</goals>
+								<configuration>
+									<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
+									<unpack>true</unpack>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.6</version>
+						<executions>
+							<execution>
+								<id>copy-swagger-ui</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${apidocs.path}/swagger-ui</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+							<execution>
+								<id>copy-yaml</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${apidocs.path}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${yaml.path}</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+							<execution>
+								<id>copy-asciidoc</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${apidocs.path}/asciidoc</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${asciidoc.path}</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>checkstyle</id>
 			<reporting>

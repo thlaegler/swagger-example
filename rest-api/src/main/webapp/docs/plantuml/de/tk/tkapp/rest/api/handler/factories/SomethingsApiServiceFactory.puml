@@ -1,7 +1,0 @@
-@startuml
-
-    class SomethingsApiServiceFactory {
-        {static} +getSomethingsApi(): SomethingsApiService
-    }
-
-@enduml

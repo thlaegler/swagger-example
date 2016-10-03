@@ -1,8 +1,0 @@
-{
-  "swagger" : "2.0",
-  "info" : {
-    "version" : "0.0.1-SNAPSHOT",
-    "title" : "TK-App REST API"
-  },
-  "basePath" : "http://localhost:8080/example"
-}

@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1_0" href="./SomethingsApiService.html" title="de.tk.tkapp.rest.api.handler.SomethingsApiService" alt="" coords="15,113,158,138"/>
-<area shape="rect" id="node1" href="./SomethingsApiService.html" title="&lt;TABLE&gt;" alt="" coords="5,101,169,149"/>
-<area shape="rect" id="node3_1" href="../model/Something.html" title="de.tk.tkapp.rest.api.model.Something" alt="" coords="83,203,211,242"/>
-<area shape="rect" id="node3" href="../model/Something.html" title="&lt;TABLE&gt;" alt="" coords="72,198,221,247"/>
-<area shape="rect" id="node2_2" href="./SomethingsApi.html" title="de.tk.tkapp.rest.api.handler.SomethingsApi" alt="" coords="96,17,197,42"/>
-<area shape="rect" id="node2" href="./SomethingsApi.html" title="&lt;TABLE&gt;" alt="" coords="85,5,208,53"/>
-</map>

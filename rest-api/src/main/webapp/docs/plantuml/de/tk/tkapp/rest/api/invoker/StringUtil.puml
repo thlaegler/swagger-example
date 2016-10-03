@@ -1,8 +1,0 @@
-@startuml
-
-    class StringUtil {
-        {static} +containsIgnoreCase(String[], String): boolean
-        {static} +join(String[], String): String
-    }
-
-@enduml
