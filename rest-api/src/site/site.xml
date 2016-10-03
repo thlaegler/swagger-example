@@ -3,7 +3,7 @@
 	<publishDate position="left" format="dd.MM.yyyy" />
 	<version position="left" />
 	<poweredBy>
-		<logo name="itemis" href="https://www.itemis.de"
+		<logo name="itemis" href="https://www.itemis.com"
 			img="https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png"
 			position="left" alt="itemis" border="0" width="50" height="50" target="_blank"
 			title="itemis" />
@@ -24,7 +24,7 @@
 			    	<span class="color-highlight">itemis</span>
 			    	]]>
 				</name>
-				<href>http://www.itemis.de</href>
+				<href>http://www.itemis.com</href>
 			</brand>
 			<breadcrumbs>true</breadcrumbs>
 			<titleTemplate>%2$s | %1$s</titleTemplate>
@@ -49,12 +49,12 @@
 		<name>Swagger Example REST API</name>
 		<src>https://www.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png
 		</src>
-		<href>http://www.itemis.de/</href>
+		<href>http://www.itemis.com/</href>
 	</bannerRight>
 
 	<body>
 		<head>
-			<link rel="author" href="http://www.itemis.de" />
+			<link rel="author" href="http://www.itemis.com" />
 		</head>
 
 		<!-- <links>
@@ -104,7 +104,9 @@
 		<menu name="Guide">
 			<item name="Index" href="docbook/index.html" />
 			<item name="HTML" href="docbook/book.html" />
+			<item name="XHTML" href="docbook/book.xhtml" />
 			<item name="PDF" href="docbook/book.pdf" />
+			<item name="Site PDF" href="site.pdf" />
 		</menu>
 
 		<!-- <menu name="Modules" ref="modules" /> -->

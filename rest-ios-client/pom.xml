@@ -7,7 +7,7 @@
 	<description>Swagger iOS REST client Project</description>
   
 	<parent>
-		<groupId>com.laegler.rest</groupId>
+		<groupId>com.itemis.rest</groupId>
 		<artifactId>rest-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>

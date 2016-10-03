@@ -8,24 +8,387 @@
 	<description>This Project contains the generated Swagger REST API</description>
 
 	<parent>
-		<groupId>com.laegler.rest</groupId>
+		<groupId>com.itemis.rest</groupId>
 		<artifactId>rest-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
+		<!-- <site.web.path>${project.build.directory}/webapp/docs</site.web.path> -->
+		<site.web.path>${project.basedir}/src/main/webapp/docs</site.web.path>
+
+		<!-- Swagger -->
+		<api.project>rest-api</api.project>
+		<client.project>rest-client</client.project>
+		<ios.client.project>rest-ios-client</ios.client.project>
+		<android.client.project>rest-android-client</android.client.project>
+
+		<apidocs.path>${site.web.path}/apidocs</apidocs.path>
+		<yaml.path>${project.basedir}/assets/api</yaml.path>
+		<asciidoc.path>${project.basedir}/assets/asciidoc</asciidoc.path>
+
 		<!-- Docker -->
 		<server.host>localhost</server.host>
 		<server.port>8080</server.port>
 		<server.port.admin>8081</server.port.admin>
-
-		<site.web.path>${project.basedir}/src/main/webapp</site.web.path>
 	</properties>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
 
 		<plugins>
+
+			<!-- Swagger Plugin -->
+			<!-- <plugin> <groupId>org.zalando.maven.plugins</groupId> <artifactId>swagger-codegen-maven-plugin</artifactId> 
+				<version>${zalando.swagger.plugin.version}</version> <configuration> <language>jaxrsinterfaces</language> 
+				<apiFile>${project.basedir}/src/main/resources/swagger.yaml</apiFile> <skipApigeneration>true</skipApigeneration> 
+				<skipModelgeneration>true</skipModelgeneration> <yamlToJson>true</yamlToJson> 
+				<yamlToJsonOutputDirectory>${project.basedir}/src/main/resources/</yamlToJsonOutputDirectory> 
+				<enableBuilderSupport>true</enableBuilderSupport> <enable303>true</enable303> 
+				<apiPackage>${project.groupId}.api2.handler</apiPackage> <modelPackage>${project.groupId}.api2.model</modelPackage> 
+				<invokerPackage>${project.groupId}.api2.invoker</invokerPackage> </configuration> 
+				<executions> <execution> <id>yaml2json</id> <goals> <goal>codegen</goal> 
+				</goals> </execution> </executions> </plugin> -->
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>${io.swagger.plugin.version}</version>
+				<dependencies>
+					<!-- Custom API Mock Generator -->
+					<dependency>
+						<groupId>${project.groupId}</groupId>
+						<artifactId>rest-generator</artifactId>
+						<version>${project.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<!-- Generate RESTeasy API -->
+					<execution>
+						<id>api</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<!-- Custom API Mock Generator -->
+							<!-- <language>jaxrs-resteasy-mock</language> -->
+
+							<language>jaxrs-resteasy</language>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+							<output>${project.basedir}/../${api.project}</output>
+							<addCompileSourceRoot>true</addCompileSourceRoot>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${api.project}</artifactId>
+							<artifactVersion>${project.version}</artifactVersion>
+							<apiPackage>${project.groupId}.api.handler</apiPackage>
+							<modelPackage>${project.groupId}.api.model</modelPackage>
+							<invokerPackage>${project.groupId}.api.invoker</invokerPackage>
+							<!-- <verbose>true</verbose> -->
+							<!-- <configHelp>true</configHelp> -->
+						</configuration>
+					</execution>
+					<!-- Generate Java REST client -->
+					<!-- <execution> <id>client</id> <phase>generate-sources</phase> <goals> 
+						<goal>generate</goal> </goals> <configuration> <language>java</language> 
+						<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${client.project}</output> 
+						<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
+						<artifactId>${client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
+						<apiPackage>${project.groupId}.api.handler</apiPackage> <modelPackage>${project.groupId}.api.model</modelPackage> 
+						<invokerPackage>${project.groupId}.api.invoker</invokerPackage> <verbose>true</verbose> 
+						</configuration> </execution> -->
+					<!-- Generate Android REST client -->
+					<!-- <execution> <id>android</id> <phase>generate-sources</phase> <goals> 
+						<goal>generate</goal> </goals> <configuration> <language>android</language> 
+						<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${android.client.project}</output> 
+						<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
+						<artifactId>${android.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
+						<verbose>true</verbose> <library>retrofit2</library> </configuration> </execution> -->
+					<!-- Generate iOS REST client -->
+					<!-- <execution> <id>ios</id> <phase>generate-sources</phase> <goals> 
+						<goal>generate</goal> </goals> <configuration> <language>csharp</language> 
+						<inputSpec>${yaml.path}/swagger.yaml</inputSpec> <output>${project.basedir}/../${ios.client.project}</output> 
+						<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
+						<artifactId>${ios.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
+						<verbose>true</verbose> </configuration> </execution> -->
+					<!-- Generate simple HTML documentation -->
+					<execution>
+						<id>html</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<language>html</language>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+							<output>${apidocs.path}/html</output>
+							<addCompileSourceRoot>false</addCompileSourceRoot>
+							<!-- <verbose>true</verbose> -->
+							<!-- <configHelp>true</configHelp> -->
+						</configuration>
+					</execution>
+					<!-- Generate dynamic HTML documentation -->
+					<execution>
+						<id>dynamic-html</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<language>dynamic-html</language>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+							<output>${apidocs.path}/dynamic-html</output>
+							<addCompileSourceRoot>false</addCompileSourceRoot>
+							<!-- <verbose>true</verbose> -->
+							<!-- <configHelp>true</configHelp> -->
+						</configuration>
+					</execution>
+					<!-- Generate modern HTML documentation -->
+					<execution>
+						<id>html2</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<language>html2</language>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+							<output>${apidocs.path}/html2</output>
+							<addCompileSourceRoot>false</addCompileSourceRoot>
+							<!-- <verbose>true</verbose> -->
+							<!-- <configHelp>true</configHelp> -->
+						</configuration>
+					</execution>
+					<!-- Generate Confluence WikiText documentation -->
+					<execution>
+						<id>cwiki</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<language>cwiki</language>
+							<inputSpec>${yaml.path}/swagger.yaml</inputSpec>
+							<output>${apidocs.path}/cwiki</output>
+							<addCompileSourceRoot>false</addCompileSourceRoot>
+							<!-- <verbose>true</verbose> -->
+							<!-- <configHelp>true</configHelp> -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- API Doc: Markdown -->
+			<!-- requires JDK 1.8 -->
+			<!-- <plugin>
+				<groupId>io.github.swagger2markup</groupId>
+				<artifactId>swagger2markup-maven-plugin</artifactId>
+				<version>${swagger2markup.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>io.github.swagger2markup</groupId>
+						<artifactId>swagger2markup-import-files-ext</artifactId>
+						<version>${swagger2markup.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>io.github.swagger2markup</groupId>
+						<artifactId>swagger2markup-spring-restdocs-ext</artifactId>
+						<version>${swagger2markup.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<swaggerInput>${yaml.path}/swagger.yaml</swaggerInput>
+					<outputDir>${apidocs.path}/markdown</outputDir>
+					<markupLanguage>markdown</markupLanguage>
+					<separateDefinitions>true</separateDefinitions>
+					<config>
+						<swagger2markup.markupLanguage>MARKDOWN</swagger2markup.markupLanguage>
+					</config>
+				</configuration>
+				<executions>
+					<execution>
+						<id>markdown</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>convertSwagger2markup</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+			<!-- API Doc: adoc -->
+			<plugin>
+				<groupId>io.github.swagger2markup</groupId>
+				<artifactId>swagger2markup-maven-plugin</artifactId>
+				<version>${swagger2markup.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>io.github.swagger2markup</groupId>
+						<artifactId>swagger2markup-import-files-ext</artifactId>
+						<version>${swagger2markup.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>io.github.swagger2markup</groupId>
+						<artifactId>swagger2markup-spring-restdocs-ext</artifactId>
+						<version>${swagger2markup.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<swaggerInput>${yaml.path}/swagger.yaml</swaggerInput>
+					<outputDir>${apidocs.path}/asciidoc</outputDir>
+					<config>
+						<swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
+						<!-- <swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy> -->
+						<swagger2markup.extensions.dynamicOverview.contentPath>${asciidoc.path}/extensions/overview</swagger2markup.extensions.dynamicOverview.contentPath>
+						<swagger2markup.extensions.dynamicDefinitions.contentPath>${asciidoc.path}/extensions/definitions</swagger2markup.extensions.dynamicDefinitions.contentPath>
+						<swagger2markup.extensions.dynamicPaths.contentPath>${asciidoc.path}/extensions/paths</swagger2markup.extensions.dynamicPaths.contentPath>
+						<swagger2markup.extensions.dynamicSecurity.contentPath>${asciidoc.path}/extensions/security/</swagger2markup.extensions.dynamicSecurity.contentPath>
+						<swagger2markup.extensions.springRestDocs.snippetBaseUri>${asciidoc.path}</swagger2markup.extensions.springRestDocs.snippetBaseUri>
+						<swagger2markup.extensions.springRestDocs.defaultSnippets>false</swagger2markup.extensions.springRestDocs.defaultSnippets>
+					</config>
+				</configuration>
+				<executions>
+					<execution>
+						<id>asciidoc</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>convertSwagger2markup</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Run the generated asciidoc through Asciidoctor to generate other 
+				documentation types, such as PDFs or HTML5 -->
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.3</version>
+				<!-- Include Asciidoctor PDF for pdf generation -->
+				<dependencies>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-pdf</artifactId>
+						<version>1.5.0-alpha.10.1</version>
+					</dependency>
+				</dependencies>
+				<!-- Configure generic document generation settings -->
+				<configuration>
+					<sourceDirectory>${asciidoc.path}</sourceDirectory>
+					<sourceDocumentName>index.adoc</sourceDocumentName>
+					<attributes>
+						<doctype>book</doctype>
+						<toc>left</toc>
+						<toclevels>3</toclevels>
+						<numbered></numbered>
+						<hardbreaks></hardbreaks>
+						<sectlinks></sectlinks>
+						<sectanchors></sectanchors>
+						<generated>${apidocs.path}/asciidoc</generated>
+					</attributes>
+				</configuration>
+				<!-- Since each execution can only handle one backend, run separate executions 
+					for each desired output type -->
+				<executions>
+					<execution>
+						<id>html5</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html5</backend>
+							<outputDirectory>${apidocs.path}/html5</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>pdf</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>pdf</backend>
+							<outputDirectory>${apidocs.path}/pdf</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>org.asciidoctor</groupId> <artifactId>asciidoctor-maven-plugin</artifactId> 
+				<version>1.5.3</version> <executions> <execution> <id>output-html</id> <phase>generate-resources</phase> 
+				<goals> <goal>process-asciidoc</goal> </goals> <configuration> <output>${apidocs.path}/ascii</output> 
+				</configuration> </execution> </executions> </plugin> -->
+			<!-- Swagger UI -->
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>swagger-ui</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-swagger-ui</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${apidocs.path}/swagger-ui</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-yaml</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${apidocs.path}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${yaml.path}</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-asciidoc</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${apidocs.path}/asciidoc</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${asciidoc.path}</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -67,12 +430,8 @@
 				<version>2.1.1</version>
 				<configuration>
 					<warName>${project.build.finalName}</warName>
+					<!-- <outputDirectory>${site.web.path}</outputDirectory> -->
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven</groupId>
-				<artifactId>maven-plugin-api</artifactId>
-				<!-- <version>3.3.9</version> -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -136,7 +495,7 @@
 				<executions>
 					<execution>
 						<id>docbkx</id>
-						<phase>site</phase>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate-html</goal>
 							<goal>generate-xhtml</goal>
@@ -165,7 +524,7 @@
 				</dependencies>
 				<configuration>
 					<targetDirectory>${site.web.path}/docbook</targetDirectory>
-					<includes>*.xml</includes>
+					<includes>book.xml</includes>
 					<highlightSource>1</highlightSource>
 					<hyphenate>true</hyphenate>
 					<hyphenateVerbatim>true</hyphenateVerbatim>
@@ -175,6 +534,13 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pdf-plugin</artifactId>
 				<version>1.3</version>
+				<configuration>
+					<!-- <locales>en,de</locales> -->
+					<!-- <implementation>itext</implementation> -->
+					<aggregate>true</aggregate>
+					<outputDirectory>${site.web.path}</outputDirectory>
+					<includeReports>true</includeReports>
+				</configuration>
 				<executions>
 					<execution>
 						<id>pdf</id>
@@ -182,13 +548,6 @@
 						<goals>
 							<goal>pdf</goal>
 						</goals>
-						<configuration>
-							<!-- <locales>en,de</locales> -->
-							<!-- <implementation>itext</implementation> -->
-							<aggregate>true</aggregate>
-							<outputDirectory>${site.web.path}/pdf</outputDirectory>
-							<includeReports>true</includeReports>
-						</configuration>
 					</execution>
 				</executions>
 				<!-- <dependencies> <dependency> <groupId>org.apache.maven.doxia</groupId> 
@@ -259,6 +618,38 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- https://mvnrepository.com/artifact/com.github.jeluard/plantuml-maven-plugin -->
+			<plugin>
+				<groupId>com.github.jeluard</groupId>
+				<artifactId>plantuml-maven-plugin</artifactId>
+				<version>7954</version>
+				<configuration>
+					<sourceFiles>
+						<directory>${site.web.path}</directory>
+					</sourceFiles>
+					<format>png</format>
+					<outputInSourceDirectory>true</outputInSourceDirectory>
+					<!-- <verbose>true</verbose> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.kuali.maven.plugins</groupId>
+				<artifactId>graph-maven-plugin</artifactId>
+				<version>1.2.3</version>
+				<configuration>
+					<keepDotFile>true</keepDotFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>graphviz</id>
+						<phase>site</phase>
+						<goals>
+							<goal>dependencies</goal>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -293,14 +684,9 @@
 
 	<reporting>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.19.1</version>
-				<configuration>
-					<outputDirectory>${project.basedir}/src/main/webapp/newsite</outputDirectory>
-				</configuration>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-report-plugin</artifactId> 
+				<version>2.19.1</version> <configuration> <outputDirectory>${project.basedir}/src/main/webapp/newsite</outputDirectory> 
+				</configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -364,7 +750,7 @@
 							<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet>
 							<docletPath>${basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath>
 							<useStandardDocletOptions>false</useStandardDocletOptions>
-							<additionalparam>-pdf javadoc.pdf</additionalparam>
+							<additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam>
 							<excludePackageNames>target.generated-sources.annotations</excludePackageNames>
 							<failOnError>false</failOnError>
 						</configuration>
@@ -394,6 +780,8 @@
 						</reportSet> -->
 					<!-- JavaDoc yUML -->
 					<!-- Doesn't work with JDK 1.8: https://power2build.wordpress.com/2015/02/24/uml-doclet-in-eclipse/ -->
+					<!-- Run with JDK 1.7 and change compiler.source.version and compiler.target.version 
+						in parent POM -->
 					<reportSet>
 						<id>yuml</id>
 						<reports>
@@ -401,12 +789,37 @@
 							<report>test-javadoc</report>
 						</reports>
 						<configuration>
-							<name>${project.name}</name>
-							<description>${project.description}</description>
+							<name>JavaDoc UML (yUML)</name>
+							<description>UML diagrams in HTML JavaDoc
+								(ydoc.doclets.YStandard).</description>
+							<destDir>yuml</destDir>
 							<doclet>ydoc.doclets.YStandard</doclet>
 							<docletPath>${project.basedir}/assets/doclet/uml/lib/ydoc.jar:${project.basedir}/assets/doclet/uml/lib/styleed.jar:${project.basedir}/assets/doclet/uml/resources</docletPath>
 							<show>private</show>
 							<additionalparam>-umlautogen ${javadoc.opts}</additionalparam>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- JavaDoc plantUML -->
+					<reportSet>
+						<id>plantuml</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc UML (plantUML)</name>
+							<description>UML diagrams in HTML JavaDoc (org.umlgraph.doclet).</description>
+							<destDir>plantuml</destDir>
+							<doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
+							<docletArtifact>
+								<groupId>nl.talsmasoftware</groupId>
+								<artifactId>umldoclet</artifactId>
+								<version>1.0.3</version>
+							</docletArtifact>
+							<show>private</show>
+							<additionalparam>-umlSkipStandardDoclet true -umlLogLevel DEBUG
+								${javadoc.opts}</additionalparam>
 							<failOnError>false</failOnError>
 						</configuration>
 					</reportSet>
@@ -418,18 +831,13 @@
 							<report>test-javadoc</report>
 						</reports>
 						<configuration>
-							<!-- <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet> <docletArtifact> 
-								<groupId>org.umlgraph</groupId> <artifactId>umlgraph</artifactId> <version>5.6</version> 
-								</docletArtifact> <additionalparam>-views -all</additionalparam> <useStandardDocletOptions>true</useStandardDocletOptions> -->
 							<name>JavaDoc UML (umlgraph)</name>
 							<description>UML diagrams in HTML JavaDoc (org.umlgraph.doclet).</description>
-							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
 							<destDir>uml</destDir>
-							<docletArtifact>
-								<groupId>org.umlgraph</groupId>
-								<artifactId>doclet</artifactId>
-								<version>5.6</version>
-							</docletArtifact>
+							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+							<docletPath>${basedir}/assets/doclet/uml/doclet-5.4.jar</docletPath>
+							<!-- <docletArtifact> <groupId>org.umlgraph</groupId> <artifactId>doclet</artifactId> 
+								<version>5.4</version> </docletArtifact> -->
 							<show>private</show>
 							<additionalparam>
 								-inferrel -inferdep -quiet -hide java.*
@@ -441,28 +849,89 @@
 							<failOnError>false</failOnError>
 						</configuration>
 					</reportSet>
-					<!-- JavaDoc UML3 -->
+					<!-- dbdoclet -->
 					<reportSet>
-						<id>uml3</id>
+						<id>dbdoclet</id>
 						<reports>
 							<report>javadoc</report>
 							<report>test-javadoc</report>
 						</reports>
 						<configuration>
-							<name>JavaDoc UML (spinellis)</name>
-							<description>UML diagrams in HTML JavaDoc
-								(gr.spinellis.UmlGraph).</description>
-							<destDir>uml3</destDir>
-							<doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet>
+							<name>JavaDoc DocBook</name>
+							<description>JavaDoc DocBook</description>
+							<destDir>dbdoclet</destDir>
+							<doclet>org.dbdoclet.doclet.docbook.DocBookDoclet</doclet>
 							<docletArtifact>
-								<groupId>gr.spinellis</groupId>
-								<artifactId>umlgraph</artifactId>
-								<version>4.6</version>
+								<groupId>org.dbdoclet</groupId>
+								<artifactId>dbdoclet</artifactId>
+								<version>8.0.2</version>
 							</docletArtifact>
 							<show>private</show>
+							<additionalparam>${javadoc.opts}</additionalparam>
 							<failOnError>false</failOnError>
 						</configuration>
 					</reportSet>
+					<!-- ApiGuide -->
+					<reportSet>
+						<id>apiguide</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc ApiGuide</name>
+							<description>JavaDoc ApiGuide.</description>
+							<destDir>apiguide</destDir>
+							<doclet>apiguide.ApiGuide</doclet>
+							<docletPath>${basedir}/assets/doclet/apiguide/ApiGuideDoclet.jar</docletPath>
+							<show>private</show>
+							<additionalparam>${javadoc.opts}</additionalparam>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- XHTML -->
+					<reportSet>
+						<id>xhtml</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc XHTML</name>
+							<description>JavaDoc XHTML.</description>
+							<destDir>xhtml</destDir>
+							<doclet>net.sourceforge.xhtmldoclet.Doclet</doclet>
+							<docletPath>${basedir}/assets/doclet/xhtml/XHTML_Doclet_0.4.jar</docletPath>
+							<show>private</show>
+							<additionalparam>${javadoc.opts}</additionalparam>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- LaTeX -->
+					<reportSet>
+						<id>latex</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<name>JavaDoc LaTeX</name>
+							<description>JavaDoc LaTeX.</description>
+							<destDir>latex</destDir>
+							<doclet>org.wonderly.doclets.TexDoclet</doclet>
+							<docletPath>${basedir}/assets/doclet/latex/texdoclet.jar</docletPath>
+							<show>private</show>
+							<additionalparam>${javadoc.opts}</additionalparam>
+							<failOnError>false</failOnError>
+						</configuration>
+					</reportSet>
+					<!-- JavaDoc UML3 -->
+					<!-- <reportSet> <id>uml3</id> <reports> <report>javadoc</report> <report>test-javadoc</report> 
+						</reports> <configuration> <name>JavaDoc UML (spinellis)</name> <description>UML 
+						diagrams in HTML JavaDoc (gr.spinellis.UmlGraph).</description> <destDir>html</destDir> 
+						<doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet> <docletArtifact> <groupId>gr.spinellis</groupId> 
+						<artifactId>UmlGraph</artifactId> <version>4.6</version> </docletArtifact> 
+						<show>private</show> <failOnError>false</failOnError> </configuration> </reportSet> -->
 					<!-- <reportSet> <id>doccheck</id> <configuration> <doclet>com.sun.tools.doclets.doccheck.DocCheck</doclet> 
 						<docletPath>/path/to/doccheck.jar</docletPath> <docletArtifact> <groupId>com.sun.tools.doclets</groupId> 
 						<artifactId>doccheck</artifactId> <version>1.2b2</version> </docletArtifact> 
@@ -488,14 +957,35 @@
 				</reportSets>
 			</plugin>
 			<!-- Dependency Graph. GraphViz must be installed -->
-			<!-- <plugin> <groupId>org.kuali.maven.plugins</groupId> <artifactId>graph-maven-plugin</artifactId> 
-				<version>1.2.3</version> </plugin> -->
+			<plugin>
+				<groupId>org.kuali.maven.plugins</groupId>
+				<artifactId>graph-maven-plugin</artifactId>
+				<version>1.2.3</version>
+				<configuration>
+					<keepDotFile>true</keepDotFile>
+				</configuration>
+			</plugin>
+			<!-- Dependency Graph with GraphViz -->
+			<!-- <plugin> <groupId>us.bryon</groupId> <artifactId>graphviz-maven-plugin</artifactId> 
+				<version>1.0</version> <configuration> <basedir>${site.web.path}</basedir> 
+				</configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
 					<docTitle>JavaDoc Source HTML</docTitle>
+					<destDir>source</destDir>
+					<linkJavadoc>true</linkJavadoc>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<docTitle>JavaDoc Source HTML</docTitle>
+					<destDir>source</destDir>
 					<linkJavadoc>true</linkJavadoc>
 				</configuration>
 			</plugin>
@@ -532,14 +1022,6 @@
 				</configuration> <reports> <report>changelog</report> <report>file-activity</report> 
 				</reports> </reportSet> </reportSets> </plugin> -->
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<outputDirectory>${project.basedir}/site2</outputDirectory>
-				</configuration>
-			</plugin>
 		</plugins>
 	</reporting>
 
@@ -757,7 +1239,7 @@
 							</configuration>
 							<deployables>
 								<deployable>
-									<groupId>com.laegler.rest</groupId>
+									<groupId>com.itemis.rest</groupId>
 									<artifactId>rest-api</artifactId>
 									<type>war</type>
 									<properties>
@@ -803,6 +1285,12 @@
 	</profiles>
 
 	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>rest-generator</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
 		<dependency>
 			<groupId>io.swagger</groupId>
@@ -870,6 +1358,40 @@
 			<artifactId>swagger-servlet</artifactId>
 			<version>${swagger-core-version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-generator -->
+		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-generator</artifactId> 
+			<version>2.2.1</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-codegen -->
+		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-codegen</artifactId> 
+			<version>2.2.1</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-parser -->
+		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-parser</artifactId> 
+			<version>1.0.22</version> </dependency> -->
+
+		<!-- <dependency> <groupId>com.squareup.retrofit2</groupId> <artifactId>converter-gson</artifactId> 
+			<version>${retrofit.version}</version> </dependency> <dependency> <groupId>com.squareup.retrofit2</groupId> 
+			<artifactId>retrofit</artifactId> <version>${retrofit.version}</version> 
+			</dependency> <dependency> <groupId>com.squareup.retrofit2</groupId> <artifactId>converter-scalars</artifactId> 
+			<version>${retrofit.version}</version> </dependency> <dependency> <groupId>com.squareup.okhttp</groupId> 
+			<artifactId>okhttp</artifactId> <version>${okhttp.version}</version> </dependency> 
+			<dependency> <groupId>com.squareup.okhttp</groupId> <artifactId>logging-interceptor</artifactId> 
+			<version>${okhttp.version}</version> </dependency> -->
+		<dependency>
+			<groupId>gr.spinellis</groupId>
+			<artifactId>UmlGraph</artifactId>
+			<version>4.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/nl.talsmasoftware/umldoclet -->
+		<dependency>
+			<groupId>nl.talsmasoftware</groupId>
+			<artifactId>umldoclet</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.umlgraph/doclet -->
+		<!-- http://services.tidalwave.it/nexus/content/repositories/releases/ -->
+		<!-- <dependency> <groupId>org.umlgraph</groupId> <artifactId>doclet</artifactId> 
+			<version>5.4</version> </dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/javax.faces/jsf-api -->
 		<dependency>
 			<groupId>javax.faces</groupId>

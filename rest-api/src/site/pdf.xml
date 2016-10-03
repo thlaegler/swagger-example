@@ -1,7 +1,7 @@
 <document xmlns="http://maven.apache.org/DOCUMENT/1.0.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DOCUMENT/1.0.1 http://maven.apache.org/xsd/document-1.0.1.xsd"
-  outputName="maven-pdf-plugin">
+  outputName="site">
 
   <meta>
     <title>Swagger Example REST API</title>
@@ -9,7 +9,7 @@
   </meta>
 
   <toc name="Table of Contents">
-  	<item name="Readme" ref="markup/readme.md"/>
+  	<item name="Readme" ref="readme.md"/>
     <item name="Introduction" ref="index.apt"/>
     <item name="Dependency Info" ref="dependency-info.html"/>
     <item name="Usage" ref="usage.apt.vm"/>

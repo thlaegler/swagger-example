@@ -1,4 +1,4 @@
-package com.laegler.rest.generator
+package com.itemis.rest.generator
 
 import io.swagger.codegen.CodegenModel
 import io.swagger.codegen.CodegenOperation

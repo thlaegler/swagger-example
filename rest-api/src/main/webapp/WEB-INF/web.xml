@@ -7,24 +7,25 @@
 
 	<filter>
 		<filter-name>ApiOriginFilter</filter-name>
-		<filter-class>com.laegler.rest.api.handler.ApiOriginFilter</filter-class>
+		<filter-class>com.itemis.rest.api.handler.ApiOriginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ApiOriginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</filter-mapping>
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
+		<url-pattern>/docs/*</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/docs/index.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>

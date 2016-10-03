@@ -2,12 +2,12 @@ swagger: '2.0'
 info:
   title: Example Rest API
   description: |
-    This is the Example Rest API
+    This is the Example Rest API specification.
   version: 0.0.1-SNAPSHOT
-  termsOfService: http://www.xn--lgler-gra.com
+  termsOfService: http://www.itemis.com
   contact:
     name: Thomas Laegler
-    url: http://www.xn--lgler-gra.com
+    url: http://www.itemis.com
     email: thomas.laegler@googlemail.com
   license:
     name: Apache License 2.0
@@ -52,9 +52,11 @@ paths:
       - Something
       consumes:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       produces:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       parameters:
       - in: body
@@ -67,9 +69,12 @@ paths:
       responses:
         200:
           description: |
-            Successful response
+            New Something successfully added.
           schema:
             $ref: '#/definitions/Something'
+        201:
+          description: |
+            New Something successfully added.
         405:
           description: |
             Validation exception.
@@ -93,9 +98,11 @@ paths:
       - Something
       consumes:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       produces:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       parameters:
       - in: body
@@ -108,9 +115,12 @@ paths:
       responses:
         200:
           description: |
-            Successful response
+            Something successfully updated.
           schema:
             $ref: '#/definitions/Something'
+        205:
+          description: |
+            Something successfully updated. Client should reset/recall content.
         405:
           description: |
             Validation exception.
@@ -137,6 +147,7 @@ paths:
       - Something
       consumes:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       parameters:
       - in: body
@@ -149,7 +160,10 @@ paths:
       responses:
         200:
           description: |
-            Successful response
+            Something successfully removed.
+        204:
+          description: |
+            Something successfully removed.
         405:
           description: |
             Validation exception.
@@ -176,6 +190,7 @@ paths:
       - Something
       produces:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       responses:
         200:
@@ -203,9 +218,11 @@ paths:
       - Something
       consumes:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       produces:
       - application/json
+      - application/vnd.com.itemis.v1+json
       - application/xml
       parameters:
       - name: id
@@ -263,9 +280,6 @@ definitions:
         example: aSomething
       otherObject:
         $ref: '#/definitions/OtherObject'
-    x-example:
-      id: 1
-      name: aSomething
   OtherObject:
     type: object
     description: |
@@ -285,9 +299,6 @@ definitions:
           Name of OtherObject.
         type: string
         example: aOtherObject
-    x-example:
-      id: 1
-      name: aOtherObject
   Error:
     type: object
     description: |
@@ -312,7 +323,3 @@ definitions:
         description: Message Body of this Error.
         type: string
         example: Your Request was somehow invalid.
-    x-example:
-      code: 123
-      title: Invalid Request
-      message: Your Request is invalid
