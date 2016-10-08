@@ -1,0 +1,40 @@
+Bar:
+    type: object
+    description: |
+      A Bar object.
+    required:
+    - id
+    - name
+    properties:
+      id:
+        description: |
+          Id of Bar.
+        type: integer
+        format: int64
+        example: 1
+      name:
+        description: |
+          Name of Bar.
+        type: string
+        example: aBar
+      otherObject:
+        $ref: '#/definitions/OtherBarRefObject'
+OtherBarRefObject:
+    type: object
+    description: |
+      A Reference to another object.
+    required:
+    - id
+    - name
+    properties:
+      id:
+        description: |
+          Id of OtherObject.
+        type: integer
+        format: int64
+        example: 1
+      name:
+        description: |
+          Name of OtherObject.
+        type: string
+        example: aOtherObject

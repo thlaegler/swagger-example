@@ -1,19 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.itemis.rest</groupId>
-	<artifactId>rest-parent</artifactId>
+	<groupId>com.itemis.swagger</groupId>
+	<artifactId>swagger-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Swagger REST Parent Project</name>
+	<name>Itemis Swagger Parent</name>
 	<description>Example project, which uses Swagger, Xtend, some Maven plugins and 'mvn generate-sources site' to generate REST Projects (Java REST API, Java REST client, Android REST client and iOS client) and documentation (REST API Doc, JavaDoc, Maven Site, DocBook, PDF etc.) from YAML.</description>
 
 	<modules>
-		<module>rest-generator</module>
-		<!-- <module>rest-generate</module> -->
-		<module>rest-api</module>
-		<!-- <module>rest-android-client</module> -->
-		<!-- <module>rest-ios-client</module> -->
+		<module>swagger-generator</module>
+		<module>swagger-maven-plugin</module>
+		<module>swagger-example-api</module>
+		<!-- <module>swagger-example-client</module> -->
+		<!-- <module>swagger-example-android</module> -->
+		<!-- <module>swagger-example-ios</module> -->
 	</modules>
 
 	<properties>
@@ -49,12 +50,13 @@
 		<compiler.source.version>1.8</compiler.source.version>
 		<compiler.target.version>1.8</compiler.target.version>
 
+		<!-- Will be overidden by profile 'java8' if jdk > 1.7 -->
 		<javadoc.opts></javadoc.opts>
 	</properties>
 
-	<url>http://www.xn--lgler-gra.com</url>
+	<url>http://www.itemis.com</url>
 	<organization>
-		<name>itemis</name>
+		<name>Itemis</name>
 		<url>http://www.itemis.com</url>
 	</organization>
 	<licenses>
@@ -73,9 +75,9 @@
 	<inceptionYear>2016</inceptionYear>
 	<developers>
 		<developer>
-			<id>P950120</id>
+			<id>thlaegler</id>
 			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
+			<organizationUrl>http://www.itemis.de</organizationUrl>
 			<name>Thomas Laegler</name>
 			<email>thomas.laegler@googlemail.com</email>
 			<roles>
@@ -83,9 +85,6 @@
 				<role>Developer</role>
 			</roles>
 			<timezone>Germany/Hamburg</timezone>
-			<properties>
-				<picUrl>http://www.itemis.com</picUrl>
-			</properties>
 		</developer>
 	</developers>
 	<issueManagement>
@@ -108,15 +107,41 @@
 			<url>http://v22015123236530736.hotsrv.de:8081/</url>
 		</site>
 	</distributionManagement>
-
+	<profiles>
+		<profile>
+			<id>java8</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+			</properties>
+		</profile>
+	</profiles>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>jcenter-releases</id>
+			<name>jcenter</name>
+			<url>http://jcenter.bintray.com</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>geotoolkit</id>
+			<name>geotoolkit</name>
+			<url>http://maven.geotoolkit.org/</url>
+		</repository>
+	</repositories>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>rest-generator</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
 			<!-- TEST -->
 			<!-- JUnit -->
 			<dependency>
@@ -196,40 +221,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<profiles>
-		<profile>
-			<id>doclint-java8-disable</id>
-			<activation>
-				<jdk>[1.8,)</jdk>
-			</activation>
-			<properties>
-				<!-- <javadoc.opts>-Xdoclint:none</javadoc.opts> -->
-			</properties>
-		</profile>
-	</profiles>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jcenter-snapshots</id>
-			<name>jcenter</name>
-			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>jcenter-releases</id>
-			<name>jcenter</name>
-			<url>http://jcenter.bintray.com</url>
-		</pluginRepository>
-	</pluginRepositories>
-
-	<repositories>
-		<repository>
-			<id>geotoolkit</id>
-			<name>geotoolkit</name>
-			<url>http://maven.geotoolkit.org/</url>
-		</repository>
-	</repositories>
 </project>

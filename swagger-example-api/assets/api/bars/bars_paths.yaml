@@ -1,0 +1,146 @@
+/bars:
+  post:
+      summary: Add a new Bar
+      description: |
+        Add a new Bar.
+      operationId: add
+      tags:
+      - Bar
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Bar object that needs to be added to database.
+        required: true
+        schema:
+          $ref: '#/definitions/Bar'
+      responses:
+        default:
+          description: |
+            New Bar successfully added.
+          schema:
+            $ref: '#/definitions/Bar'
+        201:
+          description: |
+            New Bar successfully added.
+        405:
+          description: |
+            Validation exception.
+        400:
+          description: |
+            Invalid Bar supplied.
+      security:
+      - oauth_password:
+        - user
+  put:
+      summary: Update an existing Bar
+      description: |
+        Update an existing Bar.
+      operationId: update
+      tags:
+      - Bar
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Bar object that needs to be added to database.
+        required: true
+        schema:
+          $ref: '#/definitions/Bar'
+      responses:
+        default:
+          description: |
+            Bar successfully updated.
+          schema:
+            $ref: '#/definitions/Bar'
+        205:
+          description: |
+            Bar successfully updated. Client should reset/recall content.
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Bar not found.
+        400:
+          description: |
+            Invalid Bar supplied.
+      security:
+      - oauth_password:
+        - user
+  delete:
+      summary: Remove an existing Bar
+      description: |
+        Remove an existing Bar from database.
+      operationId: remove
+      tags:
+      - Bar
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Bar object that needs to be removed from database.
+        required: true
+        schema:
+          $ref: '#/definitions/Bar'
+      responses:
+        default:
+          description: |
+            Bar successfully removed.
+        204:
+          description: |
+            Bar successfully removed.
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Bar not found.
+        400:
+          description: |
+            Invalid Bar supplied.
+      security:
+      - oauth_password:
+        - user
+  get:
+      summary: Get all existing Bars
+      description: |
+        Get all existing Bars.
+      operationId: findAll
+      tags:
+      - Bar
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      responses:
+        default:
+          description: |
+            Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Bar'
+      security:
+      - oauth_password:
+        - user

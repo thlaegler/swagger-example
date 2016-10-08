@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Itemis Swagger Example REST API">
+	<publishDate position="left" format="dd.MM.yyyy" />
+	<version position="left" />
+	<poweredBy>
+		<logo name="Itemis" href="https://www.itemis.com"
+			img="https://www.itemis.com/hs-fs/hubfs/Itemis_Logos/Itemis-Marke-200.png"
+			position="left" alt="Itemis" border="0" width="50" height="50"
+			target="_blank" title="Itemis" />
+	</poweredBy>
+
+	<skin>
+		<groupId>lt.velykis.maven.skins</groupId>
+		<artifactId>reflow-maven-skin</artifactId>
+		<version>1.1.1</version>
+	</skin>
+	<custom>
+		<reflowSkin>
+			<theme>bootswatch-cerulean</theme>
+			<highlightJs>true</highlightJs>
+			<brand>
+				<name>
+					<![CDATA[
+			    	<span class="color-highlight">Itemis</span>
+			    	]]>
+				</name>
+				<href>http://www.itemis.com</href>
+			</brand>
+			<breadcrumbs>true</breadcrumbs>
+			<titleTemplate>%2$s | %1$s</titleTemplate>
+			<toc>sidebar</toc>
+			<topNav>API|Project|Guide|Staging|Links</topNav>
+			<bottomNav>
+				<column>License</column>
+				<column>Git Repo</column>
+			</bottomNav>
+			<bottomDescription>Be lazy and let it generate :)</bottomDescription>
+			<slogan position="bannerRight|bannerLeft">Be lazy and let it generate :)</slogan>
+		</reflowSkin>
+	</custom>
+
+	<bannerRight>
+		<name>Itemis Swagger Example REST API</name>
+		<src>https://www.itemis.com/hs-fs/hubfs/Itemis_Logos/Itemis-Marke-200.png
+		</src>
+		<href>http://www.itemis.com/</href>
+	</bannerRight>
+
+	<body>
+		<head>
+			<link rel="author" href="http://www.itemis.com" />
+		</head>
+
+		<menu name="API">
+			<item name="Swagger UI"
+				href="apidocs/swagger-ui/index.html?url=http://localhost:8080/example/apidocs/swagger.yaml" />
+			<item name="HTML5" href="apidocs/html5/index.html" />
+			<item name="HTML2" href="apidocs/html2/index.html" />
+			<item name="HTML" href="apidocs/html/index.html" />
+			<item name="Dynamic HTML" href="apidocs/dynamic-html/docs/index.html" />
+			<item name="PDF" href="apidocs/pdf/index.pdf" />
+			<item name="DocBook" href="apidocs/docbook/index.xml" />
+			<item name="ASCIIDOC" href="apidocs/asciidoc/index.adoc" />
+			<item name="Confluence Wiki Markup" href="apidocs/cwiki/confluence-markup.txt" />
+			<item name="Swagger JSON" href="apidocs/swagger.json" />
+			<item name="Swagger YAML File" href="apidocs/swagger.yaml" />
+		</menu>
+
+		<menu name="Project" ref="reports" />
+
+		<menu name="Guide">
+			<item name="Index" href="docbook/index.html" />
+			<item name="HTML" href="docbook/book.html" />
+			<item name="XHTML" href="docbook/book.xhtml" />
+			<item name="PDF" href="docbook/book.pdf" />
+			<item name="Site PDF" href="site.pdf" />
+		</menu>
+
+		<menu name="Links">
+			<item name="Sharepoint" href="http://www.example.com" />
+			<item name="Foo" href="http://www.example.com" />
+			<item name="Bar" href="http://www.example.com" />
+		</menu>
+
+		<menu name="License">
+			<item name="Mailing lists" href="mail-lists.html" />
+			<item name="License" href="license.html" />
+		</menu>
+
+		<menu name="GitHub">
+			<item name="Git repository" href="https://github.com/thlaegler/swagger-example" />
+		</menu>
+
+	</body>
+</project>
