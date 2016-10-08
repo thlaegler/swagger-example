@@ -1,22 +1,23 @@
-{{#operations}}
-package {{apiPackage}}.feature.{{baseName}};
-{{/operations}}
+package {{apiPackage}}.feature;
 
-import {{package}}.*;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.core.StringContains.*;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.core.StringContains.containsString;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-{{#operations}}{{#operation}}{{#isMultipart}}import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-{{/isMultipart}}{{/operation}}{{/operations}}
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 
-{{#imports}}import {{import}};
-{{/imports}}
-
+/**
+ * Super class for all Cucumber Feature Steps.
+ */
 {{>generatedAnnotation}}
-{{#operations}}
-public class {{classname}}FeatureSteps extends AbstractFeatureSteps {
+public class CommonFeatureSteps extends AbstractFeatureSteps {
 	
 	@Given("^a consumer$")
 	public void a_consumer() throws Throwable {
@@ -25,7 +26,8 @@ public class {{classname}}FeatureSteps extends AbstractFeatureSteps {
 
 	@Given("^a consumer authenticated with \"([^\"]*)\" method \"([^\"]*)\" flow \"([^\"]*)\" scope \"([^\"]*)\"$")
 	public void a_consumer_authenticated_by_flow_scope(String arg1, String arg2, String arg3, String arg4) throws Throwable {
-	    given().spec(spec());
+	    //given().spec(spec()).auth().oauth;
+	    given().spec(spec()).headers("X-Access-Token", oauthAccessToken, "X-Client-ID", oauthClientId, "X-Client-Secret", oauthClientSecret).auth().oauth2(oauthAccessToken);
 	}
 
 	@When("^the consumer does \"([^\"]*)\" on \"([^\"]*)\"$")
@@ -74,4 +76,3 @@ public class {{classname}}FeatureSteps extends AbstractFeatureSteps {
 	}
 
 }
-{{/operations}}

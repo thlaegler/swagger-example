@@ -5,6 +5,16 @@
       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
+	<!-- Enables clean URLs with JSP views e.g. /welcome instead of /app/welcome -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<filter>
 		<filter-name>ApiOriginFilter</filter-name>
 		<filter-class>com.itemis.swagger.api.handler.ApiOriginFilter</filter-class>
@@ -25,7 +35,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/docs/index.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>

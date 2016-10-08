@@ -21,6 +21,7 @@ import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 import org.junit.Test;
+import org.junit.Ignore;
 
 {{>generatedAnnotation}}
 {{#operations}}
@@ -29,6 +30,9 @@ public class {{classname}}IntegrationTest extends AbstractIntegrationTest {
 	{{#operation}}
 	{{#responses}}
 	@Test
+	{{^isDefault}}
+	@Ignore("TODO: Define request to get HTTP status code {{code}}")
+	{{/isDefault}}
 	public void test_{{nickname}}_{{code}}() {
 		given().spec(spec).when().{{httpMethodLowerCase}}("{{baseName}}{{path}}").then().statusCode({{code}});
 	}

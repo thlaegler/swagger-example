@@ -40,6 +40,21 @@
 		<finalName>${project.artifactId}</finalName>
 
 		<plugins>
+			<!-- Necessary for Heroku -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -1343,15 +1358,42 @@
 			<artifactId>swagger-servlet</artifactId>
 			<version>${swagger-core-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-generator -->
-		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-generator</artifactId> 
-			<version>2.2.1</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-codegen -->
-		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-codegen</artifactId> 
-			<version>2.2.1</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-parser -->
-		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-parser</artifactId> 
-			<version>1.0.22</version> </dependency> -->
+
+		<!-- URL Rewrite -->
+		<!-- https://mvnrepository.com/artifact/org.tuckey/urlrewritefilter -->
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>4.0.4</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Apache Oltu OAuth2 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.common -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.common</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.resourceserver -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.authzserver -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.client -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.client</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+
 
 		<!-- <dependency> <groupId>com.squareup.retrofit2</groupId> <artifactId>converter-gson</artifactId> 
 			<version>${retrofit.version}</version> </dependency> <dependency> <groupId>com.squareup.retrofit2</groupId> 

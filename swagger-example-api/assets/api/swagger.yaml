@@ -23,22 +23,84 @@ securityDefinitions:
   oauth_password:
     type: oauth2
     flow: password
-    authorizationUrl: https://localhost/example/rest/password
+    authorizationUrl: https://localhost:8080/example/rest/oauth/password
     scopes:
       user: The default User scope for authorization with password.
   oauth_code:
     type: oauth2
     flow: accessCode
-    authorizationUrl: https://localhost/example/rest/code
+    authorizationUrl: https://localhost:8080/example/rest/oauth/authorize
+    tokenUrl: https://localhost:8080/example/rest/oauth/token
     scopes:
       user: The default User scope for authorization with authorization code.
   oauth_code:
     type: oauth2
     flow: implicit
-    authorizationUrl: https://localhost/example/rest/implicit
+    authorizationUrl: https://localhost:8080/example/rest/oauth/implicit
     scopes:
       user: The default User scope for authorization with implicit flow.
 paths:
+  /oauth/token:
+    post:
+      summary: Request OAuth Access Token.
+      description: |
+        Request the OAuth Access Token by providing username and password.
+      operationId: token
+      tags:
+      - OAuth
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - in: formData
+        name: grant_type
+        description: The grant type of the OAuth request.
+        example: password
+        required: true
+        type: string
+      - in: formData
+        name: username
+        description: The username of the OAuth request.
+        example: johndoe
+        required: true
+        type: string
+      - in: formData
+        name: password
+        description: The password of the OAuth request.
+        example: 123
+        required: true
+        type: string
+      responses:
+        default:
+          description: |
+            Access granted.
+  /oauth/authorize:
+    post:
+      summary: Request OAuth Access Token.
+      description: |
+        Request the OAuth Access Token by providing username and password.
+      operationId: token
+      tags:
+      - OAuth
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - in: formData
+        name: grant_type
+        description: The grant type of the OAuth request.
+        example: authorization_code
+        required: true
+        type: string
+      - in: formData
+        name: code
+        description: The authorization code of the OAuth request.
+        example: 123
+        required: true
+        type: string
+      responses:
+        default:
+          description: |
+            Access granted.
+  #Referencing multiple sub-yamls is not working out of the box.
   $ref: ./bars/bars_paths.yaml
   /foos:
     post:
