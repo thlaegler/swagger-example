@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>swagger-generator</artifactId>
+	<name>Itemis Swagger Generator</name>
+	<description>Customization of RESTeasy CodeGen.</description>
+
+	<parent>
+		<groupId>com.itemis.swagger</groupId>
+		<artifactId>swagger-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.xtext/org.eclipse.xtext.xbase.lib -->
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-core</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-codegen</artifactId>
+			<version>${io.swagger.plugin.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/xtend-gen</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${compiler.source.version}</source>
+					<target>${compiler.target.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

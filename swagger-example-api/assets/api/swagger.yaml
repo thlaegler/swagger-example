@@ -1,0 +1,299 @@
+swagger: '2.0'
+info:
+  title: Example Rest API
+  description: |
+    This is the Example Rest API specification.
+  version: 0.0.1-SNAPSHOT
+  termsOfService: http://www.example.com/terms
+  contact:
+    name: John Doe
+    url: http://www.example.org
+    email: john.doe@example.org
+  license:
+    name: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+#host: v22015123236530736.hotsrv.de
+host: localhost:8080
+x-appPath: /example
+basePath: /example/rest
+schemes:
+- http
+- https
+securityDefinitions:
+  oauth_password:
+    type: oauth2
+    flow: password
+    authorizationUrl: https://localhost/example/rest/password
+    scopes:
+      user: The default User scope for authorization with password.
+  oauth_code:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: https://localhost/example/rest/code
+    scopes:
+      user: The default User scope for authorization with authorization code.
+  oauth_code:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://localhost/example/rest/implicit
+    scopes:
+      user: The default User scope for authorization with implicit flow.
+paths:
+  $ref: ./bars/bars_paths.yaml
+  /foos:
+    post:
+      summary: Add a new Foo
+      description: |
+        Add a new Foo.
+      operationId: add
+      tags:
+      - Foo
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Foo object that needs to be added to database.
+        required: true
+        schema:
+          $ref: '#/definitions/Foo'
+      responses:
+        default:
+          description: |
+            New Foo successfully added.
+          schema:
+            $ref: '#/definitions/Foo'
+        201:
+          description: |
+            New Foo successfully added.
+        405:
+          description: |
+            Validation exception.
+        400:
+          description: |
+            Invalid Foo supplied.
+      security:
+      - oauth_password:
+        - user
+    put:
+      summary: Update an existing Foo
+      description: |
+        Update an existing Foo.
+      operationId: update
+      tags:
+      - Foo
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Foo object that needs to be added to database.
+        required: true
+        schema:
+          $ref: '#/definitions/Foo'
+      responses:
+        default:
+          description: |
+            Foo successfully updated.
+          schema:
+            $ref: '#/definitions/Foo'
+        205:
+          description: |
+            Foo successfully updated. Client should reset/recall content.
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Foo not found.
+        400:
+          description: |
+            Invalid Foo supplied.
+      security:
+      - oauth_password:
+        - user
+    delete:
+      summary: Remove an existing Foo
+      description: |
+        Remove an existing Foo from database.
+      operationId: remove
+      tags:
+      - Foo
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: |
+          Foo object that needs to be removed from database.
+        required: true
+        schema:
+          $ref: '#/definitions/Foo'
+      responses:
+        default:
+          description: |
+            Foo successfully removed.
+        204:
+          description: |
+            Foo successfully removed.
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Foo not found.
+        400:
+          description: |
+            Invalid Foo supplied.
+      security:
+      - oauth_password:
+        - user
+    get:
+      summary: Get all existing Foos
+      description: |
+        Get all existing Foos.
+      operationId: findAll
+      tags:
+      - Foo
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      responses:
+        default:
+          description: |
+            Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Foo'
+      security:
+      - oauth_password:
+        - user
+  /foos/{id}:
+    get:
+      summary: Find an existing Foo
+      description: |
+        Find an existing Foo from database by ID.
+      operationId: findById
+      tags:
+      - Foo
+      consumes:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      produces:
+      - application/json
+      - application/vnd.com.itemis.swagger.v1+json
+      - application/xml
+      parameters:
+      - name: id
+        in: path
+        description: |
+          ID of Foo that needs to be fetched.
+        required: true
+        type: integer
+        format: int64
+        minLength: 1
+        maxLength: 8
+        pattern: '^[1-9]{1}[0-9]{0,7}'
+      responses:
+        default:
+          description: |
+            Successful response
+          schema:
+            $ref: '#/definitions/Foo'
+        405:
+          description: |
+            Validation exception.
+        404:
+          description: |
+            Foo not found with given ID.
+        400:
+          description: |
+            Invalid ID of Foo supplied.
+      security:
+      - oauth_password:
+        - user
+definitions:
+  $ref: ./bars/bars_definitions.yaml
+  Foo:
+    type: object
+    description: |
+      A Foo object.
+    required:
+    - id
+    - name
+    properties:
+      id:
+        description: |
+          Id of Foo.
+        type: integer
+        format: int64
+        example: 1
+      name:
+        description: |
+          Name of Foo.
+        type: string
+        example: aFoo
+      otherObject:
+        $ref: '#/definitions/OtherObject'
+  OtherObject:
+    type: object
+    description: |
+      A Reference to another object.
+    required:
+    - id
+    - name
+    properties:
+      id:
+        description: |
+          Id of OtherObject.
+        type: integer
+        format: int64
+        example: 1
+      name:
+        description: |
+          Name of OtherObject.
+        type: string
+        example: aOtherObject
+  Error:
+    type: object
+    description: |
+      Generic Error object.
+    required:
+    - code
+    - title
+    - message
+    properties:
+      code:
+        description: |
+          Error Code of this Error.
+        type: integer
+        format: int64
+        example: 123
+      title:
+        description: |
+          Title of the Error Message.
+        type: string
+        example: Invalid Request
+      message:
+        description: Message Body of this Error.
+        type: string
+        example: Your Request was somehow invalid.
