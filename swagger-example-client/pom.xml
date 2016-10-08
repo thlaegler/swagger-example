@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-	<artifactId>>swagger-example-client</artifactId>
+	<artifactId>swagger-example-client</artifactId>
 	<packaging>jar</packaging>
 	<name>Swagger REST Client Project</name>
 	<description>This Project contains the generated Swagger REST Client</description>
