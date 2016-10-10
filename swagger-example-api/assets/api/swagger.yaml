@@ -127,14 +127,11 @@ paths:
         schema:
           $ref: '#/definitions/Foo'
       responses:
-        default:
+        201:
           description: |
             New Foo successfully added.
           schema:
             $ref: '#/definitions/Foo'
-        201:
-          description: |
-            New Foo successfully added.
         405:
           description: |
             Validation exception.
@@ -168,11 +165,14 @@ paths:
         schema:
           $ref: '#/definitions/Foo'
       responses:
-        default:
+        200:
           description: |
             Foo successfully updated.
           schema:
             $ref: '#/definitions/Foo'
+        204:
+          description: |
+            Foo successfully updated. No response content.
         205:
           description: |
             Foo successfully updated. Client should reset/recall content.
@@ -208,12 +208,9 @@ paths:
         schema:
           $ref: '#/definitions/Foo'
       responses:
-        default:
-          description: |
-            Foo successfully removed.
         204:
           description: |
-            Foo successfully removed.
+            Foo successfully removed. No response content.
         405:
           description: |
             Validation exception.
@@ -238,7 +235,7 @@ paths:
       - application/vnd.com.itemis.swagger.v1+json
       - application/xml
       responses:
-        default:
+        200:
           description: |
             Successful response
           schema:
@@ -276,7 +273,7 @@ paths:
         maxLength: 8
         pattern: '^[1-9]{1}[0-9]{0,7}'
       responses:
-        default:
+        200:
           description: |
             Successful response
           schema:

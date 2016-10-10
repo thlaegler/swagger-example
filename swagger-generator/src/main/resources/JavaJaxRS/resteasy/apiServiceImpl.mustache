@@ -21,34 +21,34 @@ import javax.ws.rs.core.SecurityContext;
 {{>generatedAnnotation}}
 {{#operations}}
 public class {{classname}}ServiceImpl extends {{classname}}Service {
-  {{#operation}}
-      @Override
-      public Response {{nickname}}({{#isMultipart}}MultipartFormDataInput input,{{/isMultipart}}{{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{^isMultipart}}{{>serviceFormParams}},{{/isMultipart}}{{#isMultipart}}{{^isFormParam}},{{/isFormParam}}{{/isMultipart}}{{/allParams}}SecurityContext securityContext)
-      throws NotFoundException {
-      
-      // TODO: This is REST API mock-method returning an example response.
-      // You have to customize the result in this method like:
-      // Something result = builder.id(1).name("my name").build();
-      {{^isListContainer}}
-      {{#responses.0.schema.genericRef}}
-      {{responses.0.schema.genericRef.simpleRef}} result = {{responses.0.schema.genericRef.simpleRef}}.getExample();
-      return Response.ok().entity(result).build();
-      {{/responses.0.schema.genericRef}}
-      {{^responses.0.schema.genericRef}}
-      ApiResponseMessage result = new ApiResponseMessage(ApiResponseMessage.OK, "dummy response");
-      return Response.ok().entity(result).build();
-      {{/responses.0.schema.genericRef}}
-      {{/isListContainer}}
-      {{#isListContainer}}
-      List<{{responses.0.baseType}}> results = new ArrayList<{{responses.0.baseType}}>();
-      results.add({{responses.0.baseType}}.getExample());
-      results.add({{responses.0.baseType}}.getExample());
-      results.add({{responses.0.baseType}}.getExample());
-      return Response.ok().entity(new GenericEntity<List<{{responses.0.baseType}}>>(results){}).build();
-      {{/isListContainer}}
-      
-      
-  }
-  {{/operation}}
+
+	{{#operation}}
+	{{#responses.0}}
+	@Override
+	public Response {{nickname}}({{#isMultipart}}MultipartFormDataInput input,{{/isMultipart}}{{#allParams}}{{>serviceQueryParams}}{{>servicePathParams}}{{>serviceHeaderParams}}{{>serviceBodyParams}}{{^isMultipart}}{{>serviceFormParams}},{{/isMultipart}}{{#isMultipart}}{{^isFormParam}},{{/isFormParam}}{{/isMultipart}}{{/allParams}}SecurityContext securityContext) throws NotFoundException {
+		// TODO: REST API mock-method returning an example response.
+		// You have to customize the result in this method like:
+		// Foo result = FooBuilder.id(1).name("my name").build();
+		{{^containerType}}
+		{{#schema.genericRef}}
+		{{schema.genericRef.simpleRef}} result = {{schema.genericRef.simpleRef}}.getExample();
+		{{/schema.genericRef}}
+		{{^schema.genericRef}}
+		ApiResponseMessage result = new ApiResponseMessage(ApiResponseMessage.OK, "{{message}}");
+		{{/schema.genericRef}}
+		{{/containerType}}
+		{{#containerType}}
+		List<{{baseType}}> results = new ArrayList<{{baseType}}>();
+		results.add({{baseType}}.getExample());
+		results.add({{baseType}}.getExample());
+		results.add({{baseType}}.getExample());
+		GenericEntity result = new GenericEntity<List<{{baseType}}>>(results){};
+		{{/containerType}}
+		
+		return Response.status({{code}}).entity(result).build();
+	}
+	{{/responses.0}}
+	{{/operation}}
+
 }
 {{/operations}}

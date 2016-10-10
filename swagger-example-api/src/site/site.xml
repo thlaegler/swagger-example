@@ -53,7 +53,7 @@
 
 		<menu name="API">
 			<item name="Swagger UI"
-				href="apidocs/swagger-ui/index.html?url=http://localhost:8080/example/apidocs/swagger.yaml" />
+				href="apidocs/swagger-ui/index.html?url=http%3A%2F%2Flocalhost%3A8080%2Fexample%2Fdocs%2Fapidocs%2Fswagger.yaml" />
 			<item name="HTML5" href="apidocs/html5/index.html" />
 			<item name="HTML2" href="apidocs/html2/index.html" />
 			<item name="HTML" href="apidocs/html/index.html" />
