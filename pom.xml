@@ -12,8 +12,8 @@
 		<module>swagger-generator</module>
 		<module>swagger-maven-plugin</module>
 		<module>swagger-example-api</module>
-		<!-- <module>swagger-example-client</module> -->
-		<!-- <module>swagger-example-android</module> -->
+		<module>swagger-example-client</module>
+		<module>swagger-example-android</module>
 		<!-- <module>swagger-example-ios</module> -->
 	</modules>
 
@@ -21,7 +21,7 @@
 		<swagger-core-version>1.5.10</swagger-core-version>
 		<swagger-ui.version>2.2.5</swagger-ui.version>
 		<jetty-version>9.2.9.v20150224</jetty-version>
-		<resteasy-version>3.0.11.Final</resteasy-version>
+		<resteasy-version>3.0.14.Final</resteasy-version>
 		<slf4j-version>1.6.3</slf4j-version>
 		<junit-version>4.8.1</junit-version>
 		<servlet-api-version>2.5</servlet-api-version>
@@ -142,6 +142,13 @@
 	</repositories>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.wildfly.bom</groupId>
+				<artifactId>wildfly-javaee7</artifactId>
+				<version>10.1.0.Final</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<!-- TEST -->
 			<!-- JUnit -->
 			<dependency>
