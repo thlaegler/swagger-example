@@ -26,9 +26,9 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
     this.apiTemplateFiles.put("apiServiceImpl.mustache", ".java");
     this.apiTemplateFiles.put("apiServiceFactory.mustache", ".java");
     this.apiTestTemplateFiles.clear();
-    this.apiTestTemplateFiles.put("apiIntegrationTest.mustache", ".java");
-    this.apiTestTemplateFiles.put("apiCucumberFeatureSteps.mustache", ".java");
-    this.apiTestTemplateFiles.put("apiCucumberFeature.mustache", ".feature");
+    this.apiTestTemplateFiles.put("test/integration/apiIntegrationTest.mustache", ".java");
+    this.apiTestTemplateFiles.put("test/feature/apiCucumberFeatureSteps.mustache", ".java");
+    this.apiTestTemplateFiles.put("test/feature/apiCucumberFeature.mustache", ".feature");
     this.modelDocTemplateFiles.remove("model_doc.mustache");
     this.apiDocTemplateFiles.remove("api_doc.mustache");
     this.dateLibrary = "legacy";
@@ -64,54 +64,101 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
     this.writeOptional(this.outputFolder, _supportingFile_4);
     SupportingFile _supportingFile_5 = new SupportingFile("jboss-web.mustache", "src/main/webapp/WEB-INF", "jboss-web.xml");
     this.writeOptional(this.outputFolder, _supportingFile_5);
-    String _replace = ((this.sourceFolder + "/") + this.invokerPackage).replace(".", "/");
-    SupportingFile _supportingFile_6 = new SupportingFile("RestApplication.mustache", _replace, 
-      "RestApplication.java");
+    SupportingFile _supportingFile_6 = new SupportingFile("jetty-web.mustache", "src/main/webapp/WEB-INF", "jetty-web.xml");
     this.writeOptional(this.outputFolder, _supportingFile_6);
-    String _replace_1 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_7 = new SupportingFile("ApiException.mustache", _replace_1, 
+    String _replace = ((this.sourceFolder + "/") + this.invokerPackage).replace(".", "/");
+    SupportingFile _supportingFile_7 = new SupportingFile("RestApplication.mustache", _replace, 
+      "RestApplication.java");
+    this.writeOptional(this.outputFolder, _supportingFile_7);
+    String _replace_1 = (((this.sourceFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_8 = new SupportingFile("src/oauth/ClientContent.mustache", _replace_1, "ClientContent.java");
+    this.writeOptional(this.outputFolder, _supportingFile_8);
+    String _replace_2 = (((this.sourceFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_9 = new SupportingFile("src/oauth/ServerContent.mustache", _replace_2, "ServerContent.java");
+    this.writeOptional(this.outputFolder, _supportingFile_9);
+    String _replace_3 = (((this.sourceFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_10 = new SupportingFile("src/oauth/TestContent.mustache", _replace_3, "TestContent.java");
+    this.writeOptional(this.outputFolder, _supportingFile_10);
+    String _replace_4 = (((this.sourceFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_11 = new SupportingFile("src/oauth/AuthEndpoint.mustache", _replace_4, "AuthEndpoint.java");
+    this.writeOptional(this.outputFolder, _supportingFile_11);
+    String _replace_5 = (((this.sourceFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_12 = new SupportingFile("src/oauth/TokenEndpoint.mustache", _replace_5, "TokenEndpoint.java");
+    this.writeOptional(this.outputFolder, _supportingFile_12);
+    SupportingFile _supportingFile_13 = new SupportingFile("dotProject.mustache", "", ".project");
+    this.writeOptional(this.outputFolder, _supportingFile_13);
+    SupportingFile _supportingFile_14 = new SupportingFile("dotClasspath.mustache", "", ".classpath");
+    this.writeOptional(this.outputFolder, _supportingFile_14);
+    SupportingFile _supportingFile_15 = new SupportingFile("settingsResourcesPref.mustache", ".settings", "org.eclipse.core.resources.prefs");
+    this.writeOptional(this.outputFolder, _supportingFile_15);
+    SupportingFile _supportingFile_16 = new SupportingFile("settingsFacet.mustache", ".settings", "org.eclipse.wst.common.project.facet.core.xml");
+    this.writeOptional(this.outputFolder, _supportingFile_16);
+    SupportingFile _supportingFile_17 = new SupportingFile("settingsFacetPrefs.mustache", ".settings", 
+      "org.eclipse.wst.common.project.facet.core.prefs.xml");
+    this.writeOptional(this.outputFolder, _supportingFile_17);
+    SupportingFile _supportingFile_18 = new SupportingFile("settingsResourcesPref.mustache", ".settings", "org.eclipse.core.resources.prefs");
+    this.writeOptional(this.outputFolder, _supportingFile_18);
+    SupportingFile _supportingFile_19 = new SupportingFile("settingsFacet.mustache", ".settings", "org.eclipse.wst.common.project.facet.core.xml");
+    this.writeOptional(this.outputFolder, _supportingFile_19);
+    SupportingFile _supportingFile_20 = new SupportingFile("settingsFacetPrefs.mustache", ".settings", 
+      "org.eclipse.wst.common.project.facet.core.prefs.xml");
+    this.writeOptional(this.outputFolder, _supportingFile_20);
+    String _replace_6 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+    SupportingFile _supportingFile_21 = new SupportingFile("ApiException.mustache", _replace_6, 
       "ApiException.java");
-    String _replace_2 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_8 = new SupportingFile("ApiOriginFilter.mustache", _replace_2, 
+    String _replace_7 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+    SupportingFile _supportingFile_22 = new SupportingFile("ApiOriginFilter.mustache", _replace_7, 
       "ApiOriginFilter.java");
-    String _replace_3 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_9 = new SupportingFile("ApiResponseMessage.mustache", _replace_3, 
+    String _replace_8 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+    SupportingFile _supportingFile_23 = new SupportingFile("ApiResponseMessage.mustache", _replace_8, 
       "ApiResponseMessage.java");
-    String _replace_4 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_10 = new SupportingFile("NotFoundException.mustache", _replace_4, 
+    String _replace_9 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+    SupportingFile _supportingFile_24 = new SupportingFile("NotFoundException.mustache", _replace_9, 
       "NotFoundException.java");
-    String _replace_5 = ((this.sourceFolder + "/") + this.invokerPackage).replace(".", "/");
-    SupportingFile _supportingFile_11 = new SupportingFile("StringUtil.mustache", _replace_5, 
+    String _replace_10 = ((this.sourceFolder + "/") + this.invokerPackage).replace(".", "/");
+    SupportingFile _supportingFile_25 = new SupportingFile("StringUtil.mustache", _replace_10, 
       "StringUtil.java");
-    String _replace_6 = ((this.testFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_12 = new SupportingFile("CucumberTest.mustache", _replace_6, 
-      "CucumberTest.java");
-    String _replace_7 = ((this.testFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_13 = new SupportingFile("AbstractIntegrationTest.mustache", _replace_7, 
-      "AbstractIntegrationTest.java");
-    String _replace_8 = ((this.testFolder + "/") + this.apiPackage).replace(".", "/");
-    SupportingFile _supportingFile_14 = new SupportingFile("AbstractCucumberFeatureSteps.mustache", _replace_8, "AbstractFeatureSteps.java");
-    CollectionExtensions.<SupportingFile>addAll(this.supportingFiles, _supportingFile_7, _supportingFile_8, _supportingFile_9, _supportingFile_10, _supportingFile_11, _supportingFile_12, _supportingFile_13, _supportingFile_14);
+    String _replace_11 = (((this.testFolder + "/") + this.apiPackage) + "/integration").replace(".", "/");
+    SupportingFile _supportingFile_26 = new SupportingFile("test/integration/AbstractIntegrationTest.mustache", _replace_11, "AbstractIntegrationTest.java");
+    String _replace_12 = (((this.testFolder + "/") + this.apiPackage) + "/feature").replace(".", "/");
+    SupportingFile _supportingFile_27 = new SupportingFile("test/feature/CucumberTest.mustache", _replace_12, "CucumberTest.java");
+    String _replace_13 = (((this.testFolder + "/") + this.apiPackage) + "/feature").replace(".", "/");
+    SupportingFile _supportingFile_28 = new SupportingFile("test/feature/AbstractCucumberFeatureSteps.mustache", _replace_13, "AbstractFeatureSteps.java");
+    String _replace_14 = (((this.testFolder + "/") + this.apiPackage) + "/feature").replace(".", "/");
+    SupportingFile _supportingFile_29 = new SupportingFile("test/feature/CommonCucumberFeatureSteps.mustache", _replace_14, "CommonFeatureSteps.java");
+    String _replace_15 = (((this.testFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_30 = new SupportingFile("test/oauth/Common.mustache", _replace_15, "Common.java");
+    String _replace_16 = (((this.testFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_31 = new SupportingFile("test/oauth/ClientServerOAuthTest.mustache", _replace_16, "ClientServerOAuthTest.java");
+    String _replace_17 = (((this.testFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_32 = new SupportingFile("test/oauth/AccessTokenPasswordCredentialsTest.mustache", _replace_17, 
+      "AccessTokenPasswordCredentialsTest.java");
+    String _replace_18 = (((this.testFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_33 = new SupportingFile("test/oauth/AccessTokenTestAuthCodeTest.mustache", _replace_18, "AccessTokenTestAuthCodeTest.java");
+    String _replace_19 = (((this.testFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_34 = new SupportingFile("test/oauth/UnauthenticatedAccessTokenTestAuthCodeTest.mustache", _replace_19, 
+      "UnauthenticatedAccessTokenTestAuthCodeTest.java");
+    String _replace_20 = (((this.testFolder + "/") + this.apiPackage) + "/oauth").replace(".", "/");
+    SupportingFile _supportingFile_35 = new SupportingFile("test/oauth/AccessTokenPasswordCredentialsTest.mustache", _replace_20, 
+      "AccessTokenPasswordCredentialsTest.java");
+    CollectionExtensions.<SupportingFile>addAll(this.supportingFiles, _supportingFile_21, _supportingFile_22, _supportingFile_23, _supportingFile_24, _supportingFile_25, _supportingFile_26, _supportingFile_27, _supportingFile_28, _supportingFile_29, _supportingFile_30, _supportingFile_31, _supportingFile_32, _supportingFile_33, _supportingFile_34, _supportingFile_35);
     boolean _equals = "joda".equals(this.dateLibrary);
     if (_equals) {
-      String _replace_9 = ((this.sourceFolder + "/") + this.invokerPackage).replace(".", "/");
-      SupportingFile _supportingFile_15 = new SupportingFile("JacksonConfig.mustache", _replace_9, 
-        "JacksonConfig.java");
-      String _replace_10 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-      SupportingFile _supportingFile_16 = new SupportingFile("JodaDateTimeProvider.mustache", _replace_10, 
-        "JodaDateTimeProvider.java");
-      String _replace_11 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-      SupportingFile _supportingFile_17 = new SupportingFile("JodaLocalDateProvider.mustache", _replace_11, "JodaLocalDateProvider.java");
-      CollectionExtensions.<SupportingFile>addAll(this.supportingFiles, _supportingFile_15, _supportingFile_16, _supportingFile_17);
+      String _replace_21 = ((this.sourceFolder + "/") + this.invokerPackage).replace(".", "/");
+      SupportingFile _supportingFile_36 = new SupportingFile("JacksonConfig.mustache", _replace_21, "JacksonConfig.java");
+      String _replace_22 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+      SupportingFile _supportingFile_37 = new SupportingFile("JodaDateTimeProvider.mustache", _replace_22, "JodaDateTimeProvider.java");
+      String _replace_23 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+      SupportingFile _supportingFile_38 = new SupportingFile("JodaLocalDateProvider.mustache", _replace_23, "JodaLocalDateProvider.java");
+      CollectionExtensions.<SupportingFile>addAll(this.supportingFiles, _supportingFile_36, _supportingFile_37, _supportingFile_38);
     } else {
       boolean _startsWith = this.dateLibrary.startsWith("java8");
       if (_startsWith) {
-        String _replace_12 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-        SupportingFile _supportingFile_18 = new SupportingFile("OffsetDateTimeProvider.mustache", _replace_12, "OffsetDateTimeProvider.java");
-        String _replace_13 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
-        SupportingFile _supportingFile_19 = new SupportingFile("LocalDateProvider.mustache", _replace_13, 
-          "LocalDateProvider.java");
-        CollectionExtensions.<SupportingFile>addAll(this.supportingFiles, _supportingFile_18, _supportingFile_19);
+        String _replace_24 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+        SupportingFile _supportingFile_39 = new SupportingFile("OffsetDateTimeProvider.mustache", _replace_24, "OffsetDateTimeProvider.java");
+        String _replace_25 = ((this.sourceFolder + "/") + this.apiPackage).replace(".", "/");
+        SupportingFile _supportingFile_40 = new SupportingFile("LocalDateProvider.mustache", _replace_25, "LocalDateProvider.java");
+        CollectionExtensions.<SupportingFile>addAll(this.supportingFiles, _supportingFile_39, _supportingFile_40);
       }
     }
   }
@@ -130,7 +177,8 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
         String _plus = (_substring + "/integration/");
         String _initialCaps = this.initialCaps(tag);
         String _plus_1 = (_plus + _initialCaps);
-        String _plus_2 = (_plus_1 + "ApiIntegrationTest.java");
+        String _plus_2 = (_plus_1 + 
+          "ApiIntegrationTest.java");
         result = _plus_2;
         String _apiFileFolder = this.apiFileFolder();
         String _apiPackage = this.apiPackage();
@@ -164,7 +212,8 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
             String _plus_11 = (_plus_10 + "/");
             String _initialCaps_1 = this.initialCaps(tag);
             String _plus_12 = (_plus_11 + _initialCaps_1);
-            String _plus_13 = (_plus_12 + "ApiFeatureSteps.java");
+            String _plus_13 = (_plus_12 + 
+              "ApiFeatureSteps.java");
             result = _plus_13;
             String _apiFileFolder_2 = this.apiFileFolder();
             String _apiPackage_1 = this.apiPackage();

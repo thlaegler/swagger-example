@@ -15,9 +15,9 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>com.itemis.swagger:rest-api</include>
+                <include>com.itemis.swagger:swagger-example-api</include>
             </includes>
-            <outputFileNameMapping>rest-api.war</outputFileNameMapping>
+            <outputFileNameMapping>swagger-example-api.war</outputFileNameMapping>
         </dependencySet>
     </dependencySets>
 </assembly>

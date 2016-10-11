@@ -8,7 +8,7 @@ Example project, which uses Swagger, Xtend, some Maven plugins and 'mvn generate
 * Build projects including documentation:
 		
 	mvn install site
-* Run generated WAR (/rest-api/target/rest-api.war) on Server (JBoss, Tomcat, Jetty etc.)
+* Run generated WAR (/swagger-example-api/target/swagger-example-api.war) on Server (JBoss, Tomcat, Jetty etc.)
 * Have a look at generated API documentation: http://localhost:8080/example/index.html
 * Develop against your REST API: http://localhost:8080/example/rest/somethings
 * Run and test your REST API in Docker image:

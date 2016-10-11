@@ -40,6 +40,21 @@
 		<finalName>${project.artifactId}</finalName>
 
 		<plugins>
+			<!-- Necessary for Heroku -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -389,13 +404,6 @@
 							<failOnError>false</failOnError>
 						</configuration>
 					</reportSet>
-					<!-- <reportSet> <id>pdf2</id> <reports> <report>javadoc</report> <report>test-javadoc</report> 
-						</reports> <configuration> <name>JavaDoc PDF</name> <description>PDF document 
-						of JavaDoc (com.tarsec.javadoc.pdfdoclet).</description> <destDir>pdf2</destDir> 
-						<doclet>com.tarsec.javadoc.pdfdoclet.PDFDoclet</doclet> <docletPath>${project.basedir}/assets/doclet/pdf/pdfdoclet-1.0.3-all.jar</docletPath> 
-						<useStandardDocletOptions>false</useStandardDocletOptions> <show>private</show> 
-						<additionalparam>-pdf javadoc.pdf ${javadoc.opts}</additionalparam> <failOnError>false</failOnError> 
-						</configuration> </reportSet> -->
 					<!-- JavaDoc DocCheck -->
 					<!-- <reportSet> <id>doccheck</id> <reports> <report>javadoc</report> 
 						<report>test-javadoc</report> </reports> <configuration> <name>${project.name}</name> 
@@ -565,28 +573,6 @@
 						<doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet> <docletArtifact> <groupId>gr.spinellis</groupId> 
 						<artifactId>UmlGraph</artifactId> <version>4.6</version> </docletArtifact> 
 						<show>private</show> <failOnError>false</failOnError> </configuration> </reportSet> -->
-					<!-- <reportSet> <id>doccheck</id> <configuration> <doclet>com.sun.tools.doclets.doccheck.DocCheck</doclet> 
-						<docletPath>/path/to/doccheck.jar</docletPath> <docletArtifact> <groupId>com.sun.tools.doclets</groupId> 
-						<artifactId>doccheck</artifactId> <version>1.2b2</version> </docletArtifact> 
-						<additionalparam> -d ${site.web.path}/doccheck </additionalparam> <destDir>doccheck</destDir> 
-						<name>DocCheck</name> <description>DocCheck documentation.</description> 
-						<configuration> <destDir>${basedir}/docs/generated/javadoc/doccheck</destDir> 
-						</configuration> </configuration> <reports> <report>javadoc</report> </reports> 
-						</reportSet> -->
-					<!-- <reportSet> <id>custom-javadoc</id> <configuration> <doctitle>My 
-						API for ${project.name} ${project.version}</doctitle> <windowtitle>My API 
-						for ${project.name} ${project.version}</windowtitle> <testDoctitle>My Test 
-						API for ${project.name} ${project.version}</testDoctitle> <testWindowtitle>My 
-						Test API for ${project.name} ${project.version}</testWindowtitle> <reportOutputDirectory>${basedir}/docs/generated/report</reportOutputDirectory> 
-						<docletArtifact> <groupId>org.umlgraph</groupId> <artifactId>doclet</artifactId> 
-						<version>5.1</version> </docletArtifact> <useStandardDocletOptions>true</useStandardDocletOptions> 
-						<destDir>javadoc/pdfuml</destDir> <outputDirectory>javadoc/pdfuml</outputDirectory> 
-						<excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
-						</configuration> <reports> <report>javadoc</report> </reports> </reportSet> -->
-					<!-- <reportSet> <id>aggregate</id> <configuration> <destDir>javadoc/aggregate</destDir> 
-						<additionalparam>-Xdoclint:none</additionalparam> <excludePackageNames>target.generated-sources.annotations</excludePackageNames> 
-						</configuration> <inherited>false</inherited> <reports> <report>aggregate</report> 
-						</reports> </reportSet> -->
 				</reportSets>
 			</plugin>
 			<!-- Dependency Graph. GraphViz must be installed -->
@@ -599,9 +585,14 @@
 				</configuration>
 			</plugin>
 			<!-- Dependency Graph with GraphViz -->
-			<!-- <plugin> <groupId>us.bryon</groupId> <artifactId>graphviz-maven-plugin</artifactId> 
-				<version>1.0</version> <configuration> <basedir>${site.web.path}</basedir> 
-				</configuration> </plugin> -->
+			<plugin>
+				<groupId>us.bryon</groupId>
+				<artifactId>graphviz-maven-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<basedir>${site.web.path}</basedir>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
@@ -715,36 +706,74 @@
 									<groupId>${project.groupId}</groupId>
 									<artifactId>${api.project}</artifactId>
 									<artifactVersion>${project.version}</artifactVersion>
-									<apiPackage>${project.groupId}.api.handler</apiPackage>
-									<modelPackage>${project.groupId}.api.model</modelPackage>
-									<invokerPackage>${project.groupId}.api.invoker</invokerPackage>
+									<apiPackage>${project.groupId}.handler</apiPackage>
+									<modelPackage>${project.groupId}.model</modelPackage>
+									<invokerPackage>${project.groupId}.invoker</invokerPackage>
 									<!-- <verbose>true</verbose> -->
 									<!-- <configHelp>true</configHelp> -->
 								</configuration>
 							</execution>
 							<!-- Generate Java REST client -->
-							<!-- <execution> <id>client</id> <phase>generate-sources</phase> <goals> 
-								<goal>generate</goal> </goals> <configuration> <language>java</language> 
-								<inputSpec>${swagger.file}</inputSpec> <output>${project.basedir}/../${client.project}</output> 
-								<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
-								<artifactId>${client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
-								<apiPackage>${project.groupId}.api.handler</apiPackage> <modelPackage>${project.groupId}.api.model</modelPackage> 
-								<invokerPackage>${project.groupId}.api.invoker</invokerPackage> <verbose>true</verbose> 
-								</configuration> </execution> -->
+							<execution>
+								<id>client</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>java</language>
+									<inputSpec>${swagger.file}</inputSpec>
+									<output>${project.basedir}/../${client.project}</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${client.project}</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<apiPackage>${project.groupId}.handler</apiPackage>
+									<modelPackage>${project.groupId}.model</modelPackage>
+									<invokerPackage>${project.groupId}.invoker</invokerPackage>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
 							<!-- Generate Android REST client -->
-							<!-- <execution> <id>android</id> <phase>generate-sources</phase> 
-								<goals> <goal>generate</goal> </goals> <configuration> <language>android</language> 
-								<inputSpec>${swagger.file}</inputSpec> <output>${project.basedir}/../${android.client.project}</output> 
-								<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
-								<artifactId>${android.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
-								<verbose>true</verbose> <library>retrofit2</library> </configuration> </execution> -->
+							<execution>
+								<id>android</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>android</language>
+									<inputSpec>${swagger.file}</inputSpec>
+									<output>${project.basedir}/../${android.client.project}</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${android.client.project}</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<!-- <library>retrofit</library> -->
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
 							<!-- Generate iOS REST client -->
-							<!-- <execution> <id>ios</id> <phase>generate-sources</phase> <goals> 
-								<goal>generate</goal> </goals> <configuration> <language>csharp</language> 
-								<inputSpec>${swagger.file}</inputSpec> <output>${project.basedir}/../${ios.client.project}</output> 
-								<addCompileSourceRoot>false</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
-								<artifactId>${ios.client.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
-								<verbose>true</verbose> </configuration> </execution> -->
+							<execution>
+								<id>ios</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>csharp</language>
+									<inputSpec>${swagger.file}</inputSpec>
+									<output>${project.basedir}/../${ios.client.project}</output>
+									<addCompileSourceRoot>false</addCompileSourceRoot>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${ios.client.project}</artifactId>
+									<artifactVersion>${project.version}</artifactVersion>
+									<!-- <verbose>true</verbose> -->
+									<!-- <configHelp>true</configHelp> -->
+								</configuration>
+							</execution>
 							<!-- Generate simple HTML documentation -->
 							<execution>
 								<id>html</id>
@@ -1072,7 +1101,7 @@
 							<images>
 								<image>
 									<alias>${project.groupId}.${project.artifactId}</alias>
-									<name>example/rest-api</name>
+									<name>example/swagger-example-api</name>
 									<build>
 										<from>jboss/wildfly</from>
 										<maintainer>thlaegler</maintainer>
@@ -1228,7 +1257,7 @@
 							<deployables>
 								<deployable>
 									<groupId>com.itemis.swagger</groupId>
-									<artifactId>rest-api</artifactId>
+									<artifactId>swagger-example-api</artifactId>
 									<type>war</type>
 									<properties>
 										<context>/example</context>
@@ -1272,40 +1301,14 @@
 		</profile>
 	</profiles>
 
-	<dependencies>
-		<!-- <dependency> <groupId>${project.groupId}</groupId> <artifactId>swagger-generator</artifactId> 
-			<version>${project.version}</version> </dependency> -->
 
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+	<dependencies>
 		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-core</artifactId>
-			<version>${swagger-core-version}</version>
-			<!-- Workaround: http://stackoverflow.com/questions/27694804/beanparam-in-swagger-with-resteasy-3-0-and-wildfly-8-0 -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId>jersey-server</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId>jersey-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId>jersey-common</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.glassfish.jersey.media</groupId>
-					<artifactId>jersey-media-multipart</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-models</artifactId>
-			<version>${swagger-core-version}</version>
+			<groupId>org.wildfly.bom</groupId>
+			<artifactId>wildfly-javaee7</artifactId>
+			<version>10.1.0.Final</version>
+			<type>pom</type>
+			<scope>import</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
 		<dependency>
@@ -1313,46 +1316,43 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>${swagger-core-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-jersey2-jaxrs -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jersey2-jaxrs</artifactId>
-			<version>${swagger-core-version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId>jersey-server</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId>jersey-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.glassfish.jersey.core</groupId>
-					<artifactId>jersey-common</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.glassfish.jersey.media</groupId>
-					<artifactId>jersey-media-multipart</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-servlet -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-servlet</artifactId>
-			<version>${swagger-core-version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-generator -->
-		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-generator</artifactId> 
-			<version>2.2.1</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-codegen -->
-		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-codegen</artifactId> 
-			<version>2.2.1</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-parser -->
-		<!-- <dependency> <groupId>io.swagger</groupId> <artifactId>swagger-parser</artifactId> 
-			<version>1.0.22</version> </dependency> -->
 
+		<!-- URL Rewrite -->
+		<!-- https://mvnrepository.com/artifact/org.tuckey/urlrewritefilter -->
+		<!-- <dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>4.0.4</version>
+			<scope>runtime</scope>
+		</dependency> -->
+
+		<!-- Apache Oltu OAuth2 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.common -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.common</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.resourceserver -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.authzserver -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.client -->
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.client</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+
+		<!-- Android Dependencies -->
 		<!-- <dependency> <groupId>com.squareup.retrofit2</groupId> <artifactId>converter-gson</artifactId> 
 			<version>${retrofit.version}</version> </dependency> <dependency> <groupId>com.squareup.retrofit2</groupId> 
 			<artifactId>retrofit</artifactId> <version>${retrofit.version}</version> 
@@ -1392,54 +1392,38 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${servlet-api-version}</version>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>${resteasy-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>jaxrs-api</artifactId>
-			<version>${resteasy-version}</version>
+			<!-- <version>3.0.14.Final</version> -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-validator-provider-11</artifactId>
-			<version>${resteasy-version}</version>
-			<scope>provided</scope>
+			<!-- <version>${resteasy-version}</version> -->
+			<!-- <scope>provided</scope> -->
 		</dependency>
+		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jackson2-provider</artifactId> 
+			<version>2.5.1</version> <exclusions> <exclusion> <groupId>com.fasterxml.jackson.jaxrs</groupId> 
+			<artifactId>jackson-jaxrs-base</artifactId> </exclusion> </exclusions> </dependency> -->
+		<!-- <dependency> <groupId>com.fasterxml.jackson.jaxrs</groupId> <artifactId>jackson-jaxrs-json-provider</artifactId> 
+			<version>2.5.1</version> <scope>provided</scope> </dependency> -->
+		<!-- <dependency> <groupId>javax.annotation</groupId> <artifactId>javax.annotation-api</artifactId> 
+			<version>1.2</version> <scope>provided</scope> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-multipart-provider</artifactId>
-			<version>${resteasy-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jackson2-provider</artifactId>
-			<version>${resteasy-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>1.2</version>
-			<scope>provided</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.5.4</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
-			<version>2.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.7</version>
-		</dependency>
+
+		<!-- <dependency> <groupId>com.fasterxml.jackson.datatype</groupId> <artifactId>jackson-datatype-joda</artifactId> 
+			<version>2.4.1</version> </dependency> <dependency> <groupId>joda-time</groupId> 
+			<artifactId>joda-time</artifactId> <version>2.7</version> </dependency> -->
 
 		<!-- TEST -->
 		<!-- JUnit -->
