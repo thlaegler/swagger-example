@@ -4,7 +4,7 @@
   outputName="site">
 
   <meta>
-    <title>Itemis Swagger Example REST API</title>
+    <title>Example Swagger Example REST API</title>
     <author>Thomas Laegler</author>
   </meta>
 
@@ -20,12 +20,12 @@
   </toc>
 
   <cover>
-    <coverTitle>Itemis Swagger Example REST API</coverTitle>
+    <coverTitle>Example Swagger Example REST API</coverTitle>
     <coverSubTitle>${project.name} - ${project.version}</coverSubTitle>
     <coverType>User Guide</coverType>
     <projectName>${project.name}</projectName>
     <projectLogo>http://maven.apache.org/images/maventxt_logo_200.gif</projectLogo>
-    <companyName>Itemis</companyName>
-    <companyLogo>https://www.itemis.com/hs-fs/hubfs/Itemis_Logos/Itemis-Marke-200.png</companyLogo>
+    <companyName>Example</companyName>
+    <companyLogo>https://www.example.com/hs-fs/hubfs/Example_Logos/Example-Marke-200.png</companyLogo>
   </cover>
 </document>

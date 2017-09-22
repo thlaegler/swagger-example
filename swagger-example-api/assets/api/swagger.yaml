@@ -112,11 +112,11 @@ paths:
       - Foo
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - in: body
@@ -150,11 +150,11 @@ paths:
       - Foo
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - in: body
@@ -197,7 +197,7 @@ paths:
       - Foo
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - in: body
@@ -232,7 +232,7 @@ paths:
       - Foo
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       responses:
         200:
@@ -255,11 +255,11 @@ paths:
       - Foo
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - name: id

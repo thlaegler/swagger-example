@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.itemis.swagger</groupId>
+	<groupId>com.laegler.swagger</groupId>
 	<artifactId>swagger-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Itemis Swagger Parent</name>
+	<name>Example Swagger Parent</name>
 	<description>Example project, which uses Swagger, Xtend, some Maven plugins and 'mvn generate-sources site' to generate REST Projects (Java REST API, Java REST client, Android REST client and iOS client) and documentation (REST API Doc, JavaDoc, Maven Site, DocBook, PDF etc.) from YAML.</description>
 
 	<modules>
@@ -54,10 +54,10 @@
 		<javadoc.opts></javadoc.opts>
 	</properties>
 
-	<url>http://www.itemis.com</url>
+	<url>http://thlaegler.github.io/</url>
 	<organization>
-		<name>Itemis</name>
-		<url>http://www.itemis.com</url>
+		<name>thlaegler</name>
+		<url>http://thlaegler.github.io/</url>
 	</organization>
 	<licenses>
 		<license>
@@ -66,25 +66,19 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
 		</license>
 	</licenses>
-	<mailingLists>
-		<mailingList>
-			<name>Example Project Mailing</name>
-			<post>example@itemis.com</post>
-		</mailingList>
-	</mailingLists>
 	<inceptionYear>2016</inceptionYear>
 	<developers>
 		<developer>
 			<id>thlaegler</id>
-			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.de</organizationUrl>
+			<organization>thlaegler</organization>
+			<organizationUrl>http://thlaegler.github.io/</organizationUrl>
 			<name>Thomas Laegler</name>
-			<email>thomas.laegler@googlemail.com</email>
+			<email>thomas.laegler@xxx.com</email>
 			<roles>
 				<role>Architect</role>
 				<role>Developer</role>
 			</roles>
-			<timezone>Germany/Hamburg</timezone>
+			<timezone>Germany/New Zealand</timezone>
 		</developer>
 	</developers>
 	<issueManagement>

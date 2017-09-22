@@ -1,7 +1,7 @@
 apply plugin: 'war'
 
 project.version = "0.0.1-SNAPSHOT"
-project.group = "com.itemis.swagger"
+project.group = "com.laegler.swagger"
 
 repositories {
     mavenCentral()

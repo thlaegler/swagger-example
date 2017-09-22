@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>swagger-generator</artifactId>
-	<name>Itemis Swagger Generator</name>
+	<name>Example Swagger Generator</name>
 	<description>Customization of RESTeasy CodeGen.</description>
 
 	<parent>
-		<groupId>com.itemis.swagger</groupId>
+		<groupId>com.laegler.swagger</groupId>
 		<artifactId>swagger-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>

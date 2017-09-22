@@ -1,4 +1,4 @@
-package com.itemis.swagger.generator
+package com.laegler.swagger.generator
 
 import io.swagger.codegen.CodegenModel
 import io.swagger.codegen.CodegenParameter
@@ -38,9 +38,9 @@ import org.slf4j.LoggerFactory
 /**
  * 
  */
-class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
+class ExampleServerMainCodegen extends JavaResteasyServerCodegen {
 
-	protected static final Logger LOGGER = LoggerFactory.getLogger(ItemisServerMainCodegen);
+	protected static final Logger LOGGER = LoggerFactory.getLogger(ExampleServerMainCodegen);
 
 	protected Map<String, String> apiIntegrationTestTemplateFiles = new HashMap<String, String>();
 	protected Map<String, String> apiFeatureStepsTemplateFiles = new HashMap<String, String>();
@@ -160,8 +160,8 @@ class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
 		}
 	}
 
-	def void addOperationToGroup(String tag, String resourcePath, Operation operation, ItemisCodegenOperation co,
-		Map<String, List<ItemisCodegenOperation>> operations) {
+	def void addOperationToGroup(String tag, String resourcePath, Operation operation, ExampleCodegenOperation co,
+		Map<String, List<ExampleCodegenOperation>> operations) {
 		var String basePath = resourcePath
 		if (basePath.startsWith('/')) {
 			basePath = basePath.substring(1)
@@ -179,9 +179,9 @@ class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
 			}
 			co.subresourceOperation = !co.path.isEmpty()
 		}
-		var List<ItemisCodegenOperation> opList = operations.get(basePath)
+		var List<ExampleCodegenOperation> opList = operations.get(basePath)
 		if (opList == null) {
-			opList = new ArrayList<ItemisCodegenOperation>
+			opList = new ArrayList<ExampleCodegenOperation>
 			operations.put(basePath, opList)
 		}
 		opList.add(co)
@@ -191,8 +191,8 @@ class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
 	override def Map<String, Object> postProcessOperations(Map<String, Object> objs) {
 		val Map<String, Object> operations = objs.get('operations') as Map<String, Object>
 		if (operations != null) {
-			val List<ItemisCodegenOperation> ops = operations.get('operation') as List<ItemisCodegenOperation>
-			for (ItemisCodegenOperation operation : ops) {
+			val List<ExampleCodegenOperation> ops = operations.get('operation') as List<ExampleCodegenOperation>
+			for (ExampleCodegenOperation operation : ops) {
 				if (operation.hasConsumes == Boolean.TRUE) {
 					val Map<String, String> firstType = operation.consumes.get(0)
 					if (firstType != null) {
@@ -280,10 +280,10 @@ class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
 	 * @param swagger a Swagger object representing the spec
 	 * @return Codegen Operation object
 	 */
-	override ItemisCodegenOperation fromOperation(String path, String httpMethod, Operation operation,
+	override ExampleCodegenOperation fromOperation(String path, String httpMethod, Operation operation,
 		Map<String, Model> definitions, Swagger swagger) {
-//        val ItemisCodegenOperation op = CodegenModelFactory.newInstance(CodegenModelType.OPERATION);
-		val ItemisCodegenOperation op = new ItemisCodegenOperation
+//        val ExampleCodegenOperation op = CodegenModelFactory.newInstance(CodegenModelType.OPERATION);
+		val ExampleCodegenOperation op = new ExampleCodegenOperation
 		val Set<String> imports = new HashSet<String>();
 		op.vendorExtensions = operation.getVendorExtensions()
 

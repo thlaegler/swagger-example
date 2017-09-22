@@ -1,4 +1,4 @@
-package com.itemis.swagger.generator;
+package com.laegler.swagger.generator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,10 +68,10 @@ import io.swagger.models.parameters.Parameter;
 import io.swagger.parser.SwaggerParser;
 import io.swagger.util.Json;
 
-public class ItemisMainGenerator extends Codegen {
-	protected static Logger LOGGER = LoggerFactory.getLogger(ItemisMainGenerator.class);
+public class ExampleMainGenerator extends Codegen {
+	protected static Logger LOGGER = LoggerFactory.getLogger(ExampleMainGenerator.class);
 
-	protected ItemisServerMainCodegen config;
+	protected ExampleServerMainCodegen config;
 	protected ClientOptInput opts;
 	protected Swagger swagger;
 	protected CodegenIgnoreProcessor ignoreProcessor;
@@ -81,7 +81,7 @@ public class ItemisMainGenerator extends Codegen {
 		this.opts = opts;
 
 		this.swagger = opts.getSwagger();
-		this.config = (ItemisServerMainCodegen) opts.getConfig();
+		this.config = (ExampleServerMainCodegen) opts.getConfig();
 
 		this.config.additionalProperties().putAll(opts.getOpts().getProperties());
 
@@ -445,10 +445,10 @@ public class ItemisMainGenerator extends Codegen {
 		}
 
 		// apis
-		Map<String, List<ItemisCodegenOperation>> paths = processPaths2(swagger.getPaths());
+		Map<String, List<ExampleCodegenOperation>> paths = processPaths2(swagger.getPaths());
 		if (generateApis) {
 			if (apisToGenerate != null && apisToGenerate.size() > 0) {
-				Map<String, List<ItemisCodegenOperation>> updatedPaths = new TreeMap<String, List<ItemisCodegenOperation>>();
+				Map<String, List<ExampleCodegenOperation>> updatedPaths = new TreeMap<String, List<ExampleCodegenOperation>>();
 				for (String m : paths.keySet()) {
 					if (apisToGenerate.contains(m)) {
 						updatedPaths.put(m, paths.get(m));
@@ -458,10 +458,10 @@ public class ItemisMainGenerator extends Codegen {
 			}
 			for (String tag : paths.keySet()) {
 				try {
-					List<ItemisCodegenOperation> ops = paths.get(tag);
-					Collections.sort(ops, new Comparator<ItemisCodegenOperation>() {
+					List<ExampleCodegenOperation> ops = paths.get(tag);
+					Collections.sort(ops, new Comparator<ExampleCodegenOperation>() {
 						@Override
-						public int compare(ItemisCodegenOperation one, ItemisCodegenOperation another) {
+						public int compare(ExampleCodegenOperation one, ExampleCodegenOperation another) {
 							return ObjectUtils.compare(one.operationId, another.operationId);
 						}
 					});
@@ -785,8 +785,8 @@ public class ItemisMainGenerator extends Codegen {
 		}
 	}
 
-	public Map<String, List<ItemisCodegenOperation>> processPaths2(Map<String, Path> paths) {
-		Map<String, List<ItemisCodegenOperation>> ops = new TreeMap<String, List<ItemisCodegenOperation>>();
+	public Map<String, List<ExampleCodegenOperation>> processPaths2(Map<String, Path> paths) {
+		Map<String, List<ExampleCodegenOperation>> ops = new TreeMap<String, List<ExampleCodegenOperation>>();
 
 		for (String resourcePath : paths.keySet()) {
 			Path path = paths.get(resourcePath);
@@ -811,7 +811,7 @@ public class ItemisMainGenerator extends Codegen {
 	}
 
 	public void processOperation2(String resourcePath, String httpMethod, Operation operation,
-			Map<String, List<ItemisCodegenOperation>> operations, Path path) {
+			Map<String, List<ExampleCodegenOperation>> operations, Path path) {
 		if (operation != null) {
 			if (System.getProperty("debugOperations") != null) {
 				LOGGER.info("processOperation: resourcePath= " + resourcePath + "\t;" + httpMethod + " " + operation
@@ -848,7 +848,7 @@ public class ItemisMainGenerator extends Codegen {
 			}
 
 			for (String tag : tags) {
-				ItemisCodegenOperation co = null;
+				ExampleCodegenOperation co = null;
 				try {
 					co = config.fromOperation(resourcePath, httpMethod, operation, swagger.getDefinitions(), swagger);
 					co.tags = new ArrayList<String>();
@@ -912,7 +912,7 @@ public class ItemisMainGenerator extends Codegen {
 	}
 
 	@SuppressWarnings("static-method")
-	public Map<String, Object> processOperations2(CodegenConfig config, String tag, List<ItemisCodegenOperation> ops) {
+	public Map<String, Object> processOperations2(CodegenConfig config, String tag, List<ExampleCodegenOperation> ops) {
 		Map<String, Object> operations = new HashMap<String, Object>();
 		Map<String, Object> objs = new HashMap<String, Object>();
 		objs.put("classname", config.toApiName(tag));
@@ -921,7 +921,7 @@ public class ItemisMainGenerator extends Codegen {
 		// check for operationId uniqueness
 		Set<String> opIds = new HashSet<String>();
 		int counter = 0;
-		for (ItemisCodegenOperation op : ops) {
+		for (ExampleCodegenOperation op : ops) {
 			String opId = op.nickname;
 			if (opIds.contains(opId)) {
 				counter++;
@@ -935,7 +935,7 @@ public class ItemisMainGenerator extends Codegen {
 		operations.put("package", config.apiPackage());
 
 		Set<String> allImports = new LinkedHashSet<String>();
-		for (ItemisCodegenOperation op : ops) {
+		for (ExampleCodegenOperation op : ops) {
 			allImports.addAll(op.imports);
 		}
 
@@ -961,10 +961,10 @@ public class ItemisMainGenerator extends Codegen {
 
 		config.postProcessOperations(operations);
 		if (objs.size() > 0) {
-			List<ItemisCodegenOperation> os = (List<ItemisCodegenOperation>) objs.get("operation");
+			List<ExampleCodegenOperation> os = (List<ExampleCodegenOperation>) objs.get("operation");
 
 			if (os != null && os.size() > 0) {
-				ItemisCodegenOperation op = os.get(os.size() - 1);
+				ExampleCodegenOperation op = os.get(os.size() - 1);
 				op.hasMore = null;
 			}
 		}

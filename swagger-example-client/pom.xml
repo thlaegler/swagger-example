@@ -8,7 +8,7 @@
 	<description>This Project contains the generated Swagger REST Client</description>
 
 	<parent>
-		<groupId>com.itemis.swagger</groupId>
+		<groupId>com.laegler.swagger</groupId>
 		<artifactId>swagger-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
