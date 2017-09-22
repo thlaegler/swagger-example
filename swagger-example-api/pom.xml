@@ -4,11 +4,11 @@
 
 	<artifactId>swagger-example-api</artifactId>
 	<packaging>war</packaging>
-	<name>Itemis Swagger Example REST API</name>
+	<name>Example Swagger Example REST API</name>
 	<description>This Project contains the generated Swagger REST API</description>
 
 	<parent>
-		<groupId>com.itemis.swagger</groupId>
+		<groupId>com.laegler.swagger</groupId>
 		<artifactId>swagger-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -665,12 +665,12 @@
 						<invokerPackage>${project.groupId}.api2.invoker</invokerPackage> </configuration> 
 						<executions> <execution> <id>yaml2json</id> <goals> <goal>codegen</goal> 
 						</goals> </execution> </executions> </plugin> -->
-					<!-- Itemis Swagger Plugin -->
+					<!-- Example Swagger Plugin -->
 					<!-- <plugin> <groupId>${project.groupId}</groupId> <artifactId>swagger-maven-plugin</artifactId> 
 						<version>${project.version}</version> <dependencies> <dependency> <groupId>${project.groupId}</groupId> 
 						<artifactId>swagger-generator</artifactId> <version>${project.version}</version> 
 						</dependency> </dependencies> <executions> <execution> <id>api</id> <phase>generate-sources</phase> 
-						<goals> <goal>generate</goal> </goals> <configuration> <language>${project.groupId}.generator.ItemisServerMainCodegen</language> 
+						<goals> <goal>generate</goal> </goals> <configuration> <language>${project.groupId}.generator.ExampleServerMainCodegen</language> 
 						<inputSpec>${swagger.file}</inputSpec> <output>${project.basedir}</output> 
 						<addCompileSourceRoot>true</addCompileSourceRoot> <groupId>${project.groupId}</groupId> 
 						<artifactId>${api.project}</artifactId> <artifactVersion>${project.version}</artifactVersion> 
@@ -699,7 +699,7 @@
 								</goals>
 								<configuration>
 									<!-- Custom API Mock Generator -->
-									<language>${project.groupId}.generator.ItemisServerCodegen</language>
+									<language>${project.groupId}.generator.ExampleServerCodegen</language>
 									<inputSpec>${swagger.file}</inputSpec>
 									<output>${project.basedir}</output>
 									<addCompileSourceRoot>true</addCompileSourceRoot>
@@ -1256,7 +1256,7 @@
 							</configuration>
 							<deployables>
 								<deployable>
-									<groupId>com.itemis.swagger</groupId>
+									<groupId>com.laegler.swagger</groupId>
 									<artifactId>swagger-example-api</artifactId>
 									<type>war</type>
 									<properties>

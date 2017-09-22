@@ -15,7 +15,7 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>com.itemis.swagger:swagger-example-api</include>
+                <include>com.laegler.swagger:swagger-example-api</include>
             </includes>
             <outputFileNameMapping>swagger-example-api.war</outputFileNameMapping>
         </dependencySet>

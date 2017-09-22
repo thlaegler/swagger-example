@@ -1,8 +1,8 @@
-package com.itemis.swagger.generator
+package com.laegler.swagger.generator
 
 import io.swagger.codegen.CodegenOperation
 
-class ItemisCodegenOperation extends CodegenOperation {
+class ExampleCodegenOperation extends CodegenOperation {
 
 	public String httpMethodLowerCase
 	public String description

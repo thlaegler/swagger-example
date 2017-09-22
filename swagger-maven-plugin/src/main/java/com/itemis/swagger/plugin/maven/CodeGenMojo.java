@@ -1,4 +1,4 @@
-package com.itemis.swagger.plugin.maven;
+package com.laegler.swagger.plugin.maven;
 
 import static io.swagger.codegen.config.CodegenConfiguratorUtils.applyAdditionalPropertiesKvp;
 import static io.swagger.codegen.config.CodegenConfiguratorUtils.applyImportMappingsKvp;
@@ -18,7 +18,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-import com.itemis.swagger.generator.ItemisMainGenerator;
+import com.laegler.swagger.generator.ExampleMainGenerator;
 
 import io.swagger.codegen.CliOption;
 import io.swagger.codegen.ClientOptInput;
@@ -285,7 +285,7 @@ public class CodeGenMojo extends AbstractMojo {
 			return;
 		}
 		try {
-			new ItemisMainGenerator().opts(input).generate();
+			new ExampleMainGenerator().opts(input).generate();
 		} catch (Exception e) {
 			// Maven logs exceptions thrown by plugins only if invoked with -e
 			// I find it annoying to jump through hoops to get basic diagnostic

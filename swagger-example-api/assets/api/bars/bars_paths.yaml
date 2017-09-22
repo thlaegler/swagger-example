@@ -8,11 +8,11 @@
       - Bar
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - in: body
@@ -49,11 +49,11 @@
       - Bar
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - in: body
@@ -93,7 +93,7 @@
       - Bar
       consumes:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       parameters:
       - in: body
@@ -131,7 +131,7 @@
       - Bar
       produces:
       - application/json
-      - application/vnd.com.itemis.swagger.v1+json
+      - application/vnd.com.laegler.swagger.v1+json
       - application/xml
       responses:
         default:

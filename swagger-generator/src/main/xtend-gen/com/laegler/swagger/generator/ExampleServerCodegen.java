@@ -1,6 +1,6 @@
-package com.itemis.swagger.generator;
+package com.laegler.swagger.generator;
 
-import com.itemis.swagger.generator.ItemisCodegenOperation;
+import com.laegler.swagger.generator.ExampleCodegenOperation;
 import io.swagger.codegen.CodegenOperation;
 import io.swagger.codegen.SupportingFile;
 import io.swagger.codegen.languages.JavaResteasyServerCodegen;
@@ -9,19 +9,17 @@ import io.swagger.models.Operation;
 import io.swagger.models.Swagger;
 import java.io.File;
 import java.util.Map;
-import javax.annotation.Generated;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-@Generated("org.eclipse.xtend.core.compiler.XtendGenerator")
-public class ItemisServerCodegen extends JavaResteasyServerCodegen {
-  public ItemisServerCodegen() {
+public class ExampleServerCodegen extends JavaResteasyServerCodegen {
+  public ExampleServerCodegen() {
     super();
     this.artifactId = "swagger-example-api";
-    this.outputFolder = "generated-code/itemis-swagger";
+    this.outputFolder = "generated-code/example-swagger";
     this.apiTemplateFiles.put("apiService.mustache", ".java");
     this.apiTemplateFiles.put("apiServiceImpl.mustache", ".java");
     this.apiTemplateFiles.put("apiServiceFactory.mustache", ".java");
@@ -38,7 +36,7 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
   @Override
   public String getName() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("itemis-swagger");
+    _builder.append("example-swagger");
     return _builder.toString();
   }
   
@@ -171,8 +169,7 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
       boolean _endsWith = templateName.endsWith("IntegrationTest.mustache");
       if (_endsWith) {
         final int ix = result.lastIndexOf("/");
-        String _replace = result.replace("Test", "");
-        result = _replace;
+        result = result.replace("Test", "");
         String _substring = result.substring(0, ix);
         String _plus = (_substring + "/integration/");
         String _initialCaps = this.initialCaps(tag);
@@ -181,11 +178,9 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
           "ApiIntegrationTest.java");
         result = _plus_2;
         String _apiFileFolder = this.apiFileFolder();
-        String _apiPackage = this.apiPackage();
-        String _replace_1 = _apiPackage.replace(".", "/");
-        String _plus_3 = ((this.testFolder + "/") + _replace_1);
-        String _replace_2 = result.replace(_apiFileFolder, _plus_3);
-        result = _replace_2;
+        String _replace = this.apiPackage().replace(".", "/");
+        String _plus_3 = ((this.testFolder + "/") + _replace);
+        result = result.replace(_apiFileFolder, _plus_3);
       } else {
         boolean _endsWith_1 = templateName.endsWith("CucumberFeature.mustache");
         if (_endsWith_1) {
@@ -197,15 +192,12 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
           String _plus_7 = (_plus_6 + tag);
           String _plus_8 = (_plus_7 + ".feature");
           result = _plus_8;
-          String _apiFileFolder_1 = this.apiFileFolder();
-          String _replace_3 = result.replace(_apiFileFolder_1, (this.testFolder + "/feature"));
-          result = _replace_3;
+          result = result.replace(this.apiFileFolder(), (this.testFolder + "/feature"));
         } else {
           boolean _endsWith_2 = templateName.endsWith("CucumberFeatureSteps.mustache");
           if (_endsWith_2) {
             final int ix_2 = result.lastIndexOf("/");
-            String _replace_4 = result.replace("Test", "");
-            result = _replace_4;
+            result = result.replace("Test", "");
             String _substring_2 = result.substring(0, ix_2);
             String _plus_9 = (_substring_2 + "/feature/");
             String _plus_10 = (_plus_9 + tag);
@@ -215,12 +207,10 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
             String _plus_13 = (_plus_12 + 
               "ApiFeatureSteps.java");
             result = _plus_13;
-            String _apiFileFolder_2 = this.apiFileFolder();
-            String _apiPackage_1 = this.apiPackage();
-            String _replace_5 = _apiPackage_1.replace(".", "/");
-            String _plus_14 = ((this.testFolder + "/") + _replace_5);
-            String _replace_6 = result.replace(_apiFileFolder_2, _plus_14);
-            result = _replace_6;
+            String _apiFileFolder_1 = this.apiFileFolder();
+            String _replace_1 = this.apiPackage().replace(".", "/");
+            String _plus_14 = ((this.testFolder + "/") + _replace_1);
+            result = result.replace(_apiFileFolder_1, _plus_14);
           }
         }
       }
@@ -230,16 +220,14 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
   }
   
   @Override
-  public ItemisCodegenOperation fromOperation(final String path, final String httpMethod, final Operation operation, final Map<String, Model> definitions, final Swagger swagger) {
-    ItemisCodegenOperation _xblockexpression = null;
+  public ExampleCodegenOperation fromOperation(final String path, final String httpMethod, final Operation operation, final Map<String, Model> definitions, final Swagger swagger) {
+    ExampleCodegenOperation _xblockexpression = null;
     {
       final CodegenOperation op = super.fromOperation(path, httpMethod, operation, definitions, swagger);
-      ItemisCodegenOperation _itemisCodegenOperation = new ItemisCodegenOperation();
-      final Procedure1<ItemisCodegenOperation> _function = (ItemisCodegenOperation it) -> {
-        String _lowerCase = httpMethod.toLowerCase();
-        it.httpMethodLowerCase = _lowerCase;
-        String _description = operation.getDescription();
-        it.description = _description;
+      ExampleCodegenOperation _exampleCodegenOperation = new ExampleCodegenOperation();
+      final Procedure1<ExampleCodegenOperation> _function = (ExampleCodegenOperation it) -> {
+        it.httpMethodLowerCase = httpMethod.toLowerCase();
+        it.description = operation.getDescription();
         it.allParams = op.allParams;
         it.authMethods = op.authMethods;
         it.baseName = op.baseName;
@@ -285,9 +273,8 @@ public class ItemisServerCodegen extends JavaResteasyServerCodegen {
         it.unescapedNotes = op.unescapedNotes;
         it.vendorExtensions = op.vendorExtensions;
       };
-      final ItemisCodegenOperation iop = ObjectExtensions.<ItemisCodegenOperation>operator_doubleArrow(_itemisCodegenOperation, _function);
-      String _sanitizePath = this.sanitizePath(iop.path);
-      iop.path = _sanitizePath;
+      final ExampleCodegenOperation iop = ObjectExtensions.<ExampleCodegenOperation>operator_doubleArrow(_exampleCodegenOperation, _function);
+      iop.path = this.sanitizePath(iop.path);
       _xblockexpression = iop;
     }
     return _xblockexpression;

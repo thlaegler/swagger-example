@@ -1,4 +1,4 @@
-package com.itemis.swagger.generator
+package com.laegler.swagger.generator
 
 import io.swagger.codegen.SupportingFile
 import io.swagger.codegen.languages.JavaResteasyServerCodegen
@@ -12,14 +12,14 @@ import java.util.Map
 /**
  * 
  */
-class ItemisServerCodegen extends JavaResteasyServerCodegen {
+class ExampleServerCodegen extends JavaResteasyServerCodegen {
 
 	new() {
 		super()
 
 		artifactId = 'swagger-example-api'
 
-		outputFolder = 'generated-code/itemis-swagger'
+		outputFolder = 'generated-code/example-swagger'
 		apiTemplateFiles.put('apiService.mustache', '.java')
 		apiTemplateFiles.put('apiServiceImpl.mustache', '.java')
 		apiTemplateFiles.put('apiServiceFactory.mustache', '.java')
@@ -39,10 +39,10 @@ class ItemisServerCodegen extends JavaResteasyServerCodegen {
 		dateLibrary = 'legacy'; // TODO: change to joda
 		embeddedTemplateDir = templateDir = 'JavaJaxRS' + File.separator + 'resteasy';
 // TODO: Only a few templates are customized.
-//		embeddedTemplateDir = templateDir = '''itemis«File.separator»swagger'''
+//		embeddedTemplateDir = templateDir = '''example«File.separator»swagger'''
 	}
 
-	override String getName() '''itemis-swagger'''
+	override String getName() '''example-swagger'''
 
 	override String getHelp() '''Generates an Example Java JAXRS-Resteasy Server application.'''
 
@@ -175,10 +175,10 @@ class ItemisServerCodegen extends JavaResteasyServerCodegen {
 					result
 				}
 
-				override ItemisCodegenOperation fromOperation(String path, String httpMethod, Operation operation,
+				override ExampleCodegenOperation fromOperation(String path, String httpMethod, Operation operation,
 					Map<String, Model> definitions, Swagger swagger) {
 					val CodegenOperation op = super.fromOperation(path, httpMethod, operation, definitions, swagger)
-					val ItemisCodegenOperation iop = new ItemisCodegenOperation => [
+					val ExampleCodegenOperation iop = new ExampleCodegenOperation => [
 						httpMethodLowerCase = httpMethod.toLowerCase
 						description = operation.description
 						allParams = op.allParams

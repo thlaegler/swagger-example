@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Itemis Swagger Example REST API">
+<project name="Example Swagger REST API">
 	<publishDate position="left" format="dd.MM.yyyy" />
 	<version position="left" />
 	<poweredBy>
-		<logo name="Itemis" href="https://www.itemis.com"
-			img="https://www.itemis.com/hs-fs/hubfs/Itemis_Logos/Itemis-Marke-200.png"
-			position="left" alt="Itemis" border="0" width="50" height="50"
-			target="_blank" title="Itemis" />
+		<logo name="Example" href="https://www.example.com"
+			img="https://www.example.com/hs-fs/hubfs/Example_Logos/Example-Marke-200.png"
+			position="left" alt="Example" border="0" width="50" height="50"
+			target="_blank" title="Example" />
 	</poweredBy>
 
 	<skin>
@@ -21,10 +21,10 @@
 			<brand>
 				<name>
 					<![CDATA[
-			    	<span class="color-highlight">Itemis</span>
+			    	<span class="color-highlight">Example</span>
 			    	]]>
 				</name>
-				<href>http://www.itemis.com</href>
+				<href>http://www.example.com</href>
 			</brand>
 			<breadcrumbs>true</breadcrumbs>
 			<titleTemplate>%2$s | %1$s</titleTemplate>
@@ -40,15 +40,15 @@
 	</custom>
 
 	<bannerRight>
-		<name>Itemis Swagger Example REST API</name>
-		<src>https://www.itemis.com/hs-fs/hubfs/Itemis_Logos/Itemis-Marke-200.png
+		<name>Example Swagger REST API</name>
+		<src>https://www.example.com/hs-fs/hubfs/Example_Logos/Example-Marke-200.png
 		</src>
-		<href>http://www.itemis.com/</href>
+		<href>http://www.example.com/</href>
 	</bannerRight>
 
 	<body>
 		<head>
-			<link rel="author" href="http://www.itemis.com" />
+			<link rel="author" href="http://www.example.com" />
 		</head>
 
 		<menu name="API">

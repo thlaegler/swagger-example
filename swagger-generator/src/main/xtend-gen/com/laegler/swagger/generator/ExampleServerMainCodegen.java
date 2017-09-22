@@ -1,7 +1,7 @@
-package com.itemis.swagger.generator;
+package com.laegler.swagger.generator;
 
 import com.google.common.base.Objects;
-import com.itemis.swagger.generator.ItemisCodegenOperation;
+import com.laegler.swagger.generator.ExampleCodegenOperation;
 import io.swagger.codegen.CodegenModel;
 import io.swagger.codegen.CodegenParameter;
 import io.swagger.codegen.CodegenProperty;
@@ -9,7 +9,6 @@ import io.swagger.codegen.CodegenResponse;
 import io.swagger.codegen.SupportingFile;
 import io.swagger.codegen.examples.ExampleGenerator;
 import io.swagger.codegen.languages.JavaResteasyServerCodegen;
-import io.swagger.models.ExternalDocs;
 import io.swagger.models.Model;
 import io.swagger.models.Operation;
 import io.swagger.models.Response;
@@ -34,16 +33,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.Generated;
 import org.apache.commons.lang3.BooleanUtils;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("all")
-@Generated("org.eclipse.xtend.core.compiler.XtendGenerator")
-public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
-  protected final static Logger LOGGER = LoggerFactory.getLogger(ItemisServerMainCodegen.class);
+public class ExampleServerMainCodegen extends JavaResteasyServerCodegen {
+  protected final static Logger LOGGER = LoggerFactory.getLogger(ExampleServerMainCodegen.class);
   
   protected Map<String, String> apiIntegrationTestTemplateFiles = new HashMap<String, String>();
   
@@ -60,8 +57,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
   }
   
   public String apiIntegrationTestFilename(final String templateName, final String tag) {
-    Map<String, String> _apiIntegrationTestTemplateFiles = this.apiIntegrationTestTemplateFiles();
-    final String suffix = _apiIntegrationTestTemplateFiles.get(templateName);
+    final String suffix = this.apiIntegrationTestTemplateFiles().get(templateName);
     String _apiIntegrationTestFileFolder = this.apiIntegrationTestFileFolder();
     String _plus = (_apiIntegrationTestFileFolder + "/");
     String _apiIntegrationTestFilename = this.toApiIntegrationTestFilename(tag);
@@ -70,8 +66,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
   }
   
   public String apiFeatureStepsFilename(final String templateName, final String tag) {
-    Map<String, String> _apiFeatureStepsTemplateFiles = this.apiFeatureStepsTemplateFiles();
-    final String suffix = _apiFeatureStepsTemplateFiles.get(templateName);
+    final String suffix = this.apiFeatureStepsTemplateFiles().get(templateName);
     String _apiFeatureStepsFileFolder = this.apiFeatureStepsFileFolder();
     String _plus = (_apiFeatureStepsFileFolder + "/");
     String _apiFeatureStepsFilename = this.toApiFeatureStepsFilename(tag);
@@ -99,7 +94,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
     return (_apiName + "FeatureSteps");
   }
   
-  public ItemisServerMainCodegen() {
+  public ExampleServerMainCodegen() {
     super();
     this.testFolder = "src/test/java";
     this.artifactId = "swagger-jaxrs-resteasy-server";
@@ -115,7 +110,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
     this.dateLibrary = "legacy";
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("JavaJaxRS");
-    _builder.append(File.separator, "");
+    _builder.append(File.separator);
     _builder.append("resteasy");
     String _templateDir = (this.templateDir = _builder.toString());
     this.embeddedTemplateDir = _templateDir;
@@ -201,17 +196,15 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
     }
   }
   
-  public void addOperationToGroup(final String tag, final String resourcePath, final Operation operation, final ItemisCodegenOperation co, final Map<String, List<ItemisCodegenOperation>> operations) {
+  public void addOperationToGroup(final String tag, final String resourcePath, final Operation operation, final ExampleCodegenOperation co, final Map<String, List<ExampleCodegenOperation>> operations) {
     String basePath = resourcePath;
     boolean _startsWith = basePath.startsWith("/");
     if (_startsWith) {
-      String _substring = basePath.substring(1);
-      basePath = _substring;
+      basePath = basePath.substring(1);
     }
     int pos = basePath.indexOf("/");
     if ((pos > 0)) {
-      String _substring_1 = basePath.substring(0, pos);
-      basePath = _substring_1;
+      basePath = basePath.substring(0, pos);
     }
     boolean _equals = Objects.equal(basePath, "");
     if (_equals) {
@@ -219,18 +212,16 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
     } else {
       boolean _startsWith_1 = co.path.startsWith(("/" + basePath));
       if (_startsWith_1) {
-        int _length = ("/" + basePath).length();
-        String _substring_2 = co.path.substring(_length);
-        co.path = _substring_2;
+        co.path = co.path.substring(("/" + basePath).length());
       }
       boolean _isEmpty = co.path.isEmpty();
       boolean _not = (!_isEmpty);
       co.subresourceOperation = Boolean.valueOf(_not);
     }
-    List<ItemisCodegenOperation> opList = operations.get(basePath);
+    List<ExampleCodegenOperation> opList = operations.get(basePath);
     boolean _equals_1 = Objects.equal(opList, null);
     if (_equals_1) {
-      ArrayList<ItemisCodegenOperation> _arrayList = new ArrayList<ItemisCodegenOperation>();
+      ArrayList<ExampleCodegenOperation> _arrayList = new ArrayList<ExampleCodegenOperation>();
       opList = _arrayList;
       operations.put(basePath, opList);
     }
@@ -247,16 +238,15 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
       boolean _notEquals = (!Objects.equal(operations, null));
       if (_notEquals) {
         Object _get_1 = operations.get("operation");
-        final List<ItemisCodegenOperation> ops = ((List<ItemisCodegenOperation>) _get_1);
-        for (final ItemisCodegenOperation operation : ops) {
+        final List<ExampleCodegenOperation> ops = ((List<ExampleCodegenOperation>) _get_1);
+        for (final ExampleCodegenOperation operation : ops) {
           {
             boolean _equals = Objects.equal(operation.hasConsumes, Boolean.TRUE);
             if (_equals) {
               final Map<String, String> firstType = operation.consumes.get(0);
               boolean _notEquals_1 = (!Objects.equal(firstType, null));
               if (_notEquals_1) {
-                String _get_2 = firstType.get("mediaType");
-                boolean _equals_1 = "multipart/form-data".equals(_get_2);
+                boolean _equals_1 = "multipart/form-data".equals(firstType.get("mediaType"));
                 if (_equals_1) {
                   operation.isMultipart = Boolean.TRUE;
                 }
@@ -281,10 +271,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
                 final String rt = operation.returnType;
                 final int end = rt.lastIndexOf(">");
                 if ((end > 0)) {
-                  int _length = "List<".length();
-                  String _substring = rt.substring(_length, end);
-                  String _trim = _substring.trim();
-                  operation.returnType = _trim;
+                  operation.returnType = rt.substring("List<".length(), end).trim();
                   operation.returnContainer = "List";
                 }
               } else {
@@ -293,12 +280,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
                   final String rt_1 = operation.returnType;
                   final int end_1 = rt_1.lastIndexOf(">");
                   if ((end_1 > 0)) {
-                    int _length_1 = "Map<".length();
-                    String _substring_1 = rt_1.substring(_length_1, end_1);
-                    String[] _split = _substring_1.split(",");
-                    String _get_3 = _split[1];
-                    String _trim_1 = _get_3.trim();
-                    operation.returnType = _trim_1;
+                    operation.returnType = rt_1.substring("Map<".length(), end_1).split(",")[1].trim();
                     operation.returnContainer = "Map";
                   }
                 } else {
@@ -307,10 +289,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
                     final String rt_2 = operation.returnType;
                     final int end_2 = rt_2.lastIndexOf(">");
                     if ((end_2 > 0)) {
-                      int _length_2 = "Set<".length();
-                      String _substring_2 = rt_2.substring(_length_2, end_2);
-                      String _trim_2 = _substring_2.trim();
-                      operation.returnType = _trim_2;
+                      operation.returnType = rt_2.substring("Set<".length(), end_2).trim();
                       operation.returnContainer = "Set";
                     }
                   }
@@ -353,11 +332,9 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
           Object _get_2 = mo.get("model");
           final CodegenModel cm = ((CodegenModel) _get_2);
           if ((Boolean.TRUE.equals(cm.isEnum) && (!Objects.equal(cm.allowableValues, null)))) {
-            String _get_3 = this.importMapping.get("JsonValue");
-            cm.imports.add(_get_3);
+            cm.imports.add(this.importMapping.get("JsonValue"));
             final Map<String, String> item = new HashMap<String, String>();
-            String _get_4 = this.importMapping.get("JsonValue");
-            item.put("import", _get_4);
+            item.put("import", this.importMapping.get("JsonValue"));
             imports.add(item);
           }
         }
@@ -378,53 +355,40 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
    * @return Codegen Operation object
    */
   @Override
-  public ItemisCodegenOperation fromOperation(final String path, final String httpMethod, final Operation operation, final Map<String, Model> definitions, final Swagger swagger) {
-    final ItemisCodegenOperation op = new ItemisCodegenOperation();
+  public ExampleCodegenOperation fromOperation(final String path, final String httpMethod, final Operation operation, final Map<String, Model> definitions, final Swagger swagger) {
+    final ExampleCodegenOperation op = new ExampleCodegenOperation();
     final Set<String> imports = new HashSet<String>();
-    Map<String, Object> _vendorExtensions = operation.getVendorExtensions();
-    op.vendorExtensions = _vendorExtensions;
+    op.vendorExtensions = operation.getVendorExtensions();
     String operationId = this.getOrGenerateOperationId(operation, path, httpMethod);
-    String _removeNonNameElementToCamelCase = this.removeNonNameElementToCamelCase(operationId);
-    operationId = _removeNonNameElementToCamelCase;
+    operationId = this.removeNonNameElementToCamelCase(operationId);
     op.path = path;
-    String _operationId = this.toOperationId(operationId);
-    op.operationId = _operationId;
-    String _summary = operation.getSummary();
-    String _escapeText = this.escapeText(_summary);
-    op.summary = _escapeText;
-    String _description = operation.getDescription();
-    op.unescapedNotes = _description;
-    String _description_1 = operation.getDescription();
-    String _escapeText_1 = this.escapeText(_description_1);
-    op.notes = _escapeText_1;
-    List<String> _tags = operation.getTags();
-    op.tags = _tags;
+    op.operationId = this.toOperationId(operationId);
+    op.summary = this.escapeText(operation.getSummary());
+    op.unescapedNotes = operation.getDescription();
+    op.notes = this.escapeText(operation.getDescription());
+    op.tags = operation.getTags();
     op.hasConsumes = Boolean.valueOf(false);
     op.hasProduces = Boolean.valueOf(false);
-    String _lowerCase = httpMethod.toLowerCase();
-    op.httpMethodLowerCase = _lowerCase;
+    op.httpMethodLowerCase = httpMethod.toLowerCase();
     List<String> consumes = new ArrayList<String>();
     List<String> _consumes = operation.getConsumes();
     boolean _notEquals = (!Objects.equal(_consumes, null));
     if (_notEquals) {
-      List<String> _consumes_1 = operation.getConsumes();
-      int _size = _consumes_1.size();
+      int _size = operation.getConsumes().size();
       boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
-        List<String> _consumes_2 = operation.getConsumes();
-        consumes = _consumes_2;
+        consumes = operation.getConsumes();
       } else {
       }
     } else {
       if ((((!Objects.equal(swagger, null)) && (!Objects.equal(swagger.getConsumes(), null))) && (swagger.getConsumes().size() > 0))) {
-        List<String> _consumes_3 = swagger.getConsumes();
-        consumes = _consumes_3;
-        List<String> _consumes_4 = swagger.getConsumes();
-        String _plus = ("No consumes defined in operation. Using global consumes (" + _consumes_4);
+        consumes = swagger.getConsumes();
+        List<String> _consumes_1 = swagger.getConsumes();
+        String _plus = ("No consumes defined in operation. Using global consumes (" + _consumes_1);
         String _plus_1 = (_plus + ") for ");
         String _plus_2 = (_plus_1 + 
           op.operationId);
-        ItemisServerMainCodegen.LOGGER.debug(_plus_2);
+        ExampleServerMainCodegen.LOGGER.debug(_plus_2);
       }
     }
     if (((!Objects.equal(consumes, null)) && (consumes.size() > 0))) {
@@ -433,9 +397,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
       for (final String key : consumes) {
         {
           final Map<String, String> mediaType = new HashMap<String, String>();
-          String _escapeQuotationMark = this.escapeQuotationMark(key);
-          String _escapeText_2 = this.escapeText(_escapeQuotationMark);
-          mediaType.put("mediaType", _escapeText_2);
+          mediaType.put("mediaType", this.escapeText(this.escapeQuotationMark(key)));
           int _count = count;
           count = (_count + 1);
           int _size_1 = consumes.size();
@@ -455,24 +417,21 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
     List<String> _produces = operation.getProduces();
     boolean _notEquals_1 = (!Objects.equal(_produces, null));
     if (_notEquals_1) {
-      List<String> _produces_1 = operation.getProduces();
-      int _size_1 = _produces_1.size();
+      int _size_1 = operation.getProduces().size();
       boolean _greaterThan_1 = (_size_1 > 0);
       if (_greaterThan_1) {
-        List<String> _produces_2 = operation.getProduces();
-        produces = _produces_2;
+        produces = operation.getProduces();
       } else {
       }
     } else {
       if ((((!Objects.equal(swagger, null)) && (!Objects.equal(swagger.getProduces(), null))) && (swagger.getProduces().size() > 0))) {
-        List<String> _produces_3 = swagger.getProduces();
-        produces = _produces_3;
-        List<String> _produces_4 = swagger.getProduces();
-        String _plus_3 = ("No produces defined in operation. Using global produces (" + _produces_4);
+        produces = swagger.getProduces();
+        List<String> _produces_1 = swagger.getProduces();
+        String _plus_3 = ("No produces defined in operation. Using global produces (" + _produces_1);
         String _plus_4 = (_plus_3 + ") for ");
         String _plus_5 = (_plus_4 + 
           op.operationId);
-        ItemisServerMainCodegen.LOGGER.debug(_plus_5);
+        ExampleServerMainCodegen.LOGGER.debug(_plus_5);
       }
     }
     if (((!Objects.equal(produces, null)) && (produces.size() > 0))) {
@@ -481,9 +440,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
       for (final String key_1 : produces) {
         {
           final Map<String, String> mediaType = new HashMap<String, String>();
-          String _escapeQuotationMark = this.escapeQuotationMark(key_1);
-          String _escapeText_2 = this.escapeText(_escapeQuotationMark);
-          mediaType.put("mediaType", _escapeText_2);
+          mediaType.put("mediaType", this.escapeText(this.escapeQuotationMark(key_1)));
           int _count = count_1;
           count_1 = (_count + 1);
           int _size_2 = produces.size();
@@ -500,15 +457,12 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
       op.hasProduces = Boolean.valueOf(true);
     }
     if (((!Objects.equal(operation.getResponses(), null)) && (!operation.getResponses().isEmpty()))) {
-      Map<String, Response> _responses = operation.getResponses();
-      final Response methodResponse = this.findMethodResponse(_responses);
-      Map<String, Response> _responses_1 = operation.getResponses();
-      Set<Map.Entry<String, Response>> _entrySet = _responses_1.entrySet();
+      final Response methodResponse = this.findMethodResponse(operation.getResponses());
+      Set<Map.Entry<String, Response>> _entrySet = operation.getResponses().entrySet();
       for (final Map.Entry<String, Response> entry : _entrySet) {
         {
           final Response response = entry.getValue();
-          String _key = entry.getKey();
-          final CodegenResponse r = this.fromResponse(_key, response);
+          final CodegenResponse r = this.fromResponse(entry.getKey(), response);
           r.hasMore = Boolean.valueOf(true);
           if ((((!Objects.equal(r.baseType, null)) && (!this.defaultIncludes.contains(r.baseType))) && 
             (!this.languageSpecificPrimitives.contains(r.baseType)))) {
@@ -531,13 +485,11 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
         Property _schema = methodResponse.getSchema();
         boolean _notEquals_3 = (!Objects.equal(_schema, null));
         if (_notEquals_3) {
-          Property _schema_1 = methodResponse.getSchema();
-          final CodegenProperty cm = this.fromProperty("response", _schema_1);
+          final CodegenProperty cm = this.fromProperty("response", methodResponse.getSchema());
           final Property responseProperty = methodResponse.getSchema();
           if ((responseProperty instanceof ArrayProperty)) {
             final ArrayProperty ap = ((ArrayProperty) responseProperty);
-            Property _items = ap.getItems();
-            final CodegenProperty innerProperty = this.fromProperty("response", _items);
+            final CodegenProperty innerProperty = this.fromProperty("response", ap.getItems());
             op.returnBaseType = innerProperty.baseType;
           } else {
             boolean _notEquals_4 = (!Objects.equal(cm.complexType, null));
@@ -547,13 +499,9 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
               op.returnBaseType = cm.baseType;
             }
           }
-          ExampleGenerator _exampleGenerator = new ExampleGenerator(definitions);
-          Map<String, Object> _examples = methodResponse.getExamples();
-          List<String> _produces_5 = operation.getProduces();
-          List<Map<String, String>> _generate = _exampleGenerator.generate(_examples, _produces_5, responseProperty);
-          op.examples = _generate;
-          String _defaultValue = this.toDefaultValue(responseProperty);
-          op.defaultResponse = _defaultValue;
+          op.examples = new ExampleGenerator(definitions).generate(
+            methodResponse.getExamples(), operation.getProduces(), responseProperty);
+          op.defaultResponse = this.toDefaultValue(responseProperty);
           op.returnType = cm.datatype;
           op.hasReference = Boolean.valueOf(((!Objects.equal(definitions, null)) && definitions.containsKey(op.returnBaseType)));
           boolean _notEquals_5 = (!Objects.equal(definitions, null));
@@ -607,34 +555,27 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
         {
           final CodegenParameter p = this.fromParameter(param, imports);
           if ((this.ensureUniqueParams).booleanValue()) {
-            String _enforceUniqueParams = this.enforceUniqueParams(p, allParams);
-            p.paramName = _enforceUniqueParams;
+            p.paramName = this.enforceUniqueParams(p, allParams);
           }
           allParams.add(p);
           if ((param instanceof QueryParameter)) {
-            CodegenParameter _copy = p.copy();
-            queryParams.add(_copy);
+            queryParams.add(p.copy());
           } else {
             if ((param instanceof PathParameter)) {
-              CodegenParameter _copy_1 = p.copy();
-              pathParams.add(_copy_1);
+              pathParams.add(p.copy());
             } else {
               if ((param instanceof HeaderParameter)) {
-                CodegenParameter _copy_2 = p.copy();
-                headerParams.add(_copy_2);
+                headerParams.add(p.copy());
               } else {
                 if ((param instanceof CookieParameter)) {
-                  CodegenParameter _copy_3 = p.copy();
-                  cookieParams.add(_copy_3);
+                  cookieParams.add(p.copy());
                 } else {
                   if ((param instanceof BodyParameter)) {
                     bodyParam = p;
-                    CodegenParameter _copy_4 = p.copy();
-                    bodyParams.add(_copy_4);
+                    bodyParams.add(p.copy());
                   } else {
                     if ((param instanceof FormParameter)) {
-                      CodegenParameter _copy_5 = p.copy();
-                      formParams.add(_copy_5);
+                      formParams.add(p.copy());
                     }
                   }
                 }
@@ -654,8 +595,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
       }
     }
     op.bodyParam = bodyParam;
-    String _upperCase = httpMethod.toUpperCase();
-    op.httpMethod = _upperCase;
+    op.httpMethod = httpMethod.toUpperCase();
     if ((this.sortParamsByRequiredFlag).booleanValue()) {
       Collections.<CodegenParameter>sort(allParams, new Comparator<CodegenParameter>() {
         @Override
@@ -682,40 +622,26 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
         }
       });
     }
-    List<CodegenParameter> _addHasMore = ItemisServerMainCodegen.addHasMore(allParams);
-    op.allParams = _addHasMore;
-    List<CodegenParameter> _addHasMore_1 = ItemisServerMainCodegen.addHasMore(bodyParams);
-    op.bodyParams = _addHasMore_1;
-    List<CodegenParameter> _addHasMore_2 = ItemisServerMainCodegen.addHasMore(pathParams);
-    op.pathParams = _addHasMore_2;
-    List<CodegenParameter> _addHasMore_3 = ItemisServerMainCodegen.addHasMore(queryParams);
-    op.queryParams = _addHasMore_3;
-    List<CodegenParameter> _addHasMore_4 = ItemisServerMainCodegen.addHasMore(headerParams);
-    op.headerParams = _addHasMore_4;
-    List<CodegenParameter> _addHasMore_5 = ItemisServerMainCodegen.addHasMore(formParams);
-    op.formParams = _addHasMore_5;
+    op.allParams = ExampleServerMainCodegen.addHasMore(allParams);
+    op.bodyParams = ExampleServerMainCodegen.addHasMore(bodyParams);
+    op.pathParams = ExampleServerMainCodegen.addHasMore(pathParams);
+    op.queryParams = ExampleServerMainCodegen.addHasMore(queryParams);
+    op.headerParams = ExampleServerMainCodegen.addHasMore(headerParams);
+    op.formParams = ExampleServerMainCodegen.addHasMore(formParams);
     op.nickname = op.operationId;
     int _size_3 = op.allParams.size();
     boolean _greaterThan_2 = (_size_3 > 0);
     if (_greaterThan_2) {
       op.hasParams = Boolean.valueOf(true);
     }
-    ExternalDocs _externalDocs = operation.getExternalDocs();
-    op.externalDocs = _externalDocs;
-    boolean _isRestfulShow = op.isRestfulShow();
-    op.isRestfulShow = Boolean.valueOf(_isRestfulShow);
-    boolean _isRestfulIndex = op.isRestfulIndex();
-    op.isRestfulIndex = Boolean.valueOf(_isRestfulIndex);
-    boolean _isRestfulCreate = op.isRestfulCreate();
-    op.isRestfulCreate = Boolean.valueOf(_isRestfulCreate);
-    boolean _isRestfulUpdate = op.isRestfulUpdate();
-    op.isRestfulUpdate = Boolean.valueOf(_isRestfulUpdate);
-    boolean _isRestfulDestroy = op.isRestfulDestroy();
-    op.isRestfulDestroy = Boolean.valueOf(_isRestfulDestroy);
-    boolean _isRestful = op.isRestful();
-    op.isRestful = Boolean.valueOf(_isRestful);
-    String _sanitizePath = this.sanitizePath(op.path);
-    op.path = _sanitizePath;
+    op.externalDocs = operation.getExternalDocs();
+    op.isRestfulShow = Boolean.valueOf(op.isRestfulShow());
+    op.isRestfulIndex = Boolean.valueOf(op.isRestfulIndex());
+    op.isRestfulCreate = Boolean.valueOf(op.isRestfulCreate());
+    op.isRestfulUpdate = Boolean.valueOf(op.isRestfulUpdate());
+    op.isRestfulDestroy = Boolean.valueOf(op.isRestfulDestroy());
+    op.isRestful = Boolean.valueOf(op.isRestful());
+    op.path = this.sanitizePath(op.path);
     return op;
   }
   
@@ -725,7 +651,7 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
       for (final CodegenParameter cp : allParams) {
         boolean _equals = p.paramName.equals(cp.paramName);
         if (_equals) {
-          return ItemisServerMainCodegen.generateNextName(p.paramName);
+          return ExampleServerMainCodegen.generateNextName(p.paramName);
         }
       }
       _xblockexpression = p.paramName;
@@ -737,13 +663,9 @@ public class ItemisServerMainCodegen extends JavaResteasyServerCodegen {
     Map<String, Property> _headers = response.getHeaders();
     boolean _notEquals = (!Objects.equal(_headers, null));
     if (_notEquals) {
-      Map<String, Property> _headers_1 = response.getHeaders();
-      Set<Map.Entry<String, Property>> _entrySet = _headers_1.entrySet();
+      Set<Map.Entry<String, Property>> _entrySet = response.getHeaders().entrySet();
       for (final Map.Entry<String, Property> headers : _entrySet) {
-        String _key = headers.getKey();
-        Property _value = headers.getValue();
-        CodegenProperty _fromProperty = this.fromProperty(_key, _value);
-        target.add(_fromProperty);
+        target.add(this.fromProperty(headers.getKey(), headers.getValue()));
       }
     }
   }
